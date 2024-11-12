@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:jombang/utils/api_request.dart';
+import 'package:jombang/networks/api_request.dart';
 import 'package:jombang/models/menu_model.dart';
 
 class HomeMenuController extends GetxController {

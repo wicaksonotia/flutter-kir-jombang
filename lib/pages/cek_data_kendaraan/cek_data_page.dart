@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 import 'package:jombang/controllers/search_bar_controller.dart';
 import 'package:jombang/utils/colors.dart';
-import 'package:jombang/utils/containers/search_bar_container.dart';
+import 'package:jombang/pages/cek_data_kendaraan/search_bar_container.dart';
 import 'package:jombang/utils/widgets/text_field_widget.dart';
 
 class CekDataPage extends StatefulWidget {

@@ -34,7 +34,7 @@ class TextFieldWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 40,
+      height: 50,
       child: TextFormField(
         initialValue: initialValue,
         onEditingComplete: onEditingComplete,
@@ -43,25 +43,39 @@ class TextFieldWidget extends StatelessWidget {
         validator: validator,
         obscureText: obscureText,
         keyboardType: TextInputType.text,
+        style: const TextStyle(fontFamily: "Inter", fontSize: 16),
+        textCapitalization: TextCapitalization.characters,
         decoration: InputDecoration(
           contentPadding: const EdgeInsets.all(0),
           fillColor: Colors.white,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
+          border: const OutlineInputBorder(
+            // borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(10),
+              bottomLeft: Radius.circular(10),
+            ),
             borderSide: const BorderSide(
               color: Colors.white,
               width: 0.0,
             ),
           ),
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
+          enabledBorder: const OutlineInputBorder(
+            // borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(10),
+              bottomLeft: Radius.circular(10),
+            ),
             borderSide: const BorderSide(
               color: Colors.white,
               width: 0.0,
             ),
           ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
+          focusedBorder: const OutlineInputBorder(
+            // borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(10),
+              bottomLeft: Radius.circular(10),
+            ),
             borderSide: const BorderSide(
               color: Colors.white,
               width: 0.0,
@@ -78,7 +92,7 @@ class TextFieldWidget extends StatelessWidget {
           hintText: hint,
           hintStyle: const TextStyle(
             fontFamily: "Inter",
-            fontSize: 15,
+            fontSize: 16,
             fontWeight: FontWeight.w500,
           ),
           prefixIcon: Icon(

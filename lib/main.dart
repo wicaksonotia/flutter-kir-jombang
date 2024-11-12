@@ -5,7 +5,7 @@ import 'package:jombang/pages/app_navigation.dart';
 // void main() => runApp(
 //       const GetMaterialApp(
 //         debugShowCheckedModeBanner: false,
-//         home: ListCategories(),
+//         home: LoginPage(),
 //       ),
 //     );
 

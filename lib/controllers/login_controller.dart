@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:jombang/pages/home/home.dart';
-import 'package:jombang/utils/api_endpoints.dart';
+import 'package:jombang/networks/api_endpoints.dart';
 
 class LoginController extends GetxController {
   var isPasswordVisible = false.obs;

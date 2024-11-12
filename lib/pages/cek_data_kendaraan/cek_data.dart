@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 import 'package:jombang/controllers/search_bar_controller.dart';
+import 'package:jombang/pages/cek_data_kendaraan/data_kendaraan.dart';
 import 'package:jombang/utils/colors.dart';
-import 'package:jombang/utils/containers/search_bar_container.dart';
+import 'package:jombang/pages/cek_data_kendaraan/search_bar_container.dart';
 
 class CekData extends StatefulWidget {
   const CekData({super.key});
@@ -17,6 +19,24 @@ class _CekDataState extends State<CekData> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        title: const Text(
+          'Cek Data Kendaraan',
+          style: TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Colors.transparent,
+        elevation: 0.0,
+        leading: IconButton(
+          icon: const Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+          ),
+          onPressed: () {
+            context.goNamed('home');
+          },
+        ),
+      ),
       backgroundColor: MyColors.form,
       body: MediaQuery.removePadding(
         context: context,
@@ -27,7 +47,7 @@ class _CekDataState extends State<CekData> {
               children: [
                 // BACKGROUND HEADER
                 Container(
-                  height: 175,
+                  height: 125,
                   // color: MyColors.primary,
                   decoration: const BoxDecoration(
                     color: MyColors.primary,
@@ -66,12 +86,13 @@ class _CekDataState extends State<CekData> {
 
                 // HEADER dan MENU
                 Container(
-                  margin: const EdgeInsets.only(top: 40),
-                  padding: const EdgeInsets.only(left: 10),
+                  margin: const EdgeInsets.only(top: 100, bottom: 20),
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
                   child: const SearchBarContainer(),
                 ),
               ],
             ),
+            DataKendaraan()
           ],
         ),
       ),

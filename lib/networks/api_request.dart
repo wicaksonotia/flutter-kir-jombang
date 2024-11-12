@@ -3,9 +3,10 @@ import 'package:dio/dio.dart';
 import 'package:jombang/models/berita_model.dart';
 import 'package:jombang/models/carousel_model.dart';
 import 'package:jombang/models/jenis_uji_model.dart';
+import 'package:jombang/models/kendaraan_model.dart';
 import 'package:jombang/models/menu_model.dart';
 import 'package:jombang/models/persyaratan_model.dart';
-import 'package:jombang/utils/api_endpoints.dart';
+import 'package:jombang/networks/api_endpoints.dart';
 
 class RemoteDataSource {
   // SLIDER
@@ -68,7 +69,8 @@ class RemoteDataSource {
     }
   }
 
-  static Future<List<PersyaratanModel>?> getDetailPersyaratan(jenisUji) async {
+  static Future<List<PersyaratanModel>?> getDetailPersyaratan(
+      String jenisUji) async {
     try {
       var url =
           ApiEndPoints.baseUrl + ApiEndPoints.authEndpoints.detailpersyaratan;
@@ -76,6 +78,23 @@ class RemoteDataSource {
       if (response.statusCode == 200) {
         List<dynamic> jsonData = response.data;
         return jsonData.map((e) => PersyaratanModel.fromJson(e)).toList();
+      }
+      return null;
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
+  static Future<DetailKendaraanModel?> getDetailKendaraan(String params) async {
+    try {
+      var url =
+          ApiEndPoints.baseUrl + ApiEndPoints.authEndpoints.detailkendaraan;
+      final response = await Dio().get("$url?nouji=$params");
+      if (response.statusCode == 200) {
+        // Map<String, dynamic> jsonData = response.data;
+        final DetailKendaraanModel res =
+            DetailKendaraanModel.fromJson(response.data);
+        return res;
       }
       return null;
     } catch (e) {

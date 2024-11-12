@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import 'package:jombang/models/berita_model.dart';
-import 'package:jombang/utils/api_request.dart';
+import 'package:jombang/networks/api_request.dart';
 
 class BeritaController extends GetxController {
   var beritaItem = <BeritaModel>[].obs;
