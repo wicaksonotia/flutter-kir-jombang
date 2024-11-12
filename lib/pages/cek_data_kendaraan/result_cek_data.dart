@@ -1,6 +1,4 @@
 import 'dart:convert';
-import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
@@ -8,15 +6,15 @@ import 'package:jombang/controllers/search_bar_controller.dart';
 import 'package:jombang/utils/containers/box_container.dart';
 import 'package:jombang/utils/sizes.dart';
 
-class DataKendaraan extends GetWidget<SearchBarController> {
-  const DataKendaraan({super.key});
+class ResultCekData extends GetWidget<SearchBarController> {
+  const ResultCekData({super.key});
 
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(SearchBarController());
 
     return Obx(() {
-      if (controller.isLoading.value) {
+      if (controller.isLoadingDetailKendaraan.value) {
         return Container(
           margin: const EdgeInsets.only(top: 10),
           child: const Center(
@@ -25,7 +23,7 @@ class DataKendaraan extends GetWidget<SearchBarController> {
         );
       } else {
         return SingleChildScrollView(
-          padding: EdgeInsets.symmetric(horizontal: 10),
+          padding: const EdgeInsets.symmetric(horizontal: 10),
           child: Column(
             children: [
               // ==========================
@@ -253,7 +251,7 @@ class DataKendaraan extends GetWidget<SearchBarController> {
                                   ? const AssetImage(
                                       'assets/images/no_image.png')
                                   : MemoryImage(
-                                      Base64Decoder().convert(controller
+                                      const Base64Decoder().convert(controller
                                           .resultData.value.imgDepan!),
                                     ),
                               fit: controller.resultData.value.imgDepan ==
@@ -280,7 +278,7 @@ class DataKendaraan extends GetWidget<SearchBarController> {
                                   ? const AssetImage(
                                       'assets/images/no_image.png')
                                   : MemoryImage(
-                                      Base64Decoder().convert(controller
+                                      const Base64Decoder().convert(controller
                                           .resultData.value.imgBelakang!),
                                     ),
                               fit: controller.resultData.value.imgBelakang ==
@@ -309,7 +307,7 @@ class DataKendaraan extends GetWidget<SearchBarController> {
                                   ? const AssetImage(
                                       'assets/images/no_image.png')
                                   : MemoryImage(
-                                      Base64Decoder().convert(controller
+                                      const Base64Decoder().convert(controller
                                           .resultData.value.imgKanan!),
                                     ),
                               fit: controller.resultData.value.imgKanan ==
@@ -335,7 +333,7 @@ class DataKendaraan extends GetWidget<SearchBarController> {
                                   ? const AssetImage(
                                       'assets/images/no_image.png')
                                   : MemoryImage(
-                                      Base64Decoder().convert(
+                                      const Base64Decoder().convert(
                                           controller.resultData.value.imgKiri!),
                                     ),
                               fit: controller.resultData.value.imgKiri ==

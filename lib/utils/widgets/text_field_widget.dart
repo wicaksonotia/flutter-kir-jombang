@@ -54,7 +54,7 @@ class TextFieldWidget extends StatelessWidget {
               topLeft: Radius.circular(10),
               bottomLeft: Radius.circular(10),
             ),
-            borderSide: const BorderSide(
+            borderSide: BorderSide(
               color: Colors.white,
               width: 0.0,
             ),
@@ -65,7 +65,7 @@ class TextFieldWidget extends StatelessWidget {
               topLeft: Radius.circular(10),
               bottomLeft: Radius.circular(10),
             ),
-            borderSide: const BorderSide(
+            borderSide: BorderSide(
               color: Colors.white,
               width: 0.0,
             ),
@@ -76,7 +76,7 @@ class TextFieldWidget extends StatelessWidget {
               topLeft: Radius.circular(10),
               bottomLeft: Radius.circular(10),
             ),
-            borderSide: const BorderSide(
+            borderSide: BorderSide(
               color: Colors.white,
               width: 0.0,
             ),

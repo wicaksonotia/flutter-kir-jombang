@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:jombang/pages/cek_data_kendaraan/cek_data.dart';
+import 'package:jombang/pages/cek_data_kendaraan/home_cek_data.dart';
+import 'package:jombang/pages/cek_data_kendaraan/home_hasil_uji.dart';
 import 'package:jombang/pages/home/home.dart';
 import 'package:jombang/pages/pendaftaran/pendaftaran.dart';
 import 'package:jombang/pages/persyaratan/detail_persyaratan.dart';
@@ -33,12 +34,6 @@ class AppNavigation {
                   child: child),
     );
   }
-
-  // static PageTransition(
-  //         child: child,
-  //         type: PageTransitionType.scale,
-  //         settings: settings,
-  //       );
 
   // GoRouter configuration
   static final GoRouter router = GoRouter(
@@ -87,6 +82,16 @@ class AppNavigation {
             context: context,
             state: state,
             child: const CekData(),
+            fade: true,
+            leftToRight: false),
+      ),
+      GoRoute(
+        name: 'cekhasiluji',
+        path: '/cekhasiluji',
+        pageBuilder: (context, state) => buildPageWithDefaultTransition<void>(
+            context: context,
+            state: state,
+            child: const HasilUji(),
             fade: true,
             leftToRight: false),
       ),

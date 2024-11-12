@@ -1,7 +1,7 @@
 class DetailKendaraanModel {
   String? status;
   String? message;
-  DataDetaiilKendaraan? data;
+  DataDetailKendaraan? data;
 
   DetailKendaraanModel({this.status, this.message, this.data});
 
@@ -9,7 +9,7 @@ class DetailKendaraanModel {
     status = json['status'];
     message = json['message'];
     data = json['data'] != null
-        ? new DataDetaiilKendaraan.fromJson(json['data'])
+        ? DataDetailKendaraan.fromJson(json['data'])
         : null;
   }
 
@@ -24,7 +24,7 @@ class DetailKendaraanModel {
   }
 }
 
-class DataDetaiilKendaraan {
+class DataDetailKendaraan {
   String? noUji;
   String? noKendaraan;
   String? merk;
@@ -60,7 +60,7 @@ class DataDetaiilKendaraan {
   String? imgKanan;
   String? imgKiri;
 
-  DataDetaiilKendaraan(
+  DataDetailKendaraan(
       {this.noUji,
       this.noKendaraan,
       this.merk,
@@ -96,7 +96,7 @@ class DataDetaiilKendaraan {
       this.imgKanan,
       this.imgKiri});
 
-  DataDetaiilKendaraan.fromJson(Map<String, dynamic> json) {
+  DataDetailKendaraan.fromJson(Map<String, dynamic> json) {
     noUji = json['no_uji'];
     noKendaraan = json['no_kendaraan'];
     merk = json['merk'];

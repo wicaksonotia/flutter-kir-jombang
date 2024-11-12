@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:dio/dio.dart';
 import 'package:jombang/models/berita_model.dart';
 import 'package:jombang/models/carousel_model.dart';
+import 'package:jombang/models/hasil_uji_model.dart';
 import 'package:jombang/models/jenis_uji_model.dart';
 import 'package:jombang/models/kendaraan_model.dart';
 import 'package:jombang/models/menu_model.dart';
@@ -94,6 +95,21 @@ class RemoteDataSource {
         // Map<String, dynamic> jsonData = response.data;
         final DetailKendaraanModel res =
             DetailKendaraanModel.fromJson(response.data);
+        return res;
+      }
+      return null;
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
+  static Future<HasilUjiModel?> getHasilUji(String params) async {
+    try {
+      var url =
+          ApiEndPoints.baseUrl + ApiEndPoints.authEndpoints.hasilujikendaraan;
+      final response = await Dio().get("$url?nouji=$params");
+      if (response.statusCode == 200) {
+        final HasilUjiModel res = HasilUjiModel.fromJson(response.data);
         return res;
       }
       return null;
