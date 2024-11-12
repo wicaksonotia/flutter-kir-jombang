@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-import 'package:jombang/controllers/keterangan_tidak_lulus_controller.dart';
 import 'package:jombang/controllers/search_bar_controller.dart';
 import 'package:jombang/models/hasil_uji_model.dart';
 import 'package:jombang/models/tidak_lulus_model.dart';
@@ -20,7 +19,7 @@ class HasilUjiController extends GetxController {
       String valueSearch = searchTextFieldController.text.toString();
       var result = await RemoteDataSource.getHasilUji(valueSearch);
       idHasilUji.value = result!.data!.idHasilUji!;
-      resultDataHasilUji.value = result!.data!;
+      resultDataHasilUji.value = result.data!;
       var resultTl =
           await RemoteDataSource.getKeteranganTidakLulus(idHasilUji.value);
       responseMessage.value = resultTl!.status!;
