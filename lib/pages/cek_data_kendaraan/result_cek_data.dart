@@ -2,16 +2,17 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
-import 'package:jombang/controllers/search_bar_controller.dart';
+import 'package:jombang/controllers/detail_kendaraan_controller.dart';
 import 'package:jombang/utils/containers/box_container.dart';
 import 'package:jombang/utils/sizes.dart';
 
-class ResultCekData extends GetWidget<SearchBarController> {
+class ResultCekData extends StatelessWidget {
   const ResultCekData({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(SearchBarController());
+    final DetailKendaraanController controller =
+        Get.put(DetailKendaraanController());
 
     return Obx(() {
       if (controller.isLoadingDetailKendaraan.value) {

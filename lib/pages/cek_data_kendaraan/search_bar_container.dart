@@ -1,16 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:jombang/controllers/detail_kendaraan_controller.dart';
+import 'package:jombang/controllers/hasil_uji_controller.dart';
+import 'package:jombang/controllers/keterangan_tidak_lulus_controller.dart';
 import 'package:jombang/utils/colors.dart';
 import 'package:jombang/utils/widgets/text_field_widget.dart';
 import 'package:jombang/controllers/search_bar_controller.dart';
 
-class SearchBarContainer extends GetWidget<SearchBarController> {
+class SearchBarContainer extends StatelessWidget {
   String menu;
   SearchBarContainer({super.key, required this.menu});
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(SearchBarController());
+    final SearchBarController controller = Get.put(SearchBarController());
+    final HasilUjiController hasilUjiController = Get.put(HasilUjiController());
+    final DetailKendaraanController detailKendaraanController =
+        Get.put(DetailKendaraanController());
 
     return Obx(
       () => Row(
@@ -58,8 +64,12 @@ class SearchBarContainer extends GetWidget<SearchBarController> {
             ),
             child: IconButton(
               onPressed: () {
-                if (menu == 'cekdata') controller.getDetailDataKendaraan();
-                if (menu == 'hasiluji') controller.getHasilUjiKendaraan();
+                if (menu == 'cekdata') {
+                  detailKendaraanController.getDetailDataKendaraan();
+                }
+                if (menu == 'hasiluji') {
+                  hasilUjiController.getHasilUjiKendaraan();
+                }
               },
               icon: const Icon(Icons.search),
               color: Colors.white,

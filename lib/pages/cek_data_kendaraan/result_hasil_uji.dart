@@ -2,19 +2,22 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
-import 'package:jombang/controllers/search_bar_controller.dart';
+import 'package:jombang/controllers/hasil_uji_controller.dart';
+import 'package:jombang/controllers/keterangan_tidak_lulus_controller.dart';
 import 'package:jombang/utils/containers/box_container.dart';
 import 'package:jombang/utils/sizes.dart';
 
-class ResultHasilUji extends GetWidget<SearchBarController> {
+class ResultHasilUji extends StatelessWidget {
   const ResultHasilUji({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(SearchBarController());
+    final HasilUjiController hasilUjiController = Get.put(HasilUjiController());
+    // final KeteranganTidakLulusController keteranganTidakLulusController =
+    //     Get.put(KeteranganTidakLulusController());
 
     return Obx(() {
-      if (controller.isLoadingHasilUji.value) {
+      if (hasilUjiController.isLoadingHasilUji.value) {
         return Container(
           margin: const EdgeInsets.only(top: 10),
           child: const Center(
@@ -22,7 +25,6 @@ class ResultHasilUji extends GetWidget<SearchBarController> {
           ),
         );
       } else {
-        print(controller.resultDataHasilUji.value.hasilPrauji);
         return SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 10),
           child: Column(
@@ -47,8 +49,9 @@ class ResultHasilUji extends GetWidget<SearchBarController> {
                         const TextLeft(nama: 'No Uji'),
                         const Spacer(),
                         TextRight(
-                          nama:
-                              controller.resultDataHasilUji.value.noUji ?? '-',
+                          nama: hasilUjiController
+                                  .resultDataHasilUji.value.noUji ??
+                              '-',
                         )
                       ],
                     ),
@@ -57,9 +60,9 @@ class ResultHasilUji extends GetWidget<SearchBarController> {
                         const TextLeft(nama: 'No Kendaraan'),
                         const Spacer(),
                         TextRight(
-                          nama:
-                              controller.resultDataHasilUji.value.noKendaraan ??
-                                  '-',
+                          nama: hasilUjiController
+                                  .resultDataHasilUji.value.noKendaraan ??
+                              '-',
                         )
                       ],
                     ),
@@ -68,7 +71,8 @@ class ResultHasilUji extends GetWidget<SearchBarController> {
                         const TextLeft(nama: 'Nama Pemilik'),
                         const Spacer(),
                         TextRight(
-                          nama: controller.resultDataHasilUji.value.pemilik ??
+                          nama: hasilUjiController
+                                  .resultDataHasilUji.value.pemilik ??
                               '-',
                         )
                       ],
@@ -78,9 +82,9 @@ class ResultHasilUji extends GetWidget<SearchBarController> {
                         const TextLeft(nama: 'Prauji'),
                         const Spacer(),
                         TextRight(
-                          nama:
-                              controller.resultDataHasilUji.value.hasilPrauji ??
-                                  '-',
+                          nama: hasilUjiController
+                                  .resultDataHasilUji.value.hasilPrauji ??
+                              '-',
                         )
                       ],
                     ),
@@ -89,9 +93,9 @@ class ResultHasilUji extends GetWidget<SearchBarController> {
                         const TextLeft(nama: 'Emisi'),
                         const Spacer(),
                         TextRight(
-                          nama:
-                              controller.resultDataHasilUji.value.hasilEmisi ??
-                                  '-',
+                          nama: hasilUjiController
+                                  .resultDataHasilUji.value.hasilEmisi ??
+                              '-',
                         )
                       ],
                     ),
@@ -100,9 +104,9 @@ class ResultHasilUji extends GetWidget<SearchBarController> {
                         const TextLeft(nama: 'Lampu'),
                         const Spacer(),
                         TextRight(
-                          nama:
-                              controller.resultDataHasilUji.value.hasilLampu ??
-                                  '-',
+                          nama: hasilUjiController
+                                  .resultDataHasilUji.value.hasilLampu ??
+                              '-',
                         )
                       ],
                     ),
@@ -111,7 +115,7 @@ class ResultHasilUji extends GetWidget<SearchBarController> {
                         const TextLeft(nama: 'Pitlift'),
                         const Spacer(),
                         TextRight(
-                          nama: controller
+                          nama: hasilUjiController
                                   .resultDataHasilUji.value.hasilPitlift ??
                               '-',
                         )
@@ -122,9 +126,9 @@ class ResultHasilUji extends GetWidget<SearchBarController> {
                         const TextLeft(nama: 'Rem'),
                         const Spacer(),
                         TextRight(
-                          nama:
-                              controller.resultDataHasilUji.value.hasilBreak ??
-                                  '-',
+                          nama: hasilUjiController
+                                  .resultDataHasilUji.value.hasilBreak ??
+                              '-',
                         )
                       ],
                     ),
@@ -132,6 +136,64 @@ class ResultHasilUji extends GetWidget<SearchBarController> {
                 ),
               ),
 
+              // ==========================
+              // KETERANGAN TL
+              // ==========================
+              const Gap(10),
+              BoxContainer(
+                padding: const EdgeInsets.all(10),
+                height:
+                    hasilUjiController.responseMessage.value == 'ok' ? 200 : 0,
+                radius: 5,
+                showBorder: true,
+                borderColor: Colors.grey.shade200,
+                alignment: Alignment.topLeft,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    RichText(
+                      text: const TextSpan(
+                        text: 'Keterangan Tidak Lulus ',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: MySizes.fontSizeMd,
+                            color: Colors.black),
+                        children: [
+                          TextSpan(
+                            text: '*',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, color: Colors.red),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const Gap(10),
+                    Expanded(
+                      child: ListView.builder(
+                        itemCount: hasilUjiController.keteranganTl.length,
+                        shrinkWrap: true,
+                        itemBuilder: (context, index) => Row(
+                          children: [
+                            const Text(
+                              "\u2022",
+                              style: TextStyle(fontSize: 30),
+                            ), //bullet text
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            Expanded(
+                              child: Text(
+                                hasilUjiController
+                                    .keteranganTl[index].keterangan!,
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
               // ==========================
               // FOTO KENDARAAN
               // ==========================
@@ -172,18 +234,25 @@ class ResultHasilUji extends GetWidget<SearchBarController> {
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
                             image: DecorationImage(
-                              image: controller.resultData.value.imgDepan ==
+                              image: hasilUjiController.resultDataHasilUji.value
+                                              .imgDepan ==
                                           null ||
-                                      controller.resultData.value.imgDepan == ""
+                                      hasilUjiController.resultDataHasilUji
+                                              .value.imgDepan ==
+                                          ""
                                   ? const AssetImage(
                                       'assets/images/no_image.png')
                                   : MemoryImage(
-                                      const Base64Decoder().convert(controller
-                                          .resultData.value.imgDepan!),
+                                      const Base64Decoder().convert(
+                                          hasilUjiController.resultDataHasilUji
+                                              .value.imgDepan!),
                                     ),
-                              fit: controller.resultData.value.imgDepan ==
+                              fit: hasilUjiController.resultDataHasilUji.value
+                                              .imgDepan ==
                                           null ||
-                                      controller.resultData.value.imgDepan == ""
+                                      hasilUjiController.resultDataHasilUji
+                                              .value.imgDepan ==
+                                          ""
                                   ? BoxFit.fitHeight
                                   : BoxFit.cover,
                             ),
@@ -198,19 +267,24 @@ class ResultHasilUji extends GetWidget<SearchBarController> {
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
                             image: DecorationImage(
-                              image: controller.resultData.value.imgBelakang ==
+                              image: hasilUjiController.resultDataHasilUji.value
+                                              .imgBelakang ==
                                           null ||
-                                      controller.resultData.value.imgBelakang ==
+                                      hasilUjiController.resultDataHasilUji
+                                              .value.imgBelakang ==
                                           ""
                                   ? const AssetImage(
                                       'assets/images/no_image.png')
                                   : MemoryImage(
-                                      const Base64Decoder().convert(controller
-                                          .resultData.value.imgBelakang!),
+                                      const Base64Decoder().convert(
+                                          hasilUjiController.resultDataHasilUji
+                                              .value.imgBelakang!),
                                     ),
-                              fit: controller.resultData.value.imgBelakang ==
+                              fit: hasilUjiController.resultDataHasilUji.value
+                                              .imgBelakang ==
                                           null ||
-                                      controller.resultData.value.imgBelakang ==
+                                      hasilUjiController.resultDataHasilUji
+                                              .value.imgBelakang ==
                                           ""
                                   ? BoxFit.fitHeight
                                   : BoxFit.cover,
@@ -228,18 +302,25 @@ class ResultHasilUji extends GetWidget<SearchBarController> {
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
                             image: DecorationImage(
-                              image: controller.resultData.value.imgKanan ==
+                              image: hasilUjiController.resultDataHasilUji.value
+                                              .imgKanan ==
                                           null ||
-                                      controller.resultData.value.imgKanan == ""
+                                      hasilUjiController.resultDataHasilUji
+                                              .value.imgKanan ==
+                                          ""
                                   ? const AssetImage(
                                       'assets/images/no_image.png')
                                   : MemoryImage(
-                                      const Base64Decoder().convert(controller
-                                          .resultData.value.imgKanan!),
+                                      const Base64Decoder().convert(
+                                          hasilUjiController.resultDataHasilUji
+                                              .value.imgKanan!),
                                     ),
-                              fit: controller.resultData.value.imgKanan ==
+                              fit: hasilUjiController.resultDataHasilUji.value
+                                              .imgKanan ==
                                           null ||
-                                      controller.resultData.value.imgKanan == ""
+                                      hasilUjiController.resultDataHasilUji
+                                              .value.imgKanan ==
+                                          ""
                                   ? BoxFit.fitHeight
                                   : BoxFit.cover,
                             ),
@@ -254,18 +335,25 @@ class ResultHasilUji extends GetWidget<SearchBarController> {
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
                             image: DecorationImage(
-                              image: controller.resultData.value.imgKiri ==
+                              image: hasilUjiController.resultDataHasilUji.value
+                                              .imgKiri ==
                                           null ||
-                                      controller.resultData.value.imgKiri == ""
+                                      hasilUjiController.resultDataHasilUji
+                                              .value.imgKiri ==
+                                          ""
                                   ? const AssetImage(
                                       'assets/images/no_image.png')
                                   : MemoryImage(
                                       const Base64Decoder().convert(
-                                          controller.resultData.value.imgKiri!),
+                                          hasilUjiController.resultDataHasilUji
+                                              .value.imgKiri!),
                                     ),
-                              fit: controller.resultData.value.imgKiri ==
+                              fit: hasilUjiController.resultDataHasilUji.value
+                                              .imgKiri ==
                                           null ||
-                                      controller.resultData.value.imgKiri == ""
+                                      hasilUjiController.resultDataHasilUji
+                                              .value.imgKiri ==
+                                          ""
                                   ? BoxFit.fitHeight
                                   : BoxFit.cover,
                             ),

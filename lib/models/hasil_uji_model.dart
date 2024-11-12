@@ -8,7 +8,8 @@ class HasilUjiModel {
   HasilUjiModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     message = json['message'];
-    data = json['data'] != null ? DataHasilUji.fromJson(json['data']) : null;
+    data =
+        json['data'] != null ? new DataHasilUji.fromJson(json['data']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -23,6 +24,7 @@ class HasilUjiModel {
 }
 
 class DataHasilUji {
+  int? idHasilUji;
   String? noUji;
   String? noKendaraan;
   String? pemilik;
@@ -40,7 +42,8 @@ class DataHasilUji {
   String? imgKiri;
 
   DataHasilUji(
-      {this.noUji,
+      {this.idHasilUji,
+      this.noUji,
       this.noKendaraan,
       this.pemilik,
       this.hasilTglTerakhirUji,
@@ -57,6 +60,7 @@ class DataHasilUji {
       this.imgKiri});
 
   DataHasilUji.fromJson(Map<String, dynamic> json) {
+    idHasilUji = json['id_hasil_uji'];
     noUji = json['no_uji'];
     noKendaraan = json['no_kendaraan'];
     pemilik = json['pemilik'];
@@ -76,6 +80,7 @@ class DataHasilUji {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
+    data['id_hasil_uji'] = idHasilUji;
     data['no_uji'] = noUji;
     data['no_kendaraan'] = noKendaraan;
     data['pemilik'] = pemilik;
