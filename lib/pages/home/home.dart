@@ -143,7 +143,7 @@ class HomePage extends StatelessWidget {
                       // MENU
                       Center(
                         child: BoxContainer(
-                          margin: const EdgeInsets.only(right: 10),
+                          margin: const EdgeInsets.only(right: 10, bottom: 10),
                           padding: const EdgeInsets.all(10),
                           width: MediaQuery.of(context).size.width * .85,
                           height: 170,
@@ -159,7 +159,7 @@ class HomePage extends StatelessWidget {
             ),
 
             // DATA KENDARAAN UJI
-            const Gap(20),
+            const Gap(10),
             const SeeAllContainer(
               header: "Uji hari ini",
               subHeader: "Info pemohon yang terdaftar hari ini",

@@ -13,7 +13,7 @@ class BoxContainer extends StatelessWidget {
       this.showBorder = false,
       this.radius = MySizes.cardRadiusLg,
       this.backgroundColor = Colors.white,
-      this.borderColor = Colors.black,
+      this.borderColor = Colors.grey,
       this.alignment = Alignment.center});
 
   final double? width, height;
@@ -46,7 +46,7 @@ class BoxContainer extends StatelessWidget {
         ],
         color: backgroundColor,
         borderRadius: BorderRadius.circular(radius),
-        border: showBorder ? Border.all(color: borderColor) : null,
+        border: showBorder ? Border.all(color: borderColor, width: 1) : null,
       ),
       child: child,
     );

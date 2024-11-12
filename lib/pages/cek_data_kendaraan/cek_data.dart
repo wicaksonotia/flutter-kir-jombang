@@ -37,11 +37,11 @@ class _CekDataState extends State<CekData> {
           },
         ),
       ),
-      backgroundColor: MyColors.form,
+      backgroundColor: Colors.white,
       body: MediaQuery.removePadding(
         context: context,
         removeTop: true,
-        child: ListView(
+        child: Column(
           children: [
             Stack(
               children: [
@@ -86,13 +86,17 @@ class _CekDataState extends State<CekData> {
 
                 // HEADER dan MENU
                 Container(
-                  margin: const EdgeInsets.only(top: 100, bottom: 20),
+                  // color: Colors.red,
+                  margin: const EdgeInsets.only(top: 100, bottom: 10),
                   padding: const EdgeInsets.symmetric(horizontal: 10),
                   child: const SearchBarContainer(),
                 ),
               ],
             ),
-            DataKendaraan()
+            Container(
+              height: MediaQuery.of(context).size.height * .79,
+              child: const DataKendaraan(),
+            ),
           ],
         ),
       ),

@@ -6,7 +6,7 @@ import 'package:jombang/networks/api_request.dart';
 class SearchBarController extends GetxController {
   RxBool isEmptyValue = true.obs;
   final searchTextFieldController = TextEditingController();
-  var isLoading = true.obs;
+  var isLoading = false.obs;
   var resultData = DataDetaiilKendaraan().obs;
 
   void getDetailDataKendaraan() async {
