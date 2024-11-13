@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:ffi';
 import 'package:dio/dio.dart';
 import 'package:jombang/models/berita_model.dart';
 import 'package:jombang/models/carousel_model.dart';
@@ -8,6 +7,8 @@ import 'package:jombang/models/jenis_uji_model.dart';
 import 'package:jombang/models/kendaraan_model.dart';
 import 'package:jombang/models/menu_model.dart';
 import 'package:jombang/models/persyaratan_model.dart';
+import 'package:jombang/models/riwayat_detail_model.dart';
+import 'package:jombang/models/riwayat_model.dart';
 import 'package:jombang/models/tidak_lulus_model.dart';
 import 'package:jombang/networks/api_endpoints.dart';
 
@@ -120,14 +121,47 @@ class RemoteDataSource {
     }
   }
 
-  static Future<TidakLulusModel?> getKeteranganTidakLulus(
-      int idhasiluji) async {
+  static Future<TidakLulusModel?> getKeteranganTidakLulus(int params) async {
     try {
       var url = ApiEndPoints.baseUrl + ApiEndPoints.authEndpoints.keterangantl;
-      final response = await Dio().get("$url?idhasiluji=$idhasiluji");
+      final response = await Dio().get("$url?idhasiluji=$params");
       if (response.statusCode == 200) {
         final TidakLulusModel res = TidakLulusModel.fromJson(response.data);
         // print(res.toJson());
+        return res;
+      }
+      return null;
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
+  static Future<RiwayatKendaraanModel?> getRiwayatKendaraan(
+      String params) async {
+    try {
+      var url =
+          ApiEndPoints.baseUrl + ApiEndPoints.authEndpoints.riwayatkendaraan;
+      final response = await Dio().get("$url?nouji=$params");
+      if (response.statusCode == 200) {
+        final RiwayatKendaraanModel res =
+            RiwayatKendaraanModel.fromJson(response.data);
+        return res;
+      }
+      return null;
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
+  static Future<DetailRiwayatModel?> getDetailRiwayatKendaraan(
+      int params) async {
+    try {
+      var url = ApiEndPoints.baseUrl +
+          ApiEndPoints.authEndpoints.detailriwayatkendaraan;
+      final response = await Dio().get("$url?idhasiluji=$params");
+      if (response.statusCode == 200) {
+        final DetailRiwayatModel res =
+            DetailRiwayatModel.fromJson(response.data);
         return res;
       }
       return null;

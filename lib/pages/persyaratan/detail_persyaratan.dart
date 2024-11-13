@@ -17,24 +17,25 @@ class DetailPersyaratanPage extends StatelessWidget {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(50),
-          child: AppBar(
-            title: Text(
-              detailPersyaratanController.persyaratanHeader.value,
-              style: const TextStyle(color: Colors.white),
+        preferredSize: const Size.fromHeight(50),
+        child: AppBar(
+          title: Text(
+            detailPersyaratanController.persyaratanHeader.value,
+            style: const TextStyle(color: Colors.white),
+          ),
+          backgroundColor: Colors.transparent,
+          elevation: 0.0,
+          leading: IconButton(
+            icon: const Icon(
+              Icons.arrow_back,
+              color: Colors.white,
             ),
-            backgroundColor: Colors.transparent,
-            elevation: 0.0,
-            leading: IconButton(
-              icon: const Icon(
-                Icons.arrow_back,
-                color: Colors.white,
-              ),
-              onPressed: () {
-                context.goNamed('persyaratan');
-              },
-            ),
-          )),
+            onPressed: () {
+              context.goNamed('persyaratan');
+            },
+          ),
+        ),
+      ),
       body: MediaQuery.removePadding(
         context: context,
         removeTop: true,

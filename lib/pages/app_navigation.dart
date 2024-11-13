@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:jombang/pages/cek_data_kendaraan/home_cek_data.dart';
-import 'package:jombang/pages/cek_data_kendaraan/home_hasil_uji.dart';
+import 'package:jombang/pages/cek_data_kendaraan/cek_data/home_cek_data.dart';
+import 'package:jombang/pages/cek_data_kendaraan/riwayat/detail_riwayat.dart';
+import 'package:jombang/pages/cek_data_kendaraan/hasil_uji/home_hasil_uji.dart';
+import 'package:jombang/pages/cek_data_kendaraan/riwayat/home_riwayat.dart';
 import 'package:jombang/pages/home/home.dart';
 import 'package:jombang/pages/pendaftaran/pendaftaran.dart';
 import 'package:jombang/pages/persyaratan/detail_persyaratan.dart';
@@ -81,7 +83,7 @@ class AppNavigation {
         pageBuilder: (context, state) => buildPageWithDefaultTransition<void>(
             context: context,
             state: state,
-            child: const CekData(),
+            child: const HomeCekData(),
             fade: true,
             leftToRight: false),
       ),
@@ -91,9 +93,34 @@ class AppNavigation {
         pageBuilder: (context, state) => buildPageWithDefaultTransition<void>(
             context: context,
             state: state,
-            child: const HasilUji(),
+            child: const HomeHasilUji(),
             fade: true,
             leftToRight: false),
+      ),
+      GoRoute(
+        name: 'riwayatkendaraan',
+        path: '/riwayatkendaraan',
+        pageBuilder: (context, state) => buildPageWithDefaultTransition<void>(
+            context: context,
+            state: state,
+            child: const HomeRiwayat(),
+            fade: true,
+            leftToRight: false),
+        routes: [
+          GoRoute(
+            name: 'detailriwayat',
+            path: '/detailriwayat',
+            pageBuilder: (context, state) =>
+                buildPageWithDefaultTransition<void>(
+                    context: context,
+                    state: state,
+                    child: const DetailRiwayat(),
+                    // child: DetailPersyaratanPage(
+                    //     persyaratan: state.uri.queryParameters['nama']!),
+                    fade: false,
+                    leftToRight: false),
+          ),
+        ],
       ),
       GoRoute(
         name: 'pendaftaran',

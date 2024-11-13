@@ -29,7 +29,7 @@ class ResultHasilUji extends StatelessWidget {
           child: Column(
             children: [
               // ==========================
-              // INDETIFIKASI KENDARAAN
+              // IDENTITAS KENDARAAN
               // ==========================
               BoxContainer(
                 padding: const EdgeInsets.all(10),

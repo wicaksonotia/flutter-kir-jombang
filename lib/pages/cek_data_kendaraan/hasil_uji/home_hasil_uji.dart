@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:jombang/pages/cek_data_kendaraan/app_bar_header.dart';
 import 'package:jombang/pages/cek_data_kendaraan/background_header.dart';
-import 'package:jombang/pages/cek_data_kendaraan/result_hasil_uji.dart';
+import 'package:jombang/pages/cek_data_kendaraan/hasil_uji/result_hasil_uji.dart';
 
 class HomeHasilUji extends StatefulWidget {
   const HomeHasilUji({super.key});

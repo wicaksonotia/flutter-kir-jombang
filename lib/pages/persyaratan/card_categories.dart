@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 import 'package:jombang/controllers/detail_persyaratan_controller.dart';
@@ -57,11 +58,22 @@ class CardCategories extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
                   children: [
-                    const BoxContainer(
-                      radius: 50,
-                      height: 50,
-                      width: 50,
-                      backgroundColor: Colors.white,
+                    const Column(
+                      children: [
+                        BoxContainer(
+                          radius: 50,
+                          height: 20,
+                          width: 20,
+                          backgroundColor: Colors.white,
+                        ),
+                        Gap(20),
+                        BoxContainer(
+                          radius: 50,
+                          height: 20,
+                          width: 20,
+                          backgroundColor: Colors.white,
+                        ),
+                      ],
                     ),
                     const SizedBox(
                       width: 10,

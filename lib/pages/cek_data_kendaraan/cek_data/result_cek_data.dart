@@ -28,7 +28,7 @@ class ResultCekData extends StatelessWidget {
           child: Column(
             children: [
               // ==========================
-              // INDETIFIKASI KENDARAAN
+              // IDENTITAS KENDARAAN
               // ==========================
               BoxContainer(
                 padding: const EdgeInsets.all(10),
@@ -39,7 +39,7 @@ class ResultCekData extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const TextHeader(
-                      nama: 'Indentifikasi Kendaraan',
+                      nama: 'Identitas Kendaraan',
                     ),
                     const Gap(10),
                     Row(
