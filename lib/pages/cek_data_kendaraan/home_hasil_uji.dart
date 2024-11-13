@@ -1,23 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:jombang/controllers/search_bar_controller.dart';
 import 'package:jombang/pages/cek_data_kendaraan/app_bar_header.dart';
 import 'package:jombang/pages/cek_data_kendaraan/background_header.dart';
 import 'package:jombang/pages/cek_data_kendaraan/result_hasil_uji.dart';
 
-class HasilUji extends StatefulWidget {
-  const HasilUji({super.key});
+class HomeHasilUji extends StatefulWidget {
+  const HomeHasilUji({super.key});
 
   @override
-  _HasilUjiState createState() => _HasilUjiState();
+  _HomeHasilUjiState createState() => _HomeHasilUjiState();
 }
 
-class _HasilUjiState extends State<HasilUji> {
-  final controller = Get.put(SearchBarController());
-
+class _HomeHasilUjiState extends State<HomeHasilUji> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       extendBodyBehindAppBar: true,
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(50),
@@ -32,7 +30,7 @@ class _HasilUjiState extends State<HasilUji> {
         child: Column(
           children: [
             BackgroundHeader(
-              menu: 'hasiluji',
+              menu: 'HomeHasilUji',
             ),
             SizedBox(
               height: MediaQuery.of(context).size.height * .79,

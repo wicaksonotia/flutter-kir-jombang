@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jombang/controllers/detail_kendaraan_controller.dart';
 import 'package:jombang/controllers/hasil_uji_controller.dart';
+import 'package:jombang/controllers/riwayat_kendaraan_controller.dart';
 import 'package:jombang/utils/colors.dart';
 import 'package:jombang/utils/widgets/text_field_widget.dart';
 import 'package:jombang/controllers/search_bar_controller.dart';
@@ -13,9 +14,11 @@ class SearchBarContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final SearchBarController controller = Get.put(SearchBarController());
-    final HasilUjiController hasilUjiController = Get.put(HasilUjiController());
     final DetailKendaraanController detailKendaraanController =
         Get.put(DetailKendaraanController());
+    final HasilUjiController hasilUjiController = Get.put(HasilUjiController());
+    final RiwayatKendaraanController riwayatKendaraanController =
+        Get.put(RiwayatKendaraanController());
 
     return Obx(
       () => Row(
@@ -68,6 +71,9 @@ class SearchBarContainer extends StatelessWidget {
                 }
                 if (menu == 'hasiluji') {
                   hasilUjiController.getHasilUjiKendaraan();
+                }
+                if (menu == 'riwayat') {
+                  riwayatKendaraanController.getDataRiwayat();
                 }
               },
               icon: const Icon(Icons.search),

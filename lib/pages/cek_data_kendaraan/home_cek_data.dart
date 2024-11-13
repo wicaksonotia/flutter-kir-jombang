@@ -5,19 +5,18 @@ import 'package:jombang/pages/cek_data_kendaraan/app_bar_header.dart';
 import 'package:jombang/pages/cek_data_kendaraan/background_header.dart';
 import 'package:jombang/pages/cek_data_kendaraan/result_cek_data.dart';
 
-class CekData extends StatefulWidget {
-  const CekData({super.key});
+class HomeCekData extends StatefulWidget {
+  const HomeCekData({super.key});
 
   @override
-  _CekDataState createState() => _CekDataState();
+  _HomeCekDataState createState() => _HomeCekDataState();
 }
 
-class _CekDataState extends State<CekData> {
-  final controller = Get.put(SearchBarController());
-
+class _HomeCekDataState extends State<HomeCekData> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       extendBodyBehindAppBar: true,
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(50),
