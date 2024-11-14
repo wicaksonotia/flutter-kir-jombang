@@ -8,7 +8,7 @@ import 'package:jombang/utils/containers/box_container.dart';
 import 'package:jombang/utils/sizes.dart';
 
 class CardRiwayat extends StatelessWidget {
-  CardRiwayat({
+  const CardRiwayat({
     super.key,
     required this.controller,
     required this.index,

@@ -8,8 +8,7 @@ class HasilUjiModel {
   HasilUjiModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     message = json['message'];
-    data =
-        json['data'] != null ? new DataHasilUji.fromJson(json['data']) : null;
+    data = json['data'] != null ? DataHasilUji.fromJson(json['data']) : null;
   }
 
   Map<String, dynamic> toJson() {

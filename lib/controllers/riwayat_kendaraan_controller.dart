@@ -13,8 +13,8 @@ class RiwayatKendaraanController extends GetxController {
   void getDataRiwayat() async {
     try {
       isLoadingRiwayat(true);
-      // String valueSearch = searchTextFieldController.text.toString();
-      String valueSearch = 'DG2689K';
+      String valueSearch = searchTextFieldController.text.toString();
+      // String valueSearch = 'CD021016982';
       var result = await RemoteDataSource.getRiwayatKendaraan(valueSearch);
       responseMessage.value = result!.status!;
       resultData.assignAll(result.data!);

@@ -29,7 +29,7 @@ class _HomeHasilUjiState extends State<HomeHasilUji> {
         child: Column(
           children: [
             BackgroundHeader(
-              menu: 'HomeHasilUji',
+              menu: 'hasiluji',
             ),
             SizedBox(
               height: MediaQuery.of(context).size.height * .79,

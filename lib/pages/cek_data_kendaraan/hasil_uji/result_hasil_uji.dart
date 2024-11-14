@@ -419,7 +419,8 @@ class TextRight extends StatelessWidget {
     return Text(
       nama,
       textAlign: TextAlign.right,
-      style: TextStyle(color: nama == 'LULUS' ? Colors.black : Colors.red),
+      style:
+          TextStyle(color: nama == 'TIDAK LULUS' ? Colors.red : Colors.black),
     );
   }
 }

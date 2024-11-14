@@ -8,14 +8,15 @@ import 'package:jombang/controllers/detail_riwayat_controller.dart';
 import 'package:jombang/pages/cek_data_kendaraan/riwayat/identitas_kendaraan.dart';
 import 'package:jombang/pages/cek_data_kendaraan/riwayat/identitas_pemilik.dart';
 import 'package:jombang/pages/cek_data_kendaraan/riwayat/pendaftaran.dart';
-import 'package:jombang/pages/cek_data_kendaraan/riwayat/text_header.dart';
-import 'package:jombang/pages/cek_data_kendaraan/riwayat/text_left.dart';
-import 'package:jombang/pages/cek_data_kendaraan/riwayat/text_right.dart';
 import 'package:jombang/pages/cek_data_kendaraan/riwayat/uji_emisi.dart';
 import 'package:jombang/pages/cek_data_kendaraan/riwayat/uji_lampu.dart';
+import 'package:jombang/pages/cek_data_kendaraan/riwayat/uji_lampu_tidak_lulus.dart';
 import 'package:jombang/pages/cek_data_kendaraan/riwayat/uji_pitlift.dart';
+import 'package:jombang/pages/cek_data_kendaraan/riwayat/uji_pitlift_tidak_lulus.dart';
 import 'package:jombang/pages/cek_data_kendaraan/riwayat/uji_prauji.dart';
+import 'package:jombang/pages/cek_data_kendaraan/riwayat/uji_prauji_tidak_lulus.dart';
 import 'package:jombang/pages/cek_data_kendaraan/riwayat/uji_rem.dart';
+import 'package:jombang/pages/cek_data_kendaraan/riwayat/uji_rem_tidak_lulus.dart';
 import 'package:jombang/pages/persyaratan/background_header.dart';
 import 'package:jombang/utils/containers/box_container.dart';
 import 'package:jombang/utils/sizes.dart';
@@ -29,6 +30,7 @@ class DetailRiwayat extends StatelessWidget {
         Get.put(DetailRiwayatController());
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       extendBodyBehindAppBar: true,
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(50),
@@ -100,8 +102,8 @@ class DetailRiwayat extends StatelessWidget {
                                 const Gap(10),
                                 Text(
                                   controller.resultData.value.nmPenguji!,
-                                  style:
-                                      TextStyle(fontSize: MySizes.fontSizeLg),
+                                  style: const TextStyle(
+                                      fontSize: MySizes.fontSizeLg),
                                 )
                               ],
                             ),
@@ -156,7 +158,17 @@ class DetailRiwayat extends StatelessWidget {
 
                                 // PRAUJI
                                 const Gap(10),
-                                Prauji(controller: controller),
+                                Builder(
+                                  builder: (context) {
+                                    if (controller
+                                        .resultData.value.lulusPrauji!) {
+                                      return Prauji(controller: controller);
+                                    } else {
+                                      return PraujiTidakLulus(
+                                          controller: controller);
+                                    }
+                                  },
+                                ),
 
                                 // EMISI
                                 const Gap(10),
@@ -164,15 +176,42 @@ class DetailRiwayat extends StatelessWidget {
 
                                 // PITLIFT
                                 const Gap(10),
-                                Pitlift(controller: controller),
+                                Builder(
+                                  builder: (context) {
+                                    if (controller
+                                        .resultData.value.lulusPitlift!) {
+                                      return Pitlift(controller: controller);
+                                    }
+                                    return PitliftTidakLulus(
+                                        controller: controller);
+                                  },
+                                ),
 
                                 // LAMPU
                                 const Gap(10),
-                                Lampu(controller: controller),
+                                Builder(
+                                  builder: (context) {
+                                    if (controller
+                                        .resultData.value.lulusLampu!) {
+                                      return Lampu(controller: controller);
+                                    }
+                                    return LampuTidakLulus(
+                                        controller: controller);
+                                  },
+                                ),
 
                                 // REM
                                 const Gap(10),
-                                Rem(controller: controller),
+                                Builder(
+                                  builder: (context) {
+                                    if (controller
+                                        .resultData.value.lulusBreak!) {
+                                      return Rem(controller: controller);
+                                    }
+                                    return RemTidakLulus(
+                                        controller: controller);
+                                  },
+                                ),
                               ],
                             ),
                           ),

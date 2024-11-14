@@ -58,6 +58,11 @@ class DataDetailRiwayat {
   String? selgaya3;
   String? selgaya4;
   String? statusLulus;
+  bool? lulusPrauji;
+  bool? lulusSmoke;
+  bool? lulusPitlift;
+  bool? lulusLampu;
+  bool? lulusBreak;
   String? imgDepan;
   String? imgBelakang;
   String? imgKanan;
@@ -98,6 +103,11 @@ class DataDetailRiwayat {
       this.selgaya3,
       this.selgaya4,
       this.statusLulus,
+      this.lulusPrauji,
+      this.lulusSmoke,
+      this.lulusPitlift,
+      this.lulusLampu,
+      this.lulusBreak,
       this.imgDepan,
       this.imgBelakang,
       this.imgKanan,
@@ -138,6 +148,11 @@ class DataDetailRiwayat {
     selgaya3 = json['selgaya3'];
     selgaya4 = json['selgaya4'];
     statusLulus = json['status_lulus'];
+    lulusPrauji = json['lulus_prauji'];
+    lulusSmoke = json['lulus_smoke'];
+    lulusPitlift = json['lulus_pitlift'];
+    lulusLampu = json['lulus_lampu'];
+    lulusBreak = json['lulus_break'];
     imgDepan = json['img_depan'];
     imgBelakang = json['img_belakang'];
     imgKanan = json['img_kanan'];
@@ -180,6 +195,11 @@ class DataDetailRiwayat {
     data['selgaya3'] = selgaya3;
     data['selgaya4'] = selgaya4;
     data['status_lulus'] = statusLulus;
+    data['lulus_prauji'] = lulusPrauji;
+    data['lulus_smoke'] = lulusSmoke;
+    data['lulus_pitlift'] = lulusPitlift;
+    data['lulus_lampu'] = lulusLampu;
+    data['lulus_break'] = lulusBreak;
     data['img_depan'] = imgDepan;
     data['img_belakang'] = imgBelakang;
     data['img_kanan'] = imgKanan;

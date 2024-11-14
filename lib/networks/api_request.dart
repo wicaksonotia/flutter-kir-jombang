@@ -121,10 +121,12 @@ class RemoteDataSource {
     }
   }
 
-  static Future<TidakLulusModel?> getKeteranganTidakLulus(int params) async {
+  static Future<TidakLulusModel?> getKeteranganTidakLulus(
+      int params, String kategori) async {
     try {
       var url = ApiEndPoints.baseUrl + ApiEndPoints.authEndpoints.keterangantl;
-      final response = await Dio().get("$url?idhasiluji=$params");
+      final response =
+          await Dio().get("$url?idhasiluji=$params&kategori=$kategori");
       if (response.statusCode == 200) {
         final TidakLulusModel res = TidakLulusModel.fromJson(response.data);
         // print(res.toJson());

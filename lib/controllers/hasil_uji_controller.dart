@@ -20,8 +20,8 @@ class HasilUjiController extends GetxController {
       var result = await RemoteDataSource.getHasilUji(valueSearch);
       idHasilUji.value = result!.data!.idHasilUji!;
       resultDataHasilUji.value = result.data!;
-      var resultTl =
-          await RemoteDataSource.getKeteranganTidakLulus(idHasilUji.value);
+      var resultTl = await RemoteDataSource.getKeteranganTidakLulus(
+          idHasilUji.value, 'all');
       responseMessage.value = resultTl!.status!;
       keteranganTl.assignAll(resultTl.data!);
     } catch (error) {

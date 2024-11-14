@@ -1,16 +1,37 @@
 import 'package:get/get.dart';
 import 'package:jombang/models/riwayat_detail_model.dart';
+import 'package:jombang/models/tidak_lulus_model.dart';
 import 'package:jombang/networks/api_request.dart';
 
 class DetailRiwayatController extends GetxController {
   var isLoading = false.obs;
   var resultData = DataDetailRiwayat().obs;
+  var keteranganTlPrauji = <DataTl>[].obs;
+  var keteranganTlPitlift = <DataTl>[].obs;
+  var keteranganTlLampu = <DataTl>[].obs;
+  var keteranganTlRem = <DataTl>[].obs;
 
   void getDetailDataKendaraan(idhasiluji) async {
     try {
       isLoading(true);
       var result = await RemoteDataSource.getDetailRiwayatKendaraan(idhasiluji);
       resultData.value = result!.data!;
+
+      var resultTlPrauji =
+          await RemoteDataSource.getKeteranganTidakLulus(idhasiluji, 'PRAUJI');
+      keteranganTlPrauji.assignAll(resultTlPrauji!.data!);
+
+      var resultTlPitlift =
+          await RemoteDataSource.getKeteranganTidakLulus(idhasiluji, 'PITLIFT');
+      keteranganTlPitlift.assignAll(resultTlPitlift!.data!);
+
+      var resultTlLampu =
+          await RemoteDataSource.getKeteranganTidakLulus(idhasiluji, 'LAMPU');
+      keteranganTlLampu.assignAll(resultTlLampu!.data!);
+
+      var resultTlRem =
+          await RemoteDataSource.getKeteranganTidakLulus(idhasiluji, 'REM');
+      keteranganTlRem.assignAll(resultTlRem!.data!);
       // print(resultData.value.toJson());
       // print(result?.toJson());
       // if (result?.status == 'ok') {
