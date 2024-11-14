@@ -126,7 +126,17 @@ class AppNavigation {
         name: 'pendaftaran',
         path: '/pendaftaran',
         builder: (context, state) => const Pendaftaran(),
-      )
+      ),
+      GoRoute(
+        name: 'profile',
+        path: '/profile',
+        builder: (context, state) => const Pendaftaran(),
+      ),
+      GoRoute(
+        name: 'informasi',
+        path: '/informasi',
+        builder: (context, state) => const Pendaftaran(),
+      ),
     ],
   );
 }
