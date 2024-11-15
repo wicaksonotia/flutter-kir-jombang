@@ -1,11 +1,13 @@
 import 'dart:async';
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:jombang/models/berita_model.dart';
 import 'package:jombang/models/carousel_model.dart';
 import 'package:jombang/models/hasil_uji_model.dart';
 import 'package:jombang/models/jenis_uji_model.dart';
 import 'package:jombang/models/kendaraan_model.dart';
 import 'package:jombang/models/menu_model.dart';
+import 'package:jombang/models/pendaftaran_model.dart';
 import 'package:jombang/models/persyaratan_model.dart';
 import 'package:jombang/models/riwayat_detail_model.dart';
 import 'package:jombang/models/riwayat_model.dart';
@@ -73,6 +75,7 @@ class RemoteDataSource {
     }
   }
 
+  // DETAIL PERSYARATAN
   static Future<List<PersyaratanModel>?> getDetailPersyaratan(
       String jenisUji) async {
     try {
@@ -89,6 +92,7 @@ class RemoteDataSource {
     }
   }
 
+  // DETAIL KEDARAAN
   static Future<DetailKendaraanModel?> getDetailKendaraan(String params) async {
     try {
       var url =
@@ -106,6 +110,7 @@ class RemoteDataSource {
     }
   }
 
+  // HASIL UJI
   static Future<HasilUjiModel?> getHasilUji(String params) async {
     try {
       var url =
@@ -121,6 +126,7 @@ class RemoteDataSource {
     }
   }
 
+  // KETERANGAN TIDAK LULUS
   static Future<TidakLulusModel?> getKeteranganTidakLulus(
       int params, String kategori) async {
     try {
@@ -138,6 +144,7 @@ class RemoteDataSource {
     }
   }
 
+  // LIST RIWAYAT KENDARAAN
   static Future<RiwayatKendaraanModel?> getRiwayatKendaraan(
       String params) async {
     try {
@@ -155,6 +162,7 @@ class RemoteDataSource {
     }
   }
 
+  // DETAIL RIWAYAT KENDARAAN
   static Future<DetailRiwayatModel?> getDetailRiwayatKendaraan(
       int params) async {
     try {
@@ -164,6 +172,50 @@ class RemoteDataSource {
       if (response.statusCode == 200) {
         final DetailRiwayatModel res =
             DetailRiwayatModel.fromJson(response.data);
+        return res;
+      }
+      return null;
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
+  // CREATE RETRIBUSI
+  static Future<bool> createRetribusi(FormData data) async {
+    try {
+      var url =
+          ApiEndPoints.baseUrl + ApiEndPoints.authEndpoints.daftarretribusi;
+      if (kDebugMode) {
+        print(data);
+      }
+      Response response = await Dio().post(
+        url,
+        data: data,
+      );
+      print(response);
+      if (response.statusCode == 201) {
+        // GetX.Get.snackbar('Successfully','New Profile Added',
+        //     backgroundColor: Colors.white,
+        //     duration: Duration(seconds: 4),
+        //     animationDuration: Duration(milliseconds: 900),
+        //     margin: EdgeInsets.only(top: 5, left: 10, right: 10)
+        // );
+        return true;
+      }
+      return false;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  // DETAIL RETRIBUSI
+  static Future<PendaftaranModel?> getRetribusi(int params) async {
+    try {
+      var url =
+          ApiEndPoints.baseUrl + ApiEndPoints.authEndpoints.detailretribusi;
+      final response = await Dio().get("$url?idretribusi=$params");
+      if (response.statusCode == 200) {
+        final PendaftaranModel res = PendaftaranModel.fromJson(response.data);
         return res;
       }
       return null;

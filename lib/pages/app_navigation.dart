@@ -69,7 +69,7 @@ class AppNavigation {
                 buildPageWithDefaultTransition<void>(
                     context: context,
                     state: state,
-                    child: DetailPersyaratanPage(),
+                    child: const DetailPersyaratanPage(),
                     // child: DetailPersyaratanPage(
                     //     persyaratan: state.uri.queryParameters['nama']!),
                     fade: false,
