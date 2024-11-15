@@ -18,7 +18,7 @@ class PendaftaranController extends GetxController {
       pickedFile1 = await ImagePicker().pickImage(source: imageSource);
       update();
     } finally {
-      // if (Get.isBottomSheetOpen ?? true) Get.back();
+      if (Get.isBottomSheetOpen ?? true) Get.back();
     }
   }
 
@@ -27,7 +27,7 @@ class PendaftaranController extends GetxController {
       pickedFile2 = await ImagePicker().pickImage(source: imageSource);
       update();
     } finally {
-      // if (Get.isBottomSheetOpen ?? true) Get.back();
+      if (Get.isBottomSheetOpen ?? true) Get.back();
     }
   }
 
@@ -37,7 +37,7 @@ class PendaftaranController extends GetxController {
       if (formKey.currentState!.validate()) {
         // if (pickedFile1 != null) {
         Dio.FormData formData = Dio.FormData.fromMap({
-          "name": name.text,
+          "nouji": name.text,
           // "image_1": await Dio.MultipartFile.fromFile(pickedFile1!.path,
           //     filename: pickedFile1!.path.split('/').last),
           // "image_2": await Dio.MultipartFile.fromFile(pickedFile2!.path,

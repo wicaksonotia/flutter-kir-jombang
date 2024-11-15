@@ -13,8 +13,40 @@ import 'package:jombang/models/riwayat_detail_model.dart';
 import 'package:jombang/models/riwayat_model.dart';
 import 'package:jombang/models/tidak_lulus_model.dart';
 import 'package:jombang/networks/api_endpoints.dart';
+import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 class RemoteDataSource {
+  static Future<bool> login(FormData data) async {
+    try {
+      Dio dio = Dio();
+      var url = ApiEndPoints.baseUrl + ApiEndPoints.authEndpoints.login;
+      Response response = await dio.post(url,
+          data: data,
+          options: Options(
+            contentType: 'application/json',
+          ));
+      print(response.statusCode);
+      if (response.statusCode == 200) {
+        if (response.data['status'] == 'ok') {
+          // throw jsonDecode(response.body)['message'];
+          // var token = json['data']['Token'];
+          // final SharedPreferences prefs = await _prefs;
+          // await prefs.setString('token', token);
+          // emailController.clear();
+          // passwordController.clear();
+          return true;
+        }
+        // else if (response.data['status'] == 'error') {
+        //   return false;
+        // }
+      }
+      return false;
+    } catch (e) {
+      print(e.toString());
+      return false;
+    }
+  }
+
   // SLIDER
   static Future<List<CarouselModel>?> getSlider() async {
     try {
@@ -183,27 +215,45 @@ class RemoteDataSource {
   // CREATE RETRIBUSI
   static Future<bool> createRetribusi(FormData data) async {
     try {
+      Dio dio = Dio();
       var url =
           ApiEndPoints.baseUrl + ApiEndPoints.authEndpoints.daftarretribusi;
-      if (kDebugMode) {
-        print(data);
-      }
-      Response response = await Dio().post(
-        url,
-        data: data,
-      );
+      // var headers = {'Content-Type': 'application/json'};
+      // dio.interceptors.add(PrettyDioLogger(
+      //     requestHeader: true,
+      //     requestBody: true,
+      //     responseBody: true,
+      //     responseHeader: false,
+      //     error: true,
+      //     compact: true,
+      //     maxWidth: 90,
+      //     enabled: true,
+      //     filter: (options, args) {
+      //       // don't print requests with uris containing '/posts'
+      //       if (options.path.contains(url)) {
+      //         return false;
+      //       }
+      //       // don't print responses with unit8 list data
+      //       return !args.isResponse || !args.hasUint8ListData;
+      //     }));
+      Response response = await dio.post(url,
+          data: data,
+          options: Options(
+            contentType: 'application/json',
+          ));
       print(response);
-      if (response.statusCode == 201) {
-        // GetX.Get.snackbar('Successfully','New Profile Added',
-        //     backgroundColor: Colors.white,
-        //     duration: Duration(seconds: 4),
-        //     animationDuration: Duration(milliseconds: 900),
-        //     margin: EdgeInsets.only(top: 5, left: 10, right: 10)
-        // );
-        return true;
-      }
+      // if (response.statusCode == 201) {
+      // GetX.Get.snackbar('Successfully','New Profile Added',
+      //     backgroundColor: Colors.white,
+      //     duration: Duration(seconds: 4),
+      //     animationDuration: Duration(milliseconds: 900),
+      //     margin: EdgeInsets.only(top: 5, left: 10, right: 10)
+      // );
+      // return true;
+      // }
       return false;
     } catch (e) {
+      print("error kesini");
       return false;
     }
   }
