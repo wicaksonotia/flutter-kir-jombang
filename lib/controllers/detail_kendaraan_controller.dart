@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jombang/controllers/search_bar_controller.dart';
 import 'package:jombang/models/kendaraan_model.dart';
@@ -14,19 +15,16 @@ class DetailKendaraanController extends GetxController {
       isLoadingDetailKendaraan(true);
       String valueSearch = searchTextFieldController.text.toString();
       var result = await RemoteDataSource.getDetailKendaraan(valueSearch);
-      resultData.value = result!.data!;
-      // print(resultData.value.toJson());
-      // print(result?.toJson());
-      // if (result?.status == 'ok') {
-      // resultData.value = result!.data!;
-      // print(resultData.value.toJson());
-      // } else if (result?.status == 'error') {
-      // print('error');
-      // }
+      // print(result.toJson());
+      if (result!.status == 'ok') {
+        resultData.value = result.data!;
+      } else if (result.status == 'error') {
+        Get.snackbar('Notification', 'Data kendaraan belum terdaftar.',
+            icon: const Icon(Icons.error), snackPosition: SnackPosition.BOTTOM);
+      }
     } catch (error) {
-      print(error);
-      // Get.snackbar('Notification', 'Data kendaraan belum terdaftar',
-      //     icon: const Icon(Icons.error), snackPosition: SnackPosition.BOTTOM);
+      Get.snackbar('Error', "Silakan cek koneksi internet anda.",
+          icon: const Icon(Icons.error), snackPosition: SnackPosition.BOTTOM);
       isLoadingDetailKendaraan(false);
     } finally {
       isLoadingDetailKendaraan(false);

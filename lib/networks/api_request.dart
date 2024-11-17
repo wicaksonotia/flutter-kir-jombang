@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
 import 'package:jombang/models/berita_model.dart';
 import 'package:jombang/models/carousel_model.dart';
 import 'package:jombang/models/hasil_uji_model.dart';
@@ -13,7 +12,6 @@ import 'package:jombang/models/riwayat_detail_model.dart';
 import 'package:jombang/models/riwayat_model.dart';
 import 'package:jombang/models/tidak_lulus_model.dart';
 import 'package:jombang/networks/api_endpoints.dart';
-import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 class RemoteDataSource {
   static Future<bool> login(FormData data) async {

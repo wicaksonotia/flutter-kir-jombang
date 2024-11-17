@@ -17,8 +17,10 @@ class PendaftaranController extends GetxController {
     try {
       pickedFile1 = await ImagePicker().pickImage(source: imageSource);
       update();
-    } finally {
-      if (Get.isBottomSheetOpen ?? true) Get.back();
+      Get.back();
+    } catch (error) {
+      Get.snackbar('Error', error.toString(),
+          icon: const Icon(Icons.error), snackPosition: SnackPosition.BOTTOM);
     }
   }
 
@@ -26,8 +28,10 @@ class PendaftaranController extends GetxController {
     try {
       pickedFile2 = await ImagePicker().pickImage(source: imageSource);
       update();
-    } finally {
-      if (Get.isBottomSheetOpen ?? true) Get.back();
+      Get.back();
+    } catch (error) {
+      Get.snackbar('Error', error.toString(),
+          icon: const Icon(Icons.error), snackPosition: SnackPosition.BOTTOM);
     }
   }
 

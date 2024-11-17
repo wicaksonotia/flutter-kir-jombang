@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:get/get.dart';
 
 class AppbarHeader extends StatelessWidget {
   AppbarHeader({super.key, required this.header});
@@ -20,7 +20,7 @@ class AppbarHeader extends StatelessWidget {
           color: Colors.white,
         ),
         onPressed: () {
-          context.goNamed('home');
+          Get.back();
         },
       ),
     );

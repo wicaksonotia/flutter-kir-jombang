@@ -1,8 +1,6 @@
-import 'package:back_button_interceptor/back_button_interceptor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
-import 'package:go_router/go_router.dart';
 import 'package:jombang/controllers/jenis_uji_controller.dart';
 import 'package:jombang/pages/cek_data_kendaraan/app_bar_header.dart';
 import 'package:jombang/pages/persyaratan/background_header.dart';
@@ -17,23 +15,6 @@ class PersyaratanPage extends StatefulWidget {
 
 class _PersyaratanPageState extends State<PersyaratanPage> {
   final JenisUjiController jenisUjiController = Get.put(JenisUjiController());
-  @override
-  void initState() {
-    super.initState();
-    BackButtonInterceptor.add(interceptor);
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    BackButtonInterceptor.remove(interceptor);
-  }
-
-  bool interceptor(bool btnEvent, RouteInfo info) {
-    context.goNamed('home');
-    return true;
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

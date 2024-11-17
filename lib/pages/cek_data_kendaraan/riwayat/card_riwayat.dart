@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:go_router/go_router.dart';
 import 'package:jombang/controllers/detail_riwayat_controller.dart';
 import 'package:jombang/controllers/riwayat_kendaraan_controller.dart';
 import 'package:jombang/utils/colors.dart';
@@ -28,7 +27,7 @@ class CardRiwayat extends StatelessWidget {
           //     jenisUjiController.jenisUjiItem[index].nama!;
           detailRiwayatController
               .getDetailDataKendaraan(controller.resultData[index].idHasilUji!);
-          context.goNamed('detailriwayat');
+          Get.toNamed('/detailriwayat');
         },
         child: BoxContainer(
           margin: const EdgeInsets.only(bottom: 10),

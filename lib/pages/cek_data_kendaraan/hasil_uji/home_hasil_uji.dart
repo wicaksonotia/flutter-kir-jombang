@@ -1,6 +1,4 @@
-import 'package:back_button_interceptor/back_button_interceptor.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:jombang/pages/cek_data_kendaraan/app_bar_header.dart';
 import 'package:jombang/pages/cek_data_kendaraan/background_header.dart';
 import 'package:jombang/pages/cek_data_kendaraan/hasil_uji/result_hasil_uji.dart';
@@ -13,23 +11,6 @@ class HomeHasilUji extends StatefulWidget {
 }
 
 class _HomeHasilUjiState extends State<HomeHasilUji> {
-  @override
-  void initState() {
-    super.initState();
-    BackButtonInterceptor.add(interceptor);
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    BackButtonInterceptor.remove(interceptor);
-  }
-
-  bool interceptor(bool btnEvent, RouteInfo info) {
-    context.goNamed('home');
-    return true;
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

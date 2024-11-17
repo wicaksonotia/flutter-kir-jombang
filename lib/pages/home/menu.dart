@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
-import 'package:go_router/go_router.dart';
 import 'package:jombang/controllers/menu_controller.dart';
 import 'package:jombang/utils/colors.dart';
 import 'package:jombang/utils/containers/box_container.dart';
@@ -36,7 +35,8 @@ class Menu extends StatelessWidget {
               children: [
                 InkWell(
                   onTap: () {
-                    context.goNamed(menuController.menuItem[index].directlink!);
+                    // context.goNamed(menuController.menuItem[index].directlink!);
+                    Get.toNamed(menuController.menuItem[index].directlink!);
                   },
                   child: Column(
                     children: [

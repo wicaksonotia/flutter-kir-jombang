@@ -3,7 +3,7 @@ import 'package:jombang/models/berita_model.dart';
 import 'package:jombang/networks/api_request.dart';
 
 class BeritaController extends GetxController {
-  var beritaItem = <BeritaModel>[].obs;
+  var resultData = <BeritaModel>[].obs;
   var isLoading = true.obs;
 
   @override
@@ -17,7 +17,7 @@ class BeritaController extends GetxController {
       isLoading(true);
       var result = await RemoteDataSource.getBerita();
       if (result != null) {
-        beritaItem.assignAll(result);
+        resultData.assignAll(result);
       }
     } finally {
       isLoading(false);

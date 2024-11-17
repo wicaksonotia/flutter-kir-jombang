@@ -1,41 +1,21 @@
 import 'dart:io';
 
-import 'package:back_button_interceptor/back_button_interceptor.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
-import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:jombang/controllers/pendaftaran_controller.dart';
 import 'package:jombang/pages/pendaftaran/loading_button.dart';
 
-class Pendaftaran extends StatefulWidget {
-  const Pendaftaran({super.key});
+class PendaftaranPage extends StatefulWidget {
+  const PendaftaranPage({super.key});
 
   @override
-  State<Pendaftaran> createState() => _PendaftaranState();
+  State<PendaftaranPage> createState() => _PendaftaranPageState();
 }
 
-class _PendaftaranState extends State<Pendaftaran> {
+class _PendaftaranPageState extends State<PendaftaranPage> {
   final pendaftaranController = Get.put(PendaftaranController());
-
-  @override
-  void initState() {
-    BackButtonInterceptor.add(interceptor);
-    pendaftaranController.clearController();
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    BackButtonInterceptor.remove(interceptor);
-    super.dispose();
-  }
-
-  bool interceptor(bool btnEvent, RouteInfo info) {
-    context.goNamed('home');
-    return true;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +25,7 @@ class _PendaftaranState extends State<Pendaftaran> {
         title: const Text("data"),
         leading: IconButton(
           icon: const Icon(Icons.ac_unit),
-          onPressed: () => Navigator.of(context).pop(),
+          onPressed: () => Get.back(),
         ),
       ),
       body: SingleChildScrollView(
@@ -183,7 +163,7 @@ class _PendaftaranState extends State<Pendaftaran> {
                             return Container(
                               decoration: const BoxDecoration(
                                 color: Colors.white,
-                                borderRadius: const BorderRadius.only(
+                                borderRadius: BorderRadius.only(
                                     topLeft: Radius.circular(16.0),
                                     topRight: Radius.circular(16.0)),
                               ),

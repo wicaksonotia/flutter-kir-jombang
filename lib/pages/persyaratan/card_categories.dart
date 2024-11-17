@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
-import 'package:go_router/go_router.dart';
 import 'package:jombang/controllers/detail_persyaratan_controller.dart';
 import 'package:jombang/controllers/jenis_uji_controller.dart';
 import 'package:jombang/utils/containers/box_container.dart';
@@ -33,7 +32,7 @@ class CardCategories extends StatelessWidget {
               jenisUjiController.jenisUjiItem[index].nama!;
           detailPersyaratanController
               .fetchData(jenisUjiController.jenisUjiItem[index].nama!);
-          context.goNamed('detailpersyaratan');
+          Get.toNamed('/detailpersyaratan');
         },
         child: BoxContainer(
           margin: const EdgeInsets.only(bottom: 10),

@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
-import 'package:go_router/go_router.dart';
 import 'package:jombang/controllers/detail_riwayat_controller.dart';
 import 'package:jombang/pages/cek_data_kendaraan/riwayat/identitas_kendaraan.dart';
 import 'package:jombang/pages/cek_data_kendaraan/riwayat/identitas_pemilik.dart';
@@ -47,7 +46,7 @@ class DetailRiwayat extends StatelessWidget {
               color: Colors.white,
             ),
             onPressed: () {
-              context.goNamed('riwayatkendaraan');
+              Get.back();
             },
           ),
         ),
