@@ -7,7 +7,7 @@ import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:jombang/controllers/berita_controller.dart';
-import 'package:jombang/pages/cek_data_kendaraan/app_bar_header.dart';
+import 'package:jombang/utils/containers/app_bar_header.dart';
 import 'package:jombang/pages/persyaratan/background_header.dart';
 import 'package:jombang/utils/colors.dart';
 import 'package:jombang/utils/containers/box_container.dart';

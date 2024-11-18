@@ -216,42 +216,17 @@ class RemoteDataSource {
       Dio dio = Dio();
       var url =
           ApiEndPoints.baseUrl + ApiEndPoints.authEndpoints.daftarretribusi;
-      // var headers = {'Content-Type': 'application/json'};
-      // dio.interceptors.add(PrettyDioLogger(
-      //     requestHeader: true,
-      //     requestBody: true,
-      //     responseBody: true,
-      //     responseHeader: false,
-      //     error: true,
-      //     compact: true,
-      //     maxWidth: 90,
-      //     enabled: true,
-      //     filter: (options, args) {
-      //       // don't print requests with uris containing '/posts'
-      //       if (options.path.contains(url)) {
-      //         return false;
-      //       }
-      //       // don't print responses with unit8 list data
-      //       return !args.isResponse || !args.hasUint8ListData;
-      //     }));
       Response response = await dio.post(url,
           data: data,
           options: Options(
             contentType: 'application/json',
           ));
-      print(response);
-      // if (response.statusCode == 201) {
-      // GetX.Get.snackbar('Successfully','New Profile Added',
-      //     backgroundColor: Colors.white,
-      //     duration: Duration(seconds: 4),
-      //     animationDuration: Duration(milliseconds: 900),
-      //     margin: EdgeInsets.only(top: 5, left: 10, right: 10)
-      // );
-      // return true;
-      // }
+      if (response.statusCode == 200) {
+        return true;
+      }
       return false;
-    } catch (e) {
-      print("error kesini");
+    } catch (error) {
+      print(error.toString());
       return false;
     }
   }

@@ -54,7 +54,8 @@ class _BeritaState extends State<Berita> {
               itemBuilder: (_, index) {
                 var dataJudul = controller.resultData[index].judul!;
                 var dataBerita = controller.resultData[index].berita!;
-                var dataTanggal = controller.resultData[index].tanggal!;
+                var dataTanggal =
+                    DateTime.tryParse(controller.resultData[index].tanggal!);
                 Uint8List decodePhoto;
                 decodePhoto = const Base64Decoder()
                     .convert(controller.resultData[index].gambar!);
@@ -99,7 +100,7 @@ class _BeritaState extends State<Berita> {
                                 ),
                                 Text(
                                   DateFormat('EEEE, dd MMMM yyyy', 'id_ID')
-                                      .format(DateTime.now()),
+                                      .format(dataTanggal!),
                                   style: const TextStyle(
                                       fontSize: MySizes.fontSizeXsm),
                                 ),
