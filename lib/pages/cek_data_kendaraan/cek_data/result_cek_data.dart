@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:jombang/controllers/detail_kendaraan_controller.dart';
+import 'package:jombang/pages/cek_data_kendaraan/text_header.dart';
+import 'package:jombang/pages/cek_data_kendaraan/text_left.dart';
+import 'package:jombang/pages/cek_data_kendaraan/text_right.dart';
 import 'package:jombang/utils/containers/box_container.dart';
 import 'package:jombang/utils/sizes.dart';
 
@@ -220,7 +223,7 @@ class ResultCekData extends StatelessWidget {
                   children: [
                     RichText(
                       text: const TextSpan(
-                        text: 'Dokumenasi Foto Kendaraan ',
+                        text: 'Dokumentasi Foto Terakhir Kendaraan ',
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: MySizes.fontSizeMd,
@@ -234,9 +237,6 @@ class ResultCekData extends StatelessWidget {
                         ],
                       ),
                     ),
-                    // const TextHeader(
-                    //   nama: 'Dokumenasi Foto Kendaraan',
-                    // ),
                     const Gap(10),
                     Row(
                       children: [
@@ -355,58 +355,5 @@ class ResultCekData extends StatelessWidget {
         );
       }
     });
-  }
-}
-
-class TextHeader extends StatelessWidget {
-  const TextHeader({
-    super.key,
-    required this.nama,
-  });
-
-  final String nama;
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      nama,
-      style: const TextStyle(
-          fontWeight: FontWeight.bold, fontSize: MySizes.fontSizeLg),
-    );
-  }
-}
-
-class TextLeft extends StatelessWidget {
-  const TextLeft({
-    super.key,
-    required this.nama,
-  });
-
-  final String nama;
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      nama,
-      style: const TextStyle(color: Colors.grey, height: 1.7),
-    );
-  }
-}
-
-class TextRight extends StatelessWidget {
-  const TextRight({
-    super.key,
-    required this.nama,
-  });
-
-  final String nama;
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      nama,
-      textAlign: TextAlign.right,
-      style: const TextStyle(color: Colors.black),
-    );
   }
 }

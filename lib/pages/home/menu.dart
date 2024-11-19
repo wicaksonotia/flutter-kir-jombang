@@ -40,17 +40,19 @@ class Menu extends StatelessWidget {
                   },
                   child: Column(
                     children: [
-                      BoxContainer(
+                      const BoxContainer(
                         radius: 15,
                         height: 45,
                         width: 45,
                         backgroundColor: MyColors.primary,
-                        child: Icon(
-                          (index != menuController.menuItem.length - 1)
-                              ? Icons.add_business_rounded
-                              : Icons.add_box,
-                          color: Colors.white,
-                        ),
+                        child: Icon(Icons.add_business_rounded,
+                            color: Colors.white),
+                        // child: Icon(
+                        //   (index != menuController.menuItem.length - 1)
+                        //       ? Icons.add_business_rounded
+                        //       : Icons.add_box,
+                        //   color: Colors.white,
+                        // ),
                       ),
                       const Gap(3),
                       Text(

@@ -2,9 +2,10 @@ import 'package:dio/dio.dart' as Dio;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-// import 'package:intl/intl.dart';
+import 'package:jombang/models/kendaraan_model.dart';
 // import 'package:jombang/models/pendaftaran_model.dart';
 import 'package:jombang/networks/api_request.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class PendaftaranController extends GetxController {
   TextEditingController nouji = TextEditingController();
@@ -15,7 +16,17 @@ class PendaftaranController extends GetxController {
   XFile? pickedFile4;
   var isLoading = false.obs;
   final formKey = GlobalKey<FormState>();
+  String? valueSearch = '';
+  bool? isLogin = false;
+  var isLoadingDetailKendaraan = false.obs;
+  var resultData = DataDetailKendaraan().obs;
   // var resultData = DataPendaftaran().obs;
+
+  @override
+  void onInit() {
+    super.onInit();
+    cekStatusLogin();
+  }
 
   void clearController() {
     nouji.clear();
@@ -80,16 +91,15 @@ class PendaftaranController extends GetxController {
             pickedFile4 != null) {
           Dio.FormData formData = Dio.FormData.fromMap({
             "nouji": nouji.text,
-            // "tanggaluji": DateFormat('yyyy-mm-dd').format(selectedDate.value),
             "tanggaluji": selectedDate.value,
             "image_1": await Dio.MultipartFile.fromFile(pickedFile1!.path,
                 filename: pickedFile1!.path.split('/').last),
             "image_2": await Dio.MultipartFile.fromFile(pickedFile2!.path,
                 filename: pickedFile2!.path.split('/').last),
-            // "image_3": await Dio.MultipartFile.fromFile(pickedFile3!.path,
-            //     filename: pickedFile1!.path.split('/').last),
-            // "image_4": await Dio.MultipartFile.fromFile(pickedFile4!.path,
-            //     filename: pickedFile2!.path.split('/').last),
+            "image_3": await Dio.MultipartFile.fromFile(pickedFile3!.path,
+                filename: pickedFile3!.path.split('/').last),
+            "image_4": await Dio.MultipartFile.fromFile(pickedFile4!.path,
+                filename: pickedFile4!.path.split('/').last),
           });
 
           bool result = await RemoteDataSource.createRetribusi(formData);
@@ -122,13 +132,32 @@ class PendaftaranController extends GetxController {
   //   }
   // }
 
+  void getDetailDataKendaraan(valueSearch) async {
+    try {
+      isLoadingDetailKendaraan(true);
+      var result = await RemoteDataSource.getDetailKendaraan(valueSearch!);
+      if (result!.status == 'ok') {
+        resultData.value = result.data!;
+      } else if (result.status == 'error') {
+        Get.snackbar('Notification', 'Data kendaraan belum terdaftar.',
+            icon: const Icon(Icons.error), snackPosition: SnackPosition.BOTTOM);
+      }
+    } catch (error) {
+      Get.snackbar('Notification', 'Data kendaraan belum terdaftar.',
+          icon: const Icon(Icons.error), snackPosition: SnackPosition.BOTTOM);
+      isLoadingDetailKendaraan(false);
+    } finally {
+      isLoadingDetailKendaraan(false);
+    }
+  }
+
   // PILIH TANGGAL UJI
   bool disableDate(DateTime day) {
     final List<int> disableWeekdays = [
       DateTime.sunday,
       DateTime.saturday,
     ];
-    if ((day.isAfter(DateTime.now().subtract(const Duration(days: 2))) &&
+    if ((day.isAfter(DateTime.now().subtract(const Duration(days: 1))) &&
             day.isBefore(DateTime.now().add(const Duration(days: 7)))) &&
         !disableWeekdays.contains(day.weekday)) {
       return true;
@@ -154,6 +183,16 @@ class PendaftaranController extends GetxController {
         selectableDayPredicate: disableDate);
     if (pickedDate != null && pickedDate != selectedDate.value) {
       selectedDate.value = pickedDate;
+    }
+  }
+
+  void cekStatusLogin() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    isLogin = prefs.getBool('statusLogin');
+    if (isLogin == true) {
+      Get.toNamed('/pendaftaran');
+    } else {
+      Get.offNamed('/login');
     }
   }
 }

@@ -117,7 +117,7 @@ class LoginPage extends StatelessWidget {
                                   controller: loginController.emailController,
                                   decoration: InputDecoration(
                                       border: InputBorder.none,
-                                      hintText: "Email or Phone number",
+                                      hintText: "No Uji Kendaraan",
                                       hintStyle:
                                           TextStyle(color: Colors.grey[700])),
                                 ),

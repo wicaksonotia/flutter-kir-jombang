@@ -6,10 +6,14 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:jombang/controllers/pendaftaran_controller.dart';
+import 'package:jombang/pages/cek_data_kendaraan/text_header.dart';
+import 'package:jombang/pages/cek_data_kendaraan/text_left.dart';
+import 'package:jombang/pages/cek_data_kendaraan/text_right.dart';
 import 'package:jombang/pages/pendaftaran/loading_button.dart';
 import 'package:jombang/pages/persyaratan/background_header.dart';
 import 'package:jombang/utils/colors.dart';
 import 'package:jombang/utils/containers/app_bar_header.dart';
+import 'package:jombang/utils/containers/box_container.dart';
 
 class PendaftaranPage extends StatefulWidget {
   const PendaftaranPage({super.key});
@@ -19,7 +23,8 @@ class PendaftaranPage extends StatefulWidget {
 }
 
 class _PendaftaranPageState extends State<PendaftaranPage> {
-  final pendaftaranController = Get.put(PendaftaranController());
+  final PendaftaranController pendaftaranController =
+      Get.put(PendaftaranController());
 
   @override
   Widget build(BuildContext context) {
@@ -47,42 +52,375 @@ class _PendaftaranPageState extends State<PendaftaranPage> {
                     padding: const EdgeInsets.all(20),
                     child: Column(
                       children: [
-                        TextFormField(
-                          keyboardType: TextInputType.name,
-                          controller: pendaftaranController.nouji,
-                          onEditingComplete: () => node.nextFocus(),
-                          validator: (String? value) {
-                            if (value!.isEmpty) {
-                              return 'this field is required';
-                            }
-                            return null;
-                          },
-                          decoration: const InputDecoration(
-                            labelText: "No Uji Kendaraan",
+                        // UPLOAD IMAGE
+                        GetBuilder<PendaftaranController>(
+                          builder: (c) => Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  InkWell(
+                                    child: BoxContainer(
+                                      padding: const EdgeInsets.all(20),
+                                      shadow: true,
+                                      child: Column(
+                                        children: [
+                                          const Text(
+                                            'FOTO KTP',
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          const Gap(10),
+                                          SizedBox(
+                                            height: 115,
+                                            width: 115,
+                                            child: Stack(
+                                              clipBehavior: Clip.none,
+                                              fit: StackFit.expand,
+                                              children: [
+                                                Image(
+                                                  image: pendaftaranController
+                                                              .pickedFile1 !=
+                                                          null
+                                                      ? FileImage(
+                                                          File(
+                                                              pendaftaranController
+                                                                  .pickedFile1!
+                                                                  .path),
+                                                        )
+                                                      : const AssetImage(
+                                                              'assets/images/no_image.png')
+                                                          as ImageProvider,
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    onTap: () {
+                                      showModalBottomSheet(
+                                          context: context,
+                                          builder: (BuildContext context) {
+                                            return Container(
+                                              decoration: const BoxDecoration(
+                                                color: Colors.white,
+                                                borderRadius: BorderRadius.only(
+                                                    topLeft:
+                                                        Radius.circular(16.0),
+                                                    topRight:
+                                                        Radius.circular(16.0)),
+                                              ),
+                                              child: Wrap(
+                                                alignment: WrapAlignment.end,
+                                                crossAxisAlignment:
+                                                    WrapCrossAlignment.end,
+                                                children: [
+                                                  ListTile(
+                                                    leading: const Icon(
+                                                        Icons.camera),
+                                                    title: const Text('Camera'),
+                                                    onTap: () {
+                                                      pendaftaranController
+                                                          .selectImage1(
+                                                              ImageSource
+                                                                  .camera);
+                                                    },
+                                                  ),
+                                                  ListTile(
+                                                    leading:
+                                                        const Icon(Icons.image),
+                                                    title:
+                                                        const Text('Gallery'),
+                                                    onTap: () {
+                                                      pendaftaranController
+                                                          .selectImage1(
+                                                              ImageSource
+                                                                  .gallery);
+                                                    },
+                                                  ),
+                                                ],
+                                              ),
+                                            );
+                                          });
+                                    },
+                                  ),
+                                  InkWell(
+                                    child: BoxContainer(
+                                      padding: const EdgeInsets.all(20),
+                                      shadow: true,
+                                      child: Column(
+                                        children: [
+                                          const Text(
+                                            'FOTO STNK',
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          const Gap(10),
+                                          SizedBox(
+                                            height: 115,
+                                            width: 115,
+                                            child: Stack(
+                                              clipBehavior: Clip.none,
+                                              fit: StackFit.expand,
+                                              children: [
+                                                Image(
+                                                  image: pendaftaranController
+                                                              .pickedFile2 !=
+                                                          null
+                                                      ? FileImage(
+                                                          File(
+                                                              pendaftaranController
+                                                                  .pickedFile2!
+                                                                  .path),
+                                                        )
+                                                      : const AssetImage(
+                                                              'assets/images/no_image.png')
+                                                          as ImageProvider,
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    onTap: () {
+                                      showModalBottomSheet(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return Container(
+                                            decoration: const BoxDecoration(
+                                              color: Colors.white,
+                                              borderRadius: BorderRadius.only(
+                                                  topLeft:
+                                                      Radius.circular(16.0),
+                                                  topRight:
+                                                      Radius.circular(16.0)),
+                                            ),
+                                            child: Wrap(
+                                              alignment: WrapAlignment.end,
+                                              crossAxisAlignment:
+                                                  WrapCrossAlignment.end,
+                                              children: [
+                                                ListTile(
+                                                  leading:
+                                                      const Icon(Icons.camera),
+                                                  title: const Text('Camera'),
+                                                  onTap: () {
+                                                    pendaftaranController
+                                                        .selectImage2(
+                                                            ImageSource.camera);
+                                                  },
+                                                ),
+                                                ListTile(
+                                                  leading:
+                                                      const Icon(Icons.image),
+                                                  title: const Text('Gallery'),
+                                                  onTap: () {
+                                                    pendaftaranController
+                                                        .selectImage2(
+                                                            ImageSource
+                                                                .gallery);
+                                                  },
+                                                ),
+                                              ],
+                                            ),
+                                          );
+                                        },
+                                      );
+                                    },
+                                  ),
+                                ],
+                              ),
+                              const Gap(20),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  InkWell(
+                                    child: BoxContainer(
+                                      padding: const EdgeInsets.all(20),
+                                      shadow: true,
+                                      child: Column(
+                                        children: [
+                                          const Text(
+                                            'FOTO KARTU UJI',
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          const Gap(10),
+                                          SizedBox(
+                                            height: 115,
+                                            width: 115,
+                                            child: Stack(
+                                              clipBehavior: Clip.none,
+                                              fit: StackFit.expand,
+                                              children: [
+                                                Image(
+                                                  image: pendaftaranController
+                                                              .pickedFile3 !=
+                                                          null
+                                                      ? FileImage(
+                                                          File(
+                                                              pendaftaranController
+                                                                  .pickedFile3!
+                                                                  .path),
+                                                        )
+                                                      : const AssetImage(
+                                                              'assets/images/no_image.png')
+                                                          as ImageProvider,
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    onTap: () {
+                                      showModalBottomSheet(
+                                          context: context,
+                                          builder: (BuildContext context) {
+                                            return Container(
+                                              decoration: const BoxDecoration(
+                                                color: Colors.white,
+                                                borderRadius: BorderRadius.only(
+                                                    topLeft:
+                                                        Radius.circular(16.0),
+                                                    topRight:
+                                                        Radius.circular(16.0)),
+                                              ),
+                                              child: Wrap(
+                                                alignment: WrapAlignment.end,
+                                                crossAxisAlignment:
+                                                    WrapCrossAlignment.end,
+                                                children: [
+                                                  ListTile(
+                                                    leading: const Icon(
+                                                        Icons.camera),
+                                                    title: const Text('Camera'),
+                                                    onTap: () {
+                                                      pendaftaranController
+                                                          .selectImage3(
+                                                              ImageSource
+                                                                  .camera);
+                                                    },
+                                                  ),
+                                                  ListTile(
+                                                    leading:
+                                                        const Icon(Icons.image),
+                                                    title:
+                                                        const Text('Gallery'),
+                                                    onTap: () {
+                                                      pendaftaranController
+                                                          .selectImage3(
+                                                              ImageSource
+                                                                  .gallery);
+                                                    },
+                                                  ),
+                                                ],
+                                              ),
+                                            );
+                                          });
+                                    },
+                                  ),
+                                  InkWell(
+                                    child: BoxContainer(
+                                      padding: const EdgeInsets.all(20),
+                                      shadow: true,
+                                      child: Column(
+                                        children: [
+                                          const Text(
+                                            'FOTO SERTIFIKAT UJI',
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          const Gap(10),
+                                          SizedBox(
+                                            height: 115,
+                                            width: 115,
+                                            child: Stack(
+                                              clipBehavior: Clip.none,
+                                              fit: StackFit.expand,
+                                              children: [
+                                                Image(
+                                                  image: pendaftaranController
+                                                              .pickedFile4 !=
+                                                          null
+                                                      ? FileImage(
+                                                          File(
+                                                              pendaftaranController
+                                                                  .pickedFile4!
+                                                                  .path),
+                                                        )
+                                                      : const AssetImage(
+                                                              'assets/images/no_image.png')
+                                                          as ImageProvider,
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    onTap: () {
+                                      showModalBottomSheet(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return Container(
+                                            decoration: const BoxDecoration(
+                                              color: Colors.white,
+                                              borderRadius: BorderRadius.only(
+                                                  topLeft:
+                                                      Radius.circular(16.0),
+                                                  topRight:
+                                                      Radius.circular(16.0)),
+                                            ),
+                                            child: Wrap(
+                                              alignment: WrapAlignment.end,
+                                              crossAxisAlignment:
+                                                  WrapCrossAlignment.end,
+                                              children: [
+                                                ListTile(
+                                                  leading:
+                                                      const Icon(Icons.camera),
+                                                  title: const Text('Camera'),
+                                                  onTap: () {
+                                                    pendaftaranController
+                                                        .selectImage4(
+                                                            ImageSource.camera);
+                                                  },
+                                                ),
+                                                ListTile(
+                                                  leading:
+                                                      const Icon(Icons.image),
+                                                  title: const Text('Gallery'),
+                                                  onTap: () {
+                                                    pendaftaranController
+                                                        .selectImage4(
+                                                            ImageSource
+                                                                .gallery);
+                                                  },
+                                                ),
+                                              ],
+                                            ),
+                                          );
+                                        },
+                                      );
+                                    },
+                                  ),
+                                ],
+                              ),
+                            ],
                           ),
                         ),
-                        const Gap(10),
-                        // Row(
-                        //   children: [
-                        // TextFormField(
-                        //   keyboardType: TextInputType.name,
-                        //   controller: pendaftaranController.tanggaluji,
-                        //   onEditingComplete: () => node.nextFocus(),
-                        //   decoration: InputDecoration(
-                        //     labelText: DateFormat('dd MMMM yyyy', 'id_ID')
-                        //         .format(DateTime.now())
-                        //         .toString(),
-                        //   ),
-                        // ),
+                        const Gap(30),
 
-                        //     ElevatedButton(
-                        //       onPressed: () {
-                        //         pendaftaranController.chooseDate();
-                        //       },
-                        //       child: Text('Select Date'),
-                        //     )
-                        //   ],
-                        // ),
+                        // PILIH TANGGAL UJI
                         Row(
                           children: [
                             // TEXT FIELD SEARCH
@@ -118,165 +456,137 @@ class _PendaftaranPageState extends State<PendaftaranPage> {
                           ],
                         ),
                         const Gap(10),
-                        GetBuilder<PendaftaranController>(
-                          builder: (c) => Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              InkWell(
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    boxShadow: <BoxShadow>[
-                                      BoxShadow(
-                                        color: Colors.grey.withOpacity(0.3),
-                                        blurRadius: 40,
-                                      ),
-                                    ],
-                                  ),
-                                  child: SizedBox(
-                                    height: 115,
-                                    width: 115,
-                                    child: Stack(
-                                      clipBehavior: Clip.none,
-                                      fit: StackFit.expand,
-                                      children: [
-                                        Image(
-                                          image: pendaftaranController
-                                                      .pickedFile1 !=
-                                                  null
-                                              ? FileImage(
-                                                  File(pendaftaranController
-                                                      .pickedFile1!.path),
-                                                )
-                                              : const AssetImage(
-                                                      'assets/images/no_image.png')
-                                                  as ImageProvider,
-                                          fit: BoxFit.cover,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                onTap: () {
-                                  showModalBottomSheet(
-                                      context: context,
-                                      builder: (BuildContext context) {
-                                        return Container(
-                                          decoration: const BoxDecoration(
-                                            color: Colors.white,
-                                            borderRadius: BorderRadius.only(
-                                                topLeft: Radius.circular(16.0),
-                                                topRight:
-                                                    Radius.circular(16.0)),
-                                          ),
-                                          child: Wrap(
-                                            alignment: WrapAlignment.end,
-                                            crossAxisAlignment:
-                                                WrapCrossAlignment.end,
-                                            children: [
-                                              ListTile(
-                                                leading:
-                                                    const Icon(Icons.camera),
-                                                title: const Text('Camera'),
-                                                onTap: () {
-                                                  pendaftaranController
-                                                      .selectImage1(
-                                                          ImageSource.camera);
-                                                },
-                                              ),
-                                              ListTile(
-                                                leading:
-                                                    const Icon(Icons.image),
-                                                title: const Text('Gallery'),
-                                                onTap: () {
-                                                  pendaftaranController
-                                                      .selectImage1(
-                                                          ImageSource.gallery);
-                                                },
-                                              ),
-                                            ],
-                                          ),
-                                        );
-                                      });
-                                },
-                              ),
-                              InkWell(
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    boxShadow: <BoxShadow>[
-                                      BoxShadow(
-                                        color: Colors.grey.withOpacity(0.3),
-                                        blurRadius: 40,
-                                      ),
-                                    ],
-                                  ),
-                                  child: SizedBox(
-                                    height: 115,
-                                    width: 115,
-                                    child: Stack(
-                                      clipBehavior: Clip.none,
-                                      fit: StackFit.expand,
-                                      children: [
-                                        Image(
-                                          image: pendaftaranController
-                                                      .pickedFile2 !=
-                                                  null
-                                              ? FileImage(
-                                                  File(pendaftaranController
-                                                      .pickedFile2!.path),
-                                                )
-                                              : const AssetImage(
-                                                      'assets/images/no_image.png')
-                                                  as ImageProvider,
-                                          fit: BoxFit.cover,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                onTap: () {
-                                  showModalBottomSheet(
-                                    context: context,
-                                    builder: (BuildContext context) {
-                                      return Container(
-                                        decoration: const BoxDecoration(
-                                          color: Colors.white,
-                                          borderRadius: BorderRadius.only(
-                                              topLeft: Radius.circular(16.0),
-                                              topRight: Radius.circular(16.0)),
-                                        ),
-                                        child: Wrap(
-                                          alignment: WrapAlignment.end,
-                                          crossAxisAlignment:
-                                              WrapCrossAlignment.end,
-                                          children: [
-                                            ListTile(
-                                              leading: const Icon(Icons.camera),
-                                              title: const Text('Camera'),
-                                              onTap: () {
-                                                pendaftaranController
-                                                    .selectImage2(
-                                                        ImageSource.camera);
-                                              },
-                                            ),
-                                            ListTile(
-                                              leading: const Icon(Icons.image),
-                                              title: const Text('Gallery'),
-                                              onTap: () {
-                                                pendaftaranController
-                                                    .selectImage2(
-                                                        ImageSource.gallery);
-                                              },
-                                            ),
-                                          ],
-                                        ),
-                                      );
-                                    },
-                                  );
-                                },
-                              )
-                            ],
+
+                        TextFormField(
+                          keyboardType: TextInputType.name,
+                          controller: pendaftaranController.nouji,
+                          onEditingComplete: () => node.nextFocus(),
+                          onFieldSubmitted: (value) => pendaftaranController
+                              .getDetailDataKendaraan(value),
+                          validator: (String? value) {
+                            if (value!.isEmpty) {
+                              return 'this field is required';
+                            }
+                            return null;
+                          },
+                          decoration: const InputDecoration(
+                            labelText: "No Uji Kendaraan",
                           ),
                         ),
+                        const Gap(10),
+                        Obx(() {
+                          if (pendaftaranController
+                              .isLoadingDetailKendaraan.value) {
+                            return const Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          } else {
+                            return BoxContainer(
+                              padding: const EdgeInsets.all(10),
+                              radius: 5,
+                              showBorder: true,
+                              borderColor: Colors.grey.shade200,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const TextHeader(
+                                    nama: 'Identitas Kendaraan',
+                                  ),
+                                  const Gap(10),
+                                  Row(
+                                    children: [
+                                      const TextLeft(nama: 'No Kendaraan'),
+                                      const Spacer(),
+                                      TextRight(
+                                        nama: pendaftaranController
+                                                .resultData.value.noKendaraan ??
+                                            '-',
+                                      )
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      const TextLeft(nama: 'Nama Pemilik'),
+                                      const Spacer(),
+                                      TextRight(
+                                        nama: pendaftaranController
+                                                .resultData.value.pemilik ??
+                                            '-',
+                                      )
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      const TextLeft(nama: 'Jenis Kendaraan'),
+                                      const Spacer(),
+                                      TextRight(
+                                        nama: pendaftaranController
+                                                .resultData.value.jnsKend ??
+                                            '-',
+                                      )
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      const TextLeft(nama: 'Nama Komersil'),
+                                      const Spacer(),
+                                      TextRight(
+                                        nama: pendaftaranController.resultData
+                                                .value.namaKomersil ??
+                                            '-',
+                                      )
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      const TextLeft(nama: 'Merk'),
+                                      const Spacer(),
+                                      TextRight(
+                                        nama: pendaftaranController
+                                                .resultData.value.merk ??
+                                            '-',
+                                      )
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      const TextLeft(nama: 'Tipe'),
+                                      const Spacer(),
+                                      TextRight(
+                                        nama: pendaftaranController
+                                                .resultData.value.tipe ??
+                                            '-',
+                                      )
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      const TextLeft(nama: 'No. Chasis'),
+                                      const Spacer(),
+                                      TextRight(
+                                        nama: pendaftaranController
+                                                .resultData.value.noChasis ??
+                                            '-',
+                                      )
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      const TextLeft(nama: 'No. Mesin'),
+                                      const Spacer(),
+                                      TextRight(
+                                        nama: pendaftaranController
+                                                .resultData.value.noMesin ??
+                                            '-',
+                                      )
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            );
+                          }
+                        }),
+
                         const Gap(30),
                         // Button Submit
                         Obx(() {
@@ -301,7 +611,7 @@ class _PendaftaranPageState extends State<PendaftaranPage> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
-                                    'Save',
+                                    'Daftar Uji',
                                     style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 18,

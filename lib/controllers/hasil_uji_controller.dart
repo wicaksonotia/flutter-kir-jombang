@@ -4,6 +4,7 @@ import 'package:jombang/controllers/search_bar_controller.dart';
 import 'package:jombang/models/hasil_uji_model.dart';
 import 'package:jombang/models/tidak_lulus_model.dart';
 import 'package:jombang/networks/api_request.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HasilUjiController extends GetxController {
   final searchTextFieldController =
@@ -13,12 +14,24 @@ class HasilUjiController extends GetxController {
   RxInt idHasilUji = 0.obs;
   var keteranganTl = <DataTl>[].obs;
   var responseMessage = 'error'.obs;
+  String? valueSearch = '';
+  bool? isLogin = false;
+
+  @override
+  void onInit() {
+    super.onInit();
+    cekIsLogin();
+  }
 
   void getHasilUjiKendaraan() async {
+    valueSearch = searchTextFieldController.text.toString();
+    getData(valueSearch);
+  }
+
+  void getData(valueSearch) async {
     try {
       isLoadingHasilUji(true);
-      String valueSearch = searchTextFieldController.text.toString();
-      var result = await RemoteDataSource.getHasilUji(valueSearch);
+      var result = await RemoteDataSource.getHasilUji(valueSearch!);
 
       if (result!.status == 'ok') {
         idHasilUji.value = result.data!.idHasilUji!;
@@ -38,6 +51,17 @@ class HasilUjiController extends GetxController {
       isLoadingHasilUji(false);
     } finally {
       isLoadingHasilUji(false);
+    }
+  }
+
+  void cekIsLogin() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    print(prefs.getString('username'));
+    print(prefs.getBool('statusLogin'));
+    isLogin = prefs.getBool('statusLogin');
+    if (isLogin == true) {
+      valueSearch = prefs.getString('username');
+      getData(valueSearch);
     }
   }
 }

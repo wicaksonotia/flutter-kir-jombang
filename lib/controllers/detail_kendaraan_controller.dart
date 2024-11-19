@@ -3,18 +3,31 @@ import 'package:get/get.dart';
 import 'package:jombang/controllers/search_bar_controller.dart';
 import 'package:jombang/models/kendaraan_model.dart';
 import 'package:jombang/networks/api_request.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class DetailKendaraanController extends GetxController {
   final searchTextFieldController =
       Get.find<SearchBarController>().searchTextFieldController;
   var isLoadingDetailKendaraan = false.obs;
   var resultData = DataDetailKendaraan().obs;
+  String? valueSearch = '';
+  bool? isLogin = false;
+
+  @override
+  void onInit() {
+    super.onInit();
+    cekIsLogin();
+  }
 
   void getDetailDataKendaraan() async {
+    valueSearch = searchTextFieldController.text.toString();
+    getData(valueSearch);
+  }
+
+  void getData(valueSearch) async {
     try {
       isLoadingDetailKendaraan(true);
-      String valueSearch = searchTextFieldController.text.toString();
-      var result = await RemoteDataSource.getDetailKendaraan(valueSearch);
+      var result = await RemoteDataSource.getDetailKendaraan(valueSearch!);
       // print(result.toJson());
       if (result!.status == 'ok') {
         resultData.value = result.data!;
@@ -28,6 +41,15 @@ class DetailKendaraanController extends GetxController {
       isLoadingDetailKendaraan(false);
     } finally {
       isLoadingDetailKendaraan(false);
+    }
+  }
+
+  void cekIsLogin() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    isLogin = prefs.getBool('statusLogin');
+    if (isLogin == true) {
+      valueSearch = prefs.getString('username');
+      getData(valueSearch);
     }
   }
 }
