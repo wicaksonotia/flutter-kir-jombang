@@ -8,8 +8,8 @@ import 'package:jombang/utils/widgets/text_field_widget.dart';
 import 'package:jombang/controllers/search_bar_controller.dart';
 
 class SearchBarContainer extends StatelessWidget {
-  String menu;
-  SearchBarContainer({super.key, required this.menu});
+  final String menu;
+  const SearchBarContainer({super.key, required this.menu});
 
   @override
   Widget build(BuildContext context) {

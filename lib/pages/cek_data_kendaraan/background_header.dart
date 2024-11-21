@@ -3,8 +3,8 @@ import 'package:jombang/pages/cek_data_kendaraan/search_bar_container.dart';
 import 'package:jombang/utils/colors.dart';
 
 class BackgroundHeader extends StatelessWidget {
-  String menu;
-  BackgroundHeader({super.key, required this.menu});
+  final String menu;
+  const BackgroundHeader({super.key, required this.menu});
 
   @override
   Widget build(BuildContext context) {

@@ -28,7 +28,7 @@ class _HomeRiwayatState extends State<HomeRiwayat> {
         removeTop: true,
         child: Column(
           children: [
-            BackgroundHeader(
+            const BackgroundHeader(
               menu: 'riwayat',
             ),
             SizedBox(

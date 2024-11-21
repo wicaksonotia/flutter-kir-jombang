@@ -22,7 +22,7 @@ class _PersyaratanPageState extends State<PersyaratanPage> {
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(50),
         child: AppbarHeader(
-          header: 'Cek Data Kendaraan',
+          header: 'Persyaratan Uji Kendaraan',
         ),
       ),
       backgroundColor: Colors.white,

@@ -28,7 +28,7 @@ class _HomeHasilUjiState extends State<HomeHasilUji> {
         removeTop: true,
         child: Column(
           children: [
-            BackgroundHeader(
+            const BackgroundHeader(
               menu: 'hasiluji',
             ),
             SizedBox(
