@@ -16,6 +16,6 @@ class _AuthEndPoints {
   final String keterangantl = 'kirketerangantidaklulus';
   final String riwayatkendaraan = 'kirriwayatkendaraan';
   final String detailriwayatkendaraan = 'kirdetailriwayat';
-  final String detailretribusi = 'kirdetailretribusi';
   final String daftarretribusi = 'kircreateretribusi';
+  final String listretribusi = 'kirlistretribusi';
 }

@@ -56,8 +56,6 @@ class HasilUjiController extends GetxController {
 
   void cekIsLogin() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    print(prefs.getString('username'));
-    print(prefs.getBool('statusLogin'));
     isLogin = prefs.getBool('statusLogin');
     if (isLogin == true) {
       valueSearch = prefs.getString('username');

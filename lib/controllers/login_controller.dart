@@ -34,11 +34,11 @@ class LoginController extends GetxController {
       });
       bool result = await RemoteDataSource.login(formData);
       if (result) {
+        isShowLogout(true);
         final SharedPreferences prefs = await _prefs;
         await prefs.setBool('statusLogin', true);
         await prefs.setString('username', emailController.text.trim());
         await prefs.setString('password', passwordController.text);
-        isShowLogout.value = true;
         Get.offNamed('/pendaftaran');
       } else {
         throw "No Uji / Password salah";

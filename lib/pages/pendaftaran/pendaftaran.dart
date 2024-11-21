@@ -499,7 +499,9 @@ class _PendaftaranPageState extends State<PendaftaranPage> {
                                       const Spacer(),
                                       TextRight(
                                         nama: pendaftaranController
-                                                .resultData.value.noKendaraan ??
+                                                .resultDataDetailKendaraan
+                                                .value
+                                                .noKendaraan ??
                                             '-',
                                       )
                                     ],
@@ -510,7 +512,9 @@ class _PendaftaranPageState extends State<PendaftaranPage> {
                                       const Spacer(),
                                       TextRight(
                                         nama: pendaftaranController
-                                                .resultData.value.pemilik ??
+                                                .resultDataDetailKendaraan
+                                                .value
+                                                .pemilik ??
                                             '-',
                                       )
                                     ],
@@ -521,7 +525,9 @@ class _PendaftaranPageState extends State<PendaftaranPage> {
                                       const Spacer(),
                                       TextRight(
                                         nama: pendaftaranController
-                                                .resultData.value.jnsKend ??
+                                                .resultDataDetailKendaraan
+                                                .value
+                                                .jnsKend ??
                                             '-',
                                       )
                                     ],
@@ -531,8 +537,10 @@ class _PendaftaranPageState extends State<PendaftaranPage> {
                                       const TextLeft(nama: 'Nama Komersil'),
                                       const Spacer(),
                                       TextRight(
-                                        nama: pendaftaranController.resultData
-                                                .value.namaKomersil ??
+                                        nama: pendaftaranController
+                                                .resultDataDetailKendaraan
+                                                .value
+                                                .namaKomersil ??
                                             '-',
                                       )
                                     ],
@@ -543,7 +551,9 @@ class _PendaftaranPageState extends State<PendaftaranPage> {
                                       const Spacer(),
                                       TextRight(
                                         nama: pendaftaranController
-                                                .resultData.value.merk ??
+                                                .resultDataDetailKendaraan
+                                                .value
+                                                .merk ??
                                             '-',
                                       )
                                     ],
@@ -554,7 +564,9 @@ class _PendaftaranPageState extends State<PendaftaranPage> {
                                       const Spacer(),
                                       TextRight(
                                         nama: pendaftaranController
-                                                .resultData.value.tipe ??
+                                                .resultDataDetailKendaraan
+                                                .value
+                                                .tipe ??
                                             '-',
                                       )
                                     ],
@@ -565,7 +577,9 @@ class _PendaftaranPageState extends State<PendaftaranPage> {
                                       const Spacer(),
                                       TextRight(
                                         nama: pendaftaranController
-                                                .resultData.value.noChasis ??
+                                                .resultDataDetailKendaraan
+                                                .value
+                                                .noChasis ??
                                             '-',
                                       )
                                     ],
@@ -576,7 +590,9 @@ class _PendaftaranPageState extends State<PendaftaranPage> {
                                       const Spacer(),
                                       TextRight(
                                         nama: pendaftaranController
-                                                .resultData.value.noMesin ??
+                                                .resultDataDetailKendaraan
+                                                .value
+                                                .noMesin ??
                                             '-',
                                       )
                                     ],

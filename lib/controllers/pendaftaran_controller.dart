@@ -3,24 +3,26 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:jombang/models/kendaraan_model.dart';
+import 'package:jombang/models/pendaftaran_model.dart';
 // import 'package:jombang/models/pendaftaran_model.dart';
 import 'package:jombang/networks/api_request.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class PendaftaranController extends GetxController {
   TextEditingController nouji = TextEditingController();
+  final formKey = GlobalKey<FormState>();
   var selectedDate = DateTime.now().obs;
   XFile? pickedFile1;
   XFile? pickedFile2;
   XFile? pickedFile3;
   XFile? pickedFile4;
-  var isLoading = false.obs;
-  final formKey = GlobalKey<FormState>();
   String? valueSearch = '';
   bool? isLogin = false;
+  var isLoading = false.obs;
+  var isLoadingListRetribusi = false.obs;
   var isLoadingDetailKendaraan = false.obs;
-  var resultData = DataDetailKendaraan().obs;
-  // var resultData = DataPendaftaran().obs;
+  var resultDataDetailKendaraan = DataDetailKendaraan().obs;
+  var resultDataListPendaftaran = <DataRetribusi>[].obs;
 
   @override
   void onInit() {
@@ -84,12 +86,14 @@ class PendaftaranController extends GetxController {
   void create() async {
     try {
       isLoading(true);
+      final SharedPreferences prefs = await SharedPreferences.getInstance();
       if (formKey.currentState!.validate()) {
         if (pickedFile1 != null &&
             pickedFile2 != null &&
             pickedFile3 != null &&
             pickedFile4 != null) {
           Dio.FormData formData = Dio.FormData.fromMap({
+            "pendaftar": prefs.getString('username'),
             "nouji": nouji.text,
             "tanggaluji": selectedDate.value,
             "image_1": await Dio.MultipartFile.fromFile(pickedFile1!.path,
@@ -120,24 +124,27 @@ class PendaftaranController extends GetxController {
     }
   }
 
-  // void getDataRetribusi() async {
-  //   try {
-  //     isLoading(true);
-  //     var result = await RemoteDataSource.getRetribusi(55682);
-  //     if (result != null) {
-  //       resultData.value = result.data!;
-  //     }
-  //   } finally {
-  //     isLoading(false);
-  //   }
-  // }
+  void getData() async {
+    try {
+      isLoadingListRetribusi(true);
+      var result = await RemoteDataSource.getPendaftaran();
+      resultDataListPendaftaran.assignAll(result!.data!);
+      // print(result.toJson());
+    } catch (error) {
+      Get.snackbar('Error', "Silakan cek koneksi internet anda.",
+          icon: const Icon(Icons.error), snackPosition: SnackPosition.BOTTOM);
+      isLoadingListRetribusi(false);
+    } finally {
+      isLoadingListRetribusi(false);
+    }
+  }
 
   void getDetailDataKendaraan(valueSearch) async {
     try {
       isLoadingDetailKendaraan(true);
       var result = await RemoteDataSource.getDetailKendaraan(valueSearch!);
       if (result!.status == 'ok') {
-        resultData.value = result.data!;
+        resultDataDetailKendaraan.value = result.data!;
       } else if (result.status == 'error') {
         Get.snackbar('Notification', 'Data kendaraan belum terdaftar.',
             icon: const Icon(Icons.error), snackPosition: SnackPosition.BOTTOM);

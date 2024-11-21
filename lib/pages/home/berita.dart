@@ -29,7 +29,6 @@ class _BeritaState extends State<Berita> {
 
   @override
   Widget build(BuildContext context) {
-    print(DateTime.now());
     return Obx(
       () => controller.isLoading.value
           ? Container(

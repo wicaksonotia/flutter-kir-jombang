@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:jombang/pages/pendaftaran/list_riwayat.dart';
 import 'package:jombang/utils/containers/app_bar_header.dart';
-import 'package:jombang/pages/cek_data_kendaraan/background_header.dart';
-import 'package:jombang/pages/cek_data_kendaraan/riwayat/result_riwayat.dart';
+import 'package:jombang/pages/persyaratan/background_header.dart';
 
-class HomeRiwayat extends StatefulWidget {
-  const HomeRiwayat({super.key});
+class HomeRiwayatPendaftaran extends StatefulWidget {
+  const HomeRiwayatPendaftaran({super.key});
 
   @override
-  State<HomeRiwayat> createState() => _HomeRiwayatState();
+  State<HomeRiwayatPendaftaran> createState() => _HomeRiwayatPendaftaranState();
 }
 
-class _HomeRiwayatState extends State<HomeRiwayat> {
+class _HomeRiwayatPendaftaranState extends State<HomeRiwayatPendaftaran> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,7 +19,7 @@ class _HomeRiwayatState extends State<HomeRiwayat> {
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(50),
         child: AppbarHeader(
-          header: 'Riwayat Uji Kendaraan',
+          header: 'Riwayat Transaksi Pendaftaran',
         ),
       ),
       backgroundColor: Colors.white,
@@ -28,12 +28,10 @@ class _HomeRiwayatState extends State<HomeRiwayat> {
         removeTop: true,
         child: Column(
           children: [
-            BackgroundHeader(
-              menu: 'riwayat',
-            ),
+            const BackgroundHeader(),
             SizedBox(
               height: MediaQuery.of(context).size.height * .79,
-              child: const ResultRiwayat(),
+              child: const ListRiwayatPendaftaran(),
             ),
           ],
         ),

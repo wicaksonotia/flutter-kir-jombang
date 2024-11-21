@@ -18,8 +18,10 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     LoginController loginController = Get.put(LoginController());
 
-    return Obx(
-      () => Scaffold(
+    return Obx(() {
+      print('<<<<====isShowLogout===${loginController.isShowLogout}=====>>>>>');
+      print('<<<<====islogin===${loginController.isLogin}=====>>>>>');
+      return Scaffold(
         backgroundColor: MyColors.form,
         body: MediaQuery.removePadding(
           context: context,
@@ -117,7 +119,8 @@ class HomePage extends StatelessWidget {
                             const Spacer(),
                             Builder(
                               builder: (context) {
-                                if (loginController.isLogin == true) {
+                                if (loginController.isLogin == true ||
+                                    loginController.isShowLogout.value) {
                                   return InkWell(
                                     onTap: () =>
                                         loginController.openBottomSheet(),
@@ -201,7 +204,7 @@ class HomePage extends StatelessWidget {
             ],
           ),
         ),
-      ),
-    );
+      );
+    });
   }
 }

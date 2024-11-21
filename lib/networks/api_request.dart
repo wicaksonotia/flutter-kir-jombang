@@ -23,7 +23,7 @@ class RemoteDataSource {
           options: Options(
             contentType: 'application/json',
           ));
-      print(response.statusCode);
+      // print(response.statusCode);
       if (response.statusCode == 200) {
         if (response.data['status'] == 'ok') {
           // throw jsonDecode(response.body)['message'];
@@ -232,11 +232,10 @@ class RemoteDataSource {
   }
 
   // DETAIL RETRIBUSI
-  static Future<PendaftaranModel?> getRetribusi(int params) async {
+  static Future<PendaftaranModel?> getPendaftaran() async {
     try {
-      var url =
-          ApiEndPoints.baseUrl + ApiEndPoints.authEndpoints.detailretribusi;
-      final response = await Dio().get("$url?idretribusi=$params");
+      var url = ApiEndPoints.baseUrl + ApiEndPoints.authEndpoints.listretribusi;
+      final response = await Dio().get(url);
       if (response.statusCode == 200) {
         final PendaftaranModel res = PendaftaranModel.fromJson(response.data);
         return res;
