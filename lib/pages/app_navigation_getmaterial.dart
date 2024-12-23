@@ -1,13 +1,17 @@
 import 'package:get/get.dart';
+import 'package:jombang/bindings/pendaftaran_binding.dart';
+import 'package:jombang/bindings/riwayat_binding.dart';
 import 'package:jombang/pages/cek_data_kendaraan/cek_data/home_cek_data.dart';
 import 'package:jombang/pages/cek_data_kendaraan/hasil_uji/home_hasil_uji.dart';
 import 'package:jombang/pages/cek_data_kendaraan/riwayat/detail_riwayat.dart';
 import 'package:jombang/pages/cek_data_kendaraan/riwayat/home_riwayat.dart';
 import 'package:jombang/pages/home/home.dart';
+import 'package:jombang/pages/informasi/informasi.dart';
 import 'package:jombang/pages/login_page.dart';
 import 'package:jombang/pages/pendaftaran/pendaftaran.dart';
 import 'package:jombang/pages/persyaratan/detail_persyaratan.dart';
 import 'package:jombang/pages/persyaratan/persyaratan.dart';
+import 'package:jombang/pages/profile/profile.dart';
 
 class RouterClass {
   static String login = "/login";
@@ -22,32 +26,29 @@ class RouterClass {
   static String informasi = "/informasi";
   static String detailinformasi = "/detailinformasi";
 
-  static String gotoLogin() => login;
-  static String gotoHome() => home;
-  static String gotoPendaftaran() => pendaftaran;
-  static String gotoCekDataKendaraan() => cekdatakendaraan;
-  static String gotoCekHasilUji() => cekhasiluji;
-  static String gotoCekRiwayat() => riwayatkendaraan;
-  static String clickDetailRiwayat() => detailriwayat;
-  static String gotoPersyaratan() => persyaratan;
-  static String clickDetailPersyaratan() => detailpersyaratan;
-  static String gotoInformasi() => informasi;
-  static String clickDetailInformasi() => detailinformasi;
-
   static List<GetPage> routes = [
-    GetPage(page: () => const LoginPage(), name: login),
+    GetPage(page: () => LoginPage(), name: login),
+    GetPage(page: () => HomePage(), name: home),
     GetPage(
-      page: () => const HomePage(),
-      name: home,
-      // transition: Transition.fade,
-      // transitionDuration: (const Duration(seconds: 1)),
-    ),
-    GetPage(page: () => const PendaftaranPage(), name: pendaftaran),
+        page: () => const PendaftaranPage(),
+        name: pendaftaran,
+        binding: PendaftaranBinding()),
     GetPage(page: () => const HomeCekData(), name: cekdatakendaraan),
     GetPage(page: () => const HomeHasilUji(), name: cekhasiluji),
-    GetPage(page: () => const HomeRiwayat(), name: riwayatkendaraan),
-    GetPage(page: () => const DetailRiwayat(), name: detailriwayat),
+    GetPage(
+        page: () => const HomeRiwayat(),
+        name: riwayatkendaraan,
+        binding: RiwayatBinding()),
+    GetPage(page: () => DetailRiwayat(), name: detailriwayat),
     GetPage(page: () => const PersyaratanPage(), name: persyaratan),
     GetPage(page: () => const DetailPersyaratanPage(), name: detailpersyaratan),
+    // GetPage(
+    //   page: () => const DetailPersyaratanPage(),
+    //   name: '/detailpersyaratan',
+    //   transition: Transition.rightToLeft,
+    //   transitionDuration: (const Duration(milliseconds: 300)),
+    // ),
+    GetPage(page: () => const InformasiPage(), name: '/informasi'),
+    GetPage(page: () => const Profile(), name: '/profile'),
   ];
 }

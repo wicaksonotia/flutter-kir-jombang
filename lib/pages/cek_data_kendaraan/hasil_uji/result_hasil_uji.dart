@@ -15,8 +15,6 @@ class ResultHasilUji extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final HasilUjiController hasilUjiController = Get.put(HasilUjiController());
-    // final KeteranganTidakLulusController keteranganTidakLulusController =
-    //     Get.put(KeteranganTidakLulusController());
 
     return Obx(() {
       if (hasilUjiController.isLoadingHasilUji.value) {

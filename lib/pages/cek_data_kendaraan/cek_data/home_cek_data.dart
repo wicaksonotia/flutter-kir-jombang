@@ -28,7 +28,7 @@ class _HomeCekDataState extends State<HomeCekData> {
         removeTop: true,
         child: Column(
           children: [
-            BackgroundHeader(
+            const BackgroundHeader(
               menu: 'cekdata',
             ),
             SizedBox(

@@ -12,15 +12,12 @@ import 'package:jombang/pages/home/carousel.dart';
 import 'package:jombang/utils/sizes.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  HomePage({super.key});
+  LoginController loginController = Get.find<LoginController>();
 
   @override
   Widget build(BuildContext context) {
-    LoginController loginController = Get.put(LoginController());
-
     return Obx(() {
-      print('<<<<====isShowLogout===${loginController.isShowLogout}=====>>>>>');
-      print('<<<<====islogin===${loginController.isLogin}=====>>>>>');
       return Scaffold(
         backgroundColor: MyColors.form,
         body: MediaQuery.removePadding(
@@ -117,46 +114,40 @@ class HomePage extends StatelessWidget {
                               ),
                             ),
                             const Spacer(),
-                            Builder(
-                              builder: (context) {
-                                if (loginController.isLogin == true ||
-                                    loginController.isShowLogout.value) {
-                                  return InkWell(
-                                    onTap: () =>
-                                        loginController.openBottomSheet(),
-                                    child: Container(
-                                      padding: const EdgeInsets.all(5),
-                                      decoration: const BoxDecoration(
-                                        color: MyColors.orange,
-                                        borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(7),
-                                          bottomLeft: Radius.circular(7),
-                                        ),
-                                      ),
-                                      child: const Row(
-                                        children: [
-                                          Icon(
-                                            Icons.logout_rounded,
-                                            color: Colors.white,
-                                          ),
-                                          SizedBox(
-                                            width: 5,
-                                          ),
-                                          Text(
-                                            'Logout',
-                                            style: TextStyle(
-                                                fontSize: MySizes.fontSizeSm,
-                                                fontWeight: FontWeight.bold,
-                                                color: Colors.white),
-                                          )
-                                        ],
-                                      ),
+                            Visibility(
+                              visible: loginController.isLogin.value == true ||
+                                  loginController.isShowLogout.value,
+                              child: InkWell(
+                                onTap: () => loginController.openBottomSheet(),
+                                child: Container(
+                                  padding: const EdgeInsets.all(5),
+                                  decoration: const BoxDecoration(
+                                    color: MyColors.orange,
+                                    borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(7),
+                                      bottomLeft: Radius.circular(7),
                                     ),
-                                  );
-                                }
-
-                                return Container();
-                              },
+                                  ),
+                                  child: const Row(
+                                    children: [
+                                      Icon(
+                                        Icons.logout_rounded,
+                                        color: Colors.white,
+                                      ),
+                                      SizedBox(
+                                        width: 5,
+                                      ),
+                                      Text(
+                                        'Logout',
+                                        style: TextStyle(
+                                            fontSize: MySizes.fontSizeSm,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.white),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
                             ),
                           ],
                         ),

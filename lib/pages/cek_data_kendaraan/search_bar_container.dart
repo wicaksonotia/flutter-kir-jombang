@@ -3,23 +3,26 @@ import 'package:get/get.dart';
 import 'package:jombang/controllers/detail_kendaraan_controller.dart';
 import 'package:jombang/controllers/hasil_uji_controller.dart';
 import 'package:jombang/controllers/riwayat_kendaraan_controller.dart';
+import 'package:jombang/controllers/riwayat_pendaftaran_controller.dart';
 import 'package:jombang/utils/colors.dart';
 import 'package:jombang/utils/widgets/text_field_widget.dart';
 import 'package:jombang/controllers/search_bar_controller.dart';
 
 class SearchBarContainer extends StatelessWidget {
   final String menu;
-  const SearchBarContainer({super.key, required this.menu});
+  SearchBarContainer({super.key, required this.menu});
+  final SearchBarController searchBarController =
+      Get.find<SearchBarController>();
+  final DetailKendaraanController detailKendaraanController =
+      Get.put(DetailKendaraanController());
+  final HasilUjiController hasilUjiController = Get.put(HasilUjiController());
+  final RiwayatKendaraanController riwayatKendaraanController =
+      Get.put(RiwayatKendaraanController());
+  final RiwayatPendaftaranController riwayatPendaftaranController =
+      Get.put(RiwayatPendaftaranController());
 
   @override
   Widget build(BuildContext context) {
-    final SearchBarController controller = Get.put(SearchBarController());
-    final DetailKendaraanController detailKendaraanController =
-        Get.put(DetailKendaraanController());
-    final HasilUjiController hasilUjiController = Get.put(HasilUjiController());
-    final RiwayatKendaraanController riwayatKendaraanController =
-        Get.put(RiwayatKendaraanController());
-
     return Obx(
       () => Row(
         children: [
@@ -38,17 +41,18 @@ class SearchBarContainer extends StatelessWidget {
               child: TextFieldWidget(
                 hint: "Ketik No Uji untuk cek data",
                 prefixIcon: Icons.search,
-                controller: controller.searchTextFieldController,
+                controller: searchBarController.searchTextFieldController,
                 filled: true,
-                suffixIcon: controller.isEmptyValue.value ? null : Icons.clear,
+                suffixIcon:
+                    searchBarController.isEmptyValue.value ? null : Icons.clear,
                 onTapSuffixIcon: () {
-                  controller.searchTextFieldController.clear();
-                  controller.isEmptyValue.value = true;
+                  searchBarController.searchTextFieldController.clear();
+                  searchBarController.isEmptyValue.value = true;
                 },
                 onChanged: (value) {
                   value.isEmpty
-                      ? controller.isEmptyValue.value = true
-                      : controller.isEmptyValue.value = false;
+                      ? searchBarController.isEmptyValue.value = true
+                      : searchBarController.isEmptyValue.value = false;
                 },
               ),
             ),
@@ -74,6 +78,7 @@ class SearchBarContainer extends StatelessWidget {
                 }
                 if (menu == 'riwayat') {
                   riwayatKendaraanController.getDataRiwayat();
+                  riwayatPendaftaranController.getDataRiwayatRetribusi();
                 }
               },
               icon: const Icon(Icons.search),

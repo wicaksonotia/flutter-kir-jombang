@@ -12,16 +12,10 @@ class LoginController extends GetxController {
   var isShowLogout = false.obs;
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  bool? isLogin = false;
-  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+  var isLogin = false.obs;
+  final SharedPreferences prefs = Get.find<SharedPreferences>();
   showPassword() {
     isPasswordVisible(!isPasswordVisible.value);
-  }
-
-  @override
-  void onInit() {
-    super.onInit();
-    skipLogin();
   }
 
   Future<void> loginWithEmail() async {
@@ -35,7 +29,7 @@ class LoginController extends GetxController {
       bool result = await RemoteDataSource.login(formData);
       if (result) {
         isShowLogout(true);
-        final SharedPreferences prefs = await _prefs;
+        // final SharedPreferences prefs = await _prefs;
         await prefs.setBool('statusLogin', true);
         await prefs.setString('username', emailController.text.trim());
         await prefs.setString('password', passwordController.text);
@@ -43,30 +37,6 @@ class LoginController extends GetxController {
       } else {
         throw "No Uji / Password salah";
       }
-      // var url =
-      //     Uri.parse(ApiEndPoints.baseUrl + ApiEndPoints.authEndpoints.login);
-      // Map body = {
-      //   'username': emailController.text.trim(),
-      //   'password': passwordController.text
-      // };
-      // http.Response response =
-      //     await http.post(url, body: jsonEncode(body), headers: headers);
-      // if (response.statusCode == 200) {
-      //   final json = jsonDecode(response.body);
-      //   if (json['status'] == 'ok') {
-      //     // throw jsonDecode(response.body)['message'];
-      // var token = json['data']['Token'];
-      // final SharedPreferences prefs = await _prefs;
-      // await prefs.setString('token', token);
-      //     // emailController.clear();
-      //     // passwordController.clear();
-      //     Get.off(const HomePage());
-      //   } else if (json['status'] == 'error') {
-      //     throw jsonDecode(response.body)['message'];
-      //   }
-      // } else {
-      //   throw jsonDecode(response.body)["Message"] ?? "Unknown Error Occured";
-      // }
     } catch (error) {
       Get.snackbar('Notification', error.toString(),
           icon: const Icon(Icons.error), snackPosition: SnackPosition.BOTTOM);
@@ -75,20 +45,10 @@ class LoginController extends GetxController {
     }
   }
 
-  void skipLogin() async {
-    final SharedPreferences prefs = await _prefs;
-    isLogin = prefs.getBool('statusLogin');
-    // if (isLogin == true) {
-    //   Get.offNamed('/home');
-    // } else {
-    //   Get.toNamed('/login');
-    // }
-  }
-
   void logout() async {
-    final SharedPreferences prefs = await _prefs;
+    // final SharedPreferences prefs = await _prefs;
     prefs.setBool('statusLogin', false);
-    isLogin = prefs.getBool('statusLogin');
+    isLogin.value = prefs.getBool('statusLogin') ?? false;
     isShowLogout(false);
     Get.back();
     Get.toNamed('/home');

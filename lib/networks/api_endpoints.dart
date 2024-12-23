@@ -18,4 +18,5 @@ class _AuthEndPoints {
   final String detailriwayatkendaraan = 'kirdetailriwayat';
   final String daftarretribusi = 'kircreateretribusi';
   final String listretribusi = 'kirlistretribusi';
+  final String ujihariini = 'kirujihariini';
 }

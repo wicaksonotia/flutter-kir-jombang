@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:jombang/controllers/menu_controller.dart';
+import 'package:jombang/controllers/uji_hari_ini_controller.dart';
 import 'package:jombang/utils/containers/box_container.dart';
 import 'package:jombang/utils/sizes.dart';
 
@@ -10,11 +11,11 @@ class Info extends StatelessWidget {
     super.key,
   });
 
-  final HomeMenuController menuController = Get.put(HomeMenuController());
+  final UjiHariIniController controller = Get.put(UjiHariIniController());
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() => menuController.isLoading.value
+    return Obx(() => controller.isLoading.value
         ? Container(
             margin: const EdgeInsets.only(top: 10),
             child: const Center(
@@ -83,9 +84,9 @@ class Info extends StatelessWidget {
                               ],
                             ),
                             const Gap(5),
-                            const Text(
-                              '15',
-                              style: TextStyle(
+                            Text(
+                              controller.resultData.value.ujiPertama.toString(),
+                              style: const TextStyle(
                                 fontSize: 40,
                                 fontWeight: FontWeight.bold,
                                 height: 0,
@@ -162,9 +163,9 @@ class Info extends StatelessWidget {
                               ],
                             ),
                             const Gap(5),
-                            const Text(
-                              '15',
-                              style: TextStyle(
+                            Text(
+                              controller.resultData.value.ujiBerkala.toString(),
+                              style: const TextStyle(
                                 fontSize: 40,
                                 fontWeight: FontWeight.bold,
                                 height: 0,
@@ -241,9 +242,10 @@ class Info extends StatelessWidget {
                               ],
                             ),
                             const Gap(5),
-                            const Text(
-                              '15',
-                              style: TextStyle(
+                            Text(
+                              controller.resultData.value.numpangMasuk
+                                  .toString(),
+                              style: const TextStyle(
                                 fontSize: 40,
                                 fontWeight: FontWeight.bold,
                                 height: 0,
@@ -320,9 +322,10 @@ class Info extends StatelessWidget {
                               ],
                             ),
                             const Gap(5),
-                            const Text(
-                              '15',
-                              style: TextStyle(
+                            Text(
+                              controller.resultData.value.mutasiMasuk
+                                  .toString(),
+                              style: const TextStyle(
                                 fontSize: 40,
                                 fontWeight: FontWeight.bold,
                                 height: 0,

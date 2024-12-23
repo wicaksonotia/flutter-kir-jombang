@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jombang/controllers/detail_riwayat_controller.dart';
 import 'package:jombang/pages/cek_data_kendaraan/text_left.dart';
-import 'package:jombang/pages/cek_data_kendaraan/text_right.dart';
 
 class PitliftTidakLulus extends StatelessWidget {
   const PitliftTidakLulus({
@@ -15,13 +14,10 @@ class PitliftTidakLulus extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Row(
+        const Row(
           children: [
-            const TextLeft(nama: 'Bawah Kendaraan'),
-            const Spacer(),
-            TextRight(
-              nama: controller.resultData.value.ptgsPrauji ?? '-',
-            )
+            TextLeft(nama: 'Bawah Kendaraan'),
+            Spacer(),
           ],
         ),
         ListView.builder(

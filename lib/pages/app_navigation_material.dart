@@ -48,7 +48,7 @@ class AppNavigation {
         pageBuilder: (context, state) => buildPageWithDefaultTransition<void>(
             context: context,
             state: state,
-            child: const HomePage(),
+            child: HomePage(),
             fade: true,
             leftToRight: false),
       ),
@@ -114,7 +114,7 @@ class AppNavigation {
                 buildPageWithDefaultTransition<void>(
                     context: context,
                     state: state,
-                    child: const DetailRiwayat(),
+                    child: DetailRiwayat(),
                     // child: DetailPersyaratanPage(
                     //     persyaratan: state.uri.queryParameters['nama']!),
                     fade: false,

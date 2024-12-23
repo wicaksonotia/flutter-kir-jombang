@@ -13,18 +13,15 @@ class Prauji extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return const Column(
       children: [
         Row(
           children: [
-            const TextLeft(nama: 'Prauji'),
-            const Spacer(),
-            TextRight(
-              nama: controller.resultData.value.ptgsPrauji ?? '-',
-            )
+            TextLeft(nama: 'Prauji'),
+            Spacer(),
           ],
         ),
-        const Row(
+        Row(
           children: [
             Icon(
               Icons.arrow_right,
@@ -37,7 +34,7 @@ class Prauji extends StatelessWidget {
             )
           ],
         ),
-        const Row(
+        Row(
           children: [
             Icon(
               Icons.arrow_right,
@@ -50,7 +47,7 @@ class Prauji extends StatelessWidget {
             )
           ],
         ),
-        const Row(
+        Row(
           children: [
             Icon(
               Icons.arrow_right,
@@ -63,7 +60,7 @@ class Prauji extends StatelessWidget {
             )
           ],
         ),
-        const Row(
+        Row(
           children: [
             Icon(
               Icons.arrow_right,
@@ -76,7 +73,7 @@ class Prauji extends StatelessWidget {
             )
           ],
         ),
-        const Row(
+        Row(
           children: [
             Icon(
               Icons.arrow_right,
@@ -89,7 +86,7 @@ class Prauji extends StatelessWidget {
             )
           ],
         ),
-        const Row(
+        Row(
           children: [
             Icon(
               Icons.arrow_right,

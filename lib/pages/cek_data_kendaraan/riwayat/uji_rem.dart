@@ -15,13 +15,10 @@ class Rem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Row(
+        const Row(
           children: [
-            const TextLeft(nama: 'Rem'),
-            const Spacer(),
-            TextRight(
-              nama: controller.resultData.value.ptgsBreak ?? '-',
-            )
+            TextLeft(nama: 'Rem'),
+            Spacer(),
           ],
         ),
         Row(

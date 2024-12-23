@@ -21,13 +21,11 @@ import 'package:jombang/utils/containers/box_container.dart';
 import 'package:jombang/utils/sizes.dart';
 
 class DetailRiwayat extends StatelessWidget {
-  const DetailRiwayat({super.key});
+  DetailRiwayat({super.key});
+  final DetailRiwayatController controller = Get.put(DetailRiwayatController());
 
   @override
   Widget build(BuildContext context) {
-    final DetailRiwayatController controller =
-        Get.put(DetailRiwayatController());
-
     return Scaffold(
       resizeToAvoidBottomInset: false,
       extendBodyBehindAppBar: true,

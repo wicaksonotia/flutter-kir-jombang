@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:jombang/models/kendaraan_model.dart';
-import 'package:jombang/models/pendaftaran_model.dart';
-// import 'package:jombang/models/pendaftaran_model.dart';
 import 'package:jombang/networks/api_request.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -17,18 +15,26 @@ class PendaftaranController extends GetxController {
   XFile? pickedFile3;
   XFile? pickedFile4;
   String? valueSearch = '';
-  bool? isLogin = false;
+  var isLogin = true.obs;
   var isLoading = false.obs;
-  var isLoadingListRetribusi = false.obs;
   var isLoadingDetailKendaraan = false.obs;
   var resultDataDetailKendaraan = DataDetailKendaraan().obs;
-  var resultDataListPendaftaran = <DataRetribusi>[].obs;
+  var isFullData = false.obs;
+  final SharedPreferences prefs = Get.find<SharedPreferences>();
 
-  @override
-  void onInit() {
-    super.onInit();
-    cekStatusLogin();
-  }
+  // @override
+  // void onInit() {
+  //   super.onInit();
+  // ever(isLogin, (_) {
+  //   print(isLogin.value);
+  //   if (isLogin.value == true) {
+  //     Get.toNamed('/pendaftaran');
+  //   } else {
+  //     Get.toNamed('/cekdatakendaraan');
+  //   }
+  // });
+  // cekStatusLogin();
+  // }
 
   void clearController() {
     nouji.clear();
@@ -86,7 +92,7 @@ class PendaftaranController extends GetxController {
   void create() async {
     try {
       isLoading(true);
-      final SharedPreferences prefs = await SharedPreferences.getInstance();
+      // final SharedPreferences prefs = await SharedPreferences.getInstance();
       if (formKey.currentState!.validate()) {
         if (pickedFile1 != null &&
             pickedFile2 != null &&
@@ -121,21 +127,6 @@ class PendaftaranController extends GetxController {
       }
     } finally {
       isLoading(false);
-    }
-  }
-
-  void getData() async {
-    try {
-      isLoadingListRetribusi(true);
-      var result = await RemoteDataSource.getPendaftaran();
-      resultDataListPendaftaran.assignAll(result!.data!);
-      // print(result.toJson());
-    } catch (error) {
-      Get.snackbar('Error', "Silakan cek koneksi internet anda.",
-          icon: const Icon(Icons.error), snackPosition: SnackPosition.BOTTOM);
-      isLoadingListRetribusi(false);
-    } finally {
-      isLoadingListRetribusi(false);
     }
   }
 
@@ -193,13 +184,15 @@ class PendaftaranController extends GetxController {
     }
   }
 
-  void cekStatusLogin() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    isLogin = prefs.getBool('statusLogin');
-    if (isLogin == true) {
-      Get.toNamed('/pendaftaran');
-    } else {
-      Get.offNamed('/login');
-    }
-  }
+  // void cekStatusLogin() async {
+  //   // final SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   print(isLogin.value);
+  //   isLogin.value = prefs.getBool('statusLogin') ?? false;
+  //   print(isLogin.value);
+  //   if (isLogin.value == true) {
+  //     Get.toNamed('/pendaftaran');
+  //   } else {
+  //     Get.offNamed('/login');
+  //   }
+  // }
 }

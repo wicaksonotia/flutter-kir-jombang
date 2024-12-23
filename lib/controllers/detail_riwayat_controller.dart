@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jombang/models/riwayat_detail_model.dart';
 import 'package:jombang/models/tidak_lulus_model.dart';
@@ -41,9 +42,8 @@ class DetailRiwayatController extends GetxController {
       // print('error');
       // }
     } catch (error) {
-      print(error);
-      // Get.snackbar('Notification', 'Data kendaraan belum terdaftar',
-      //     icon: const Icon(Icons.error), snackPosition: SnackPosition.BOTTOM);
+      Get.snackbar('Notification', 'Data kendaraan belum terdaftar',
+          icon: const Icon(Icons.error), snackPosition: SnackPosition.BOTTOM);
       isLoading(false);
     } finally {
       isLoading(false);

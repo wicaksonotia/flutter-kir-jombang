@@ -7,7 +7,7 @@ import 'package:jombang/utils/containers/box_container.dart';
 import 'package:jombang/utils/sizes.dart';
 
 class CardRiwayat extends StatelessWidget {
-  const CardRiwayat({
+  CardRiwayat({
     super.key,
     required this.controller,
     required this.index,
@@ -15,11 +15,11 @@ class CardRiwayat extends StatelessWidget {
 
   final RiwayatKendaraanController controller;
   final int index;
+  final DetailRiwayatController detailRiwayatController =
+      Get.put(DetailRiwayatController());
 
   @override
   Widget build(BuildContext context) {
-    final DetailRiwayatController detailRiwayatController =
-        Get.put(DetailRiwayatController());
     return Obx(
       () => InkWell(
         onTap: () {
@@ -81,7 +81,7 @@ class CardRiwayat extends StatelessWidget {
                                   fontSize: MySizes.fontSizeLg),
                             ),
                             Text(
-                              controller.resultData[index].nmPenguji!,
+                              controller.resultData[index].nmPenguji ?? '-',
                             ),
                             Text(
                               controller.resultData[index].tglUji!,

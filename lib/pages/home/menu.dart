@@ -35,8 +35,18 @@ class Menu extends StatelessWidget {
               children: [
                 InkWell(
                   onTap: () {
-                    // context.goNamed(menuController.menuItem[index].directlink!);
-                    Get.toNamed(menuController.menuItem[index].directlink!);
+                    if (menuController.menuItem[index].directlink! ==
+                        '/pendaftaran') {
+                      final isLogin =
+                          menuController.prefs.getBool('statusLogin');
+                      if (isLogin == true) {
+                        Get.toNamed(menuController.menuItem[index].directlink!);
+                      } else {
+                        Get.toNamed('/login');
+                      }
+                    } else {
+                      Get.toNamed(menuController.menuItem[index].directlink!);
+                    }
                   },
                   child: Column(
                     children: [

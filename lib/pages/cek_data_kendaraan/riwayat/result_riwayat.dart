@@ -5,13 +5,12 @@ import 'package:jombang/controllers/riwayat_kendaraan_controller.dart';
 import 'package:jombang/pages/cek_data_kendaraan/riwayat/card_riwayat.dart';
 
 class ResultRiwayat extends StatelessWidget {
-  const ResultRiwayat({super.key});
+  ResultRiwayat({super.key});
+  final RiwayatKendaraanController riwayatKendaraanController =
+      Get.find<RiwayatKendaraanController>();
 
   @override
   Widget build(BuildContext context) {
-    final RiwayatKendaraanController riwayatKendaraanController =
-        Get.put(RiwayatKendaraanController());
-
     return Obx(
       () => riwayatKendaraanController.isLoadingRiwayat.value
           ? Container(

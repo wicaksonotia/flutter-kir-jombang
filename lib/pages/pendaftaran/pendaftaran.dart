@@ -24,12 +24,13 @@ class PendaftaranPage extends StatefulWidget {
 
 class _PendaftaranPageState extends State<PendaftaranPage> {
   final PendaftaranController pendaftaranController =
-      Get.put(PendaftaranController());
+      Get.find<PendaftaranController>();
 
   @override
   Widget build(BuildContext context) {
     final node = FocusScope.of(context);
     return Scaffold(
+        resizeToAvoidBottomInset: false,
         extendBodyBehindAppBar: true,
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(50),
@@ -634,19 +635,20 @@ class _PendaftaranPageState extends State<PendaftaranPage> {
                                 },
                                 color: Colors.blue,
                                 childWidget: const Center(
-                                    child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      'Daftar Uji',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.w500,
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        'Daftar Uji',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w500,
+                                        ),
                                       ),
-                                    ),
-                                  ],
-                                )),
+                                    ],
+                                  ),
+                                ),
                               );
                             }
                           }),

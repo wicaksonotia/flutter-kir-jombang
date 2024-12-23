@@ -1,10 +1,15 @@
+import 'dart:convert';
+import 'dart:typed_data';
+
 class CarouselModel {
-  String? gambar;
+  Uint8List? gambar;
 
   CarouselModel({this.gambar});
 
   CarouselModel.fromJson(Map<String, dynamic> json) {
-    gambar = json['gambar'];
+    Uint8List decodePhoto;
+    decodePhoto = const Base64Decoder().convert('${json['gambar']}');
+    gambar = decodePhoto;
   }
 
   Map<String, dynamic> toJson() {

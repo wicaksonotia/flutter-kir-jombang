@@ -5,12 +5,12 @@ import 'package:get/get.dart';
 import 'package:jombang/controllers/login_controller.dart';
 
 class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+  LoginPage({super.key});
+  LoginController loginController = Get.find<LoginController>();
 
   @override
   Widget build(BuildContext context) {
-    LoginController loginController = Get.put(LoginController());
-
+    // return Text('asd');
     return Obx(
       () => Scaffold(
         backgroundColor: Colors.white,

@@ -24,44 +24,6 @@ class CarouselContainer extends StatelessWidget {
       } else {
         return Column(
           children: [
-            // Row(
-            //   children: [
-            //     const SeeAllContainer(
-            //       header: "Special Offer",
-            //       subHeader: "",
-            //       buttonLihatSemua: false,
-            //     ),
-            //     const Spacer(),
-            //     Padding(
-            //       padding: const EdgeInsets.symmetric(horizontal: 10),
-            //       child: Row(
-            //         children: List.generate(
-            //           carouselController.carouselItems.length,
-            //           (index) {
-            //             bool isSelected =
-            //                 carouselController.indexSlider.value == index;
-            //             return GestureDetector(
-            //               child: AnimatedContainer(
-            //                 width: isSelected ? 30 : 5,
-            //                 height: 5,
-            //                 margin: EdgeInsets.symmetric(
-            //                     horizontal: isSelected ? 6 : 3),
-            //                 decoration: BoxDecoration(
-            //                   color:
-            //                       isSelected ? MyColors.primary : MyColors.grey,
-            //                   borderRadius: BorderRadius.circular(10),
-            //                 ),
-            //                 duration: const Duration(milliseconds: 300),
-            //                 curve: Curves.ease,
-            //               ),
-            //             );
-            //           },
-            //         ),
-            //       ),
-            //     ),
-            //   ],
-            // ),
-            // const Gap(10),
             CarouselSlider(
               options: CarouselOptions(
                 initialPage: 0,
@@ -72,30 +34,14 @@ class CarouselContainer extends StatelessWidget {
                 enlargeFactor: 0.2,
                 // autoPlayAnimationDuration: const Duration(seconds: 7),
                 autoPlayAnimationDuration: const Duration(seconds: 3),
-                // onPageChanged: (index, _) {
-                //   carouselController.indexSlider.value = index;
-                // },
+                onPageChanged: (index, _) {
+                  carouselController.indexSlider.value = index;
+                },
               ),
               items: carouselController.carouselItems.map((dataSliderImage) {
-                Uint8List decodePhoto;
-                decodePhoto =
-                    const Base64Decoder().convert('${dataSliderImage.gambar}');
                 return Builder(
                   builder: (BuildContext context) {
-                    return Stack(
-                      children: [
-                        Container(
-                          width: MediaQuery.of(context).size.width,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            image: DecorationImage(
-                              image: MemoryImage(decodePhoto),
-                              fit: BoxFit.fill,
-                            ),
-                          ),
-                        ),
-                      ],
-                    );
+                    return carouselImage(decodePhoto: dataSliderImage.gambar!);
                   },
                 );
               }).toList(),
@@ -129,5 +75,32 @@ class CarouselContainer extends StatelessWidget {
         );
       }
     });
+  }
+}
+
+class carouselImage extends StatelessWidget {
+  const carouselImage({
+    super.key,
+    required this.decodePhoto,
+  });
+
+  final Uint8List decodePhoto;
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        Container(
+          width: MediaQuery.of(context).size.width,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            image: DecorationImage(
+              image: MemoryImage(decodePhoto),
+              fit: BoxFit.fill,
+            ),
+          ),
+        ),
+      ],
+    );
   }
 }

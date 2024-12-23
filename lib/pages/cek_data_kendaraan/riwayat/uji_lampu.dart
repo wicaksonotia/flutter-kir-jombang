@@ -15,13 +15,10 @@ class Lampu extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Row(
+        const Row(
           children: [
-            const TextLeft(nama: 'Lampu'),
-            const Spacer(),
-            TextRight(
-              nama: controller.resultData.value.ptgsLampu ?? '-',
-            )
+            TextLeft(nama: 'Lampu'),
+            Spacer(),
           ],
         ),
         Row(

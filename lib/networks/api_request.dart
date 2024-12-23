@@ -11,6 +11,7 @@ import 'package:jombang/models/persyaratan_model.dart';
 import 'package:jombang/models/riwayat_detail_model.dart';
 import 'package:jombang/models/riwayat_model.dart';
 import 'package:jombang/models/tidak_lulus_model.dart';
+import 'package:jombang/models/uji_hari_ini_model.dart';
 import 'package:jombang/networks/api_endpoints.dart';
 
 class RemoteDataSource {
@@ -52,6 +53,7 @@ class RemoteDataSource {
       final response = await Dio().get(url);
       if (response.statusCode == 200) {
         List<dynamic> jsonData = response.data;
+        // print(jsonData);
         return jsonData.map((e) => CarouselModel.fromJson(e)).toList();
       }
       return null;
@@ -231,13 +233,28 @@ class RemoteDataSource {
     }
   }
 
-  // DETAIL RETRIBUSI
-  static Future<PendaftaranModel?> getPendaftaran() async {
+  // RIWAYAT RETRIBUSI
+  static Future<PendaftaranModel?> getPendaftaran(String params) async {
     try {
       var url = ApiEndPoints.baseUrl + ApiEndPoints.authEndpoints.listretribusi;
       final response = await Dio().get(url);
       if (response.statusCode == 200) {
         final PendaftaranModel res = PendaftaranModel.fromJson(response.data);
+        return res;
+      }
+      return null;
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
+  // UJI HARI INI
+  static Future<UjiHariIniModel?> getUjiHariIni() async {
+    try {
+      var url = ApiEndPoints.baseUrl + ApiEndPoints.authEndpoints.ujihariini;
+      final response = await Dio().get(url);
+      if (response.statusCode == 200) {
+        final UjiHariIniModel res = UjiHariIniModel.fromJson(response.data);
         return res;
       }
       return null;

@@ -15,13 +15,10 @@ class Emisi extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Row(
+        const Row(
           children: [
-            const TextLeft(nama: 'Emisi'),
-            const Spacer(),
-            TextRight(
-              nama: controller.resultData.value.ptgsSmoke ?? '-',
-            )
+            TextLeft(nama: 'Emisi'),
+            Spacer(),
           ],
         ),
         Row(

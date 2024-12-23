@@ -11,7 +11,7 @@ class PendaftaranModel {
     if (json['data'] != null) {
       data = <DataRetribusi>[];
       json['data'].forEach((v) {
-        data!.add(DataRetribusi.fromJson(v));
+        data!.add(new DataRetribusi.fromJson(v));
       });
     }
   }
@@ -30,44 +30,40 @@ class PendaftaranModel {
 class DataRetribusi {
   int? id;
   String? noUji;
-  String? persyaratanKtp;
-  String? persyaratanStnk;
-  String? persyaratanKartuUji;
-  String? persyaratanSertifikatUji;
   String? tanggalRetribusi;
   String? tanggalUji;
+  int? kodeNumerator;
+  String? nmUji;
+  String? totalRetribusi;
 
   DataRetribusi(
       {this.id,
       this.noUji,
-      this.persyaratanKtp,
-      this.persyaratanStnk,
-      this.persyaratanKartuUji,
-      this.persyaratanSertifikatUji,
       this.tanggalRetribusi,
-      this.tanggalUji});
+      this.tanggalUji,
+      this.kodeNumerator,
+      this.nmUji,
+      this.totalRetribusi});
 
   DataRetribusi.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     noUji = json['no_uji'];
-    persyaratanKtp = json['persyaratan_ktp'];
-    persyaratanStnk = json['persyaratan_stnk'];
-    persyaratanKartuUji = json['persyaratan_kartu_uji'];
-    persyaratanSertifikatUji = json['persyaratan_sertifikat_uji'];
     tanggalRetribusi = json['tanggal_retribusi'];
     tanggalUji = json['tanggal_uji'];
+    kodeNumerator = json['kode_numerator'];
+    nmUji = json['nm_uji'];
+    totalRetribusi = json['total_retribusi'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
     data['no_uji'] = noUji;
-    data['persyaratan_ktp'] = persyaratanKtp;
-    data['persyaratan_stnk'] = persyaratanStnk;
-    data['persyaratan_kartu_uji'] = persyaratanKartuUji;
-    data['persyaratan_sertifikat_uji'] = persyaratanSertifikatUji;
     data['tanggal_retribusi'] = tanggalRetribusi;
     data['tanggal_uji'] = tanggalUji;
+    data['kode_numerator'] = kodeNumerator;
+    data['nm_uji'] = nmUji;
+    data['total_retribusi'] = totalRetribusi;
     return data;
   }
 }

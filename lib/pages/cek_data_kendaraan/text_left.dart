@@ -12,7 +12,7 @@ class TextLeft extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       nama,
-      style: const TextStyle(color: Colors.grey, height: 1.7),
+      style: TextStyle(color: Colors.grey.shade600, height: 1.7),
     );
   }
 }
