@@ -11,6 +11,7 @@ import 'package:jombang/utils/containers/box_container.dart';
 import 'package:jombang/pages/home/carousel.dart';
 import 'package:jombang/utils/sizes.dart';
 
+// ignore: must_be_immutable
 class HomePage extends StatelessWidget {
   HomePage({super.key});
   LoginController loginController = Get.find<LoginController>();
