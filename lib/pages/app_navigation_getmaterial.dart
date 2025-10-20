@@ -12,6 +12,7 @@ import 'package:sampang/pages/pendaftaran/pendaftaran.dart';
 import 'package:sampang/pages/persyaratan/detail_persyaratan.dart';
 import 'package:sampang/pages/persyaratan/persyaratan.dart';
 import 'package:sampang/pages/profile/profile.dart';
+import 'package:sampang/pages/scan_qrcode/qr_scanner.dart';
 
 class RouterClass {
   static String login = "/login";
@@ -25,6 +26,7 @@ class RouterClass {
   static String detailpersyaratan = "/detailpersyaratan";
   static String informasi = "/informasi";
   static String detailinformasi = "/detailinformasi";
+  static String qrscanner = "/qrscanner";
 
   static List<GetPage> routes = [
     GetPage(page: () => LoginPage(), name: login),
@@ -48,7 +50,8 @@ class RouterClass {
     //   transition: Transition.rightToLeft,
     //   transitionDuration: (const Duration(milliseconds: 300)),
     // ),
-    GetPage(page: () => const InformasiPage(), name: '/informasi'),
+    GetPage(page: () => const InformasiPage(), name: informasi),
     GetPage(page: () => const Profile(), name: '/profile'),
+    GetPage(page: () => const QRScannerPage(), name: qrscanner),
   ];
 }
