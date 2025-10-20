@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class AppbarHeader extends StatelessWidget {
-  AppbarHeader({super.key, required this.header});
-  String header;
+  const AppbarHeader({super.key, required this.header});
+  final String header;
 
   @override
   Widget build(BuildContext context) {

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:jombang/controllers/search_bar_controller.dart';
-import 'package:jombang/models/kendaraan_model.dart';
-import 'package:jombang/networks/api_request.dart';
+import 'package:sampang/controllers/search_bar_controller.dart';
+import 'package:sampang/models/kendaraan_model.dart';
+import 'package:sampang/networks/api_request.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class DetailKendaraanController extends GetxController {

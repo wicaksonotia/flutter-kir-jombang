@@ -2,8 +2,8 @@ import 'package:dio/dio.dart' as Dio;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:jombang/models/kendaraan_model.dart';
-import 'package:jombang/networks/api_request.dart';
+import 'package:sampang/models/kendaraan_model.dart';
+import 'package:sampang/networks/api_request.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class PendaftaranController extends GetxController {

@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
-import 'package:jombang/controllers/uji_hari_ini_controller.dart';
-import 'package:jombang/utils/containers/box_container.dart';
-import 'package:jombang/utils/sizes.dart';
+import 'package:sampang/controllers/uji_hari_ini_controller.dart';
+import 'package:sampang/utils/containers/box_container.dart';
+import 'package:sampang/utils/sizes.dart';
 
 class Info extends StatelessWidget {
   Info({
     super.key,
+    required this.ujiHariIniController,
   });
 
-  final UjiHariIniController controller = Get.put(UjiHariIniController());
+  final UjiHariIniController ujiHariIniController;
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() => controller.isLoading.value
+    return Obx(() => ujiHariIniController.isLoading.value
         ? Container(
             margin: const EdgeInsets.only(top: 10),
             child: const Center(
@@ -84,7 +85,8 @@ class Info extends StatelessWidget {
                             ),
                             const Gap(5),
                             Text(
-                              controller.resultData.value.ujiPertama.toString(),
+                              ujiHariIniController.resultData.value.ujiPertama
+                                  .toString(),
                               style: const TextStyle(
                                 fontSize: 40,
                                 fontWeight: FontWeight.bold,
@@ -163,7 +165,8 @@ class Info extends StatelessWidget {
                             ),
                             const Gap(5),
                             Text(
-                              controller.resultData.value.ujiBerkala.toString(),
+                              ujiHariIniController.resultData.value.ujiBerkala
+                                  .toString(),
                               style: const TextStyle(
                                 fontSize: 40,
                                 fontWeight: FontWeight.bold,
@@ -242,7 +245,7 @@ class Info extends StatelessWidget {
                             ),
                             const Gap(5),
                             Text(
-                              controller.resultData.value.numpangMasuk
+                              ujiHariIniController.resultData.value.numpangMasuk
                                   .toString(),
                               style: const TextStyle(
                                 fontSize: 40,
@@ -322,7 +325,7 @@ class Info extends StatelessWidget {
                             ),
                             const Gap(5),
                             Text(
-                              controller.resultData.value.mutasiMasuk
+                              ujiHariIniController.resultData.value.mutasiMasuk
                                   .toString(),
                               style: const TextStyle(
                                 fontSize: 40,

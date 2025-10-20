@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:jombang/controllers/detail_riwayat_controller.dart';
-import 'package:jombang/pages/cek_data_kendaraan/text_left.dart';
-import 'package:jombang/pages/cek_data_kendaraan/text_right.dart';
+import 'package:sampang/controllers/detail_riwayat_controller.dart';
+import 'package:sampang/pages/cek_data_kendaraan/text_left.dart';
+import 'package:sampang/pages/cek_data_kendaraan/text_right.dart';
 
 class Prauji extends StatelessWidget {
   const Prauji({

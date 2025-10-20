@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:jombang/pages/cek_data_kendaraan/riwayat/result_riwayat_pendaftaran.dart';
-import 'package:jombang/utils/colors.dart';
-import 'package:jombang/utils/containers/app_bar_header.dart';
-import 'package:jombang/pages/cek_data_kendaraan/background_header.dart';
-import 'package:jombang/pages/cek_data_kendaraan/riwayat/result_riwayat.dart';
+import 'package:sampang/pages/cek_data_kendaraan/riwayat/result_riwayat_pendaftaran.dart';
+import 'package:sampang/utils/colors.dart';
+import 'package:sampang/utils/containers/app_bar_header.dart';
+import 'package:sampang/pages/cek_data_kendaraan/background_header.dart';
+import 'package:sampang/pages/cek_data_kendaraan/riwayat/result_riwayat.dart';
 
 class HomeRiwayat extends StatelessWidget {
   const HomeRiwayat({super.key});

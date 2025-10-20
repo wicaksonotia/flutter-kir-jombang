@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:jombang/utils/sizes.dart';
+import 'package:sampang/utils/sizes.dart';
 
 class TextHeader extends StatelessWidget {
   const TextHeader({

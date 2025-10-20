@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:jombang/models/berita_model.dart';
-import 'package:jombang/networks/api_request.dart';
+import 'package:sampang/models/berita_model.dart';
+import 'package:sampang/networks/api_request.dart';
 
 class BeritaController extends GetxController {
   var resultData = <BeritaModel>[].obs;

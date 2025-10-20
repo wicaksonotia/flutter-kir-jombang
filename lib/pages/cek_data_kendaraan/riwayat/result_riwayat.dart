@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
-import 'package:jombang/controllers/riwayat_kendaraan_controller.dart';
-import 'package:jombang/pages/cek_data_kendaraan/riwayat/card_riwayat.dart';
+import 'package:sampang/controllers/riwayat_kendaraan_controller.dart';
+import 'package:sampang/pages/cek_data_kendaraan/riwayat/card_riwayat.dart';
 
 class ResultRiwayat extends StatelessWidget {
   ResultRiwayat({super.key});

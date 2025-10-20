@@ -2,8 +2,8 @@ import 'package:dio/dio.dart' as Dio;
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
-import 'package:jombang/networks/api_request.dart';
-import 'package:jombang/utils/sizes.dart';
+import 'package:sampang/networks/api_request.dart';
+import 'package:sampang/utils/sizes.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginController extends GetxController {

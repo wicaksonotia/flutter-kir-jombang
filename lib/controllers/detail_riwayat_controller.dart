@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:jombang/models/riwayat_detail_model.dart';
-import 'package:jombang/models/tidak_lulus_model.dart';
-import 'package:jombang/networks/api_request.dart';
+import 'package:sampang/models/riwayat_detail_model.dart';
+import 'package:sampang/models/tidak_lulus_model.dart';
+import 'package:sampang/networks/api_request.dart';
 
 class DetailRiwayatController extends GetxController {
   var isLoading = false.obs;

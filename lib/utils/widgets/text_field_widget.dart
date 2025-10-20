@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:jombang/utils/colors.dart';
+import 'package:sampang/utils/colors.dart';
 
 // ignore: must_be_immutable
 class TextFieldWidget extends StatelessWidget {

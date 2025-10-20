@@ -1,17 +1,17 @@
 import 'package:get/get.dart';
-import 'package:jombang/bindings/pendaftaran_binding.dart';
-import 'package:jombang/bindings/riwayat_binding.dart';
-import 'package:jombang/pages/cek_data_kendaraan/cek_data/home_cek_data.dart';
-import 'package:jombang/pages/cek_data_kendaraan/hasil_uji/home_hasil_uji.dart';
-import 'package:jombang/pages/cek_data_kendaraan/riwayat/detail_riwayat.dart';
-import 'package:jombang/pages/cek_data_kendaraan/riwayat/home_riwayat.dart';
-import 'package:jombang/pages/home/home.dart';
-import 'package:jombang/pages/informasi/informasi.dart';
-import 'package:jombang/pages/login_page.dart';
-import 'package:jombang/pages/pendaftaran/pendaftaran.dart';
-import 'package:jombang/pages/persyaratan/detail_persyaratan.dart';
-import 'package:jombang/pages/persyaratan/persyaratan.dart';
-import 'package:jombang/pages/profile/profile.dart';
+import 'package:sampang/bindings/pendaftaran_binding.dart';
+import 'package:sampang/bindings/riwayat_binding.dart';
+import 'package:sampang/pages/cek_data_kendaraan/cek_data/home_cek_data.dart';
+import 'package:sampang/pages/cek_data_kendaraan/hasil_uji/home_hasil_uji.dart';
+import 'package:sampang/pages/cek_data_kendaraan/riwayat/detail_riwayat.dart';
+import 'package:sampang/pages/cek_data_kendaraan/riwayat/home_riwayat.dart';
+import 'package:sampang/pages/home/home.dart';
+import 'package:sampang/pages/informasi/informasi.dart';
+import 'package:sampang/pages/login_page.dart';
+import 'package:sampang/pages/pendaftaran/pendaftaran.dart';
+import 'package:sampang/pages/persyaratan/detail_persyaratan.dart';
+import 'package:sampang/pages/persyaratan/persyaratan.dart';
+import 'package:sampang/pages/profile/profile.dart';
 
 class RouterClass {
   static String login = "/login";

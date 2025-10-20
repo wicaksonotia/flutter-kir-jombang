@@ -1,0 +1,2 @@
+/Users/tiawicaksono/Documents/DEVELOPMENT/FLUTTER/sampang/android/app/.cxx/Debug/144nc4j5/arm64-v8a/CMakeFiles/edit_cache.dir
+/Users/tiawicaksono/Documents/DEVELOPMENT/FLUTTER/sampang/android/app/.cxx/Debug/144nc4j5/arm64-v8a/CMakeFiles/rebuild_cache.dir

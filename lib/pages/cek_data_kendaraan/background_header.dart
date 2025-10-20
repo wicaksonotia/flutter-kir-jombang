@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:jombang/pages/cek_data_kendaraan/search_bar_container.dart';
-import 'package:jombang/utils/colors.dart';
+import 'package:sampang/pages/cek_data_kendaraan/search_bar_container.dart';
+import 'package:sampang/utils/colors.dart';
 
 class BackgroundHeader extends StatelessWidget {
   final String menu;

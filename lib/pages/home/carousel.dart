@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:flutter/foundation.dart';
@@ -6,13 +5,16 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
-import 'package:jombang/utils/colors.dart';
-import 'package:jombang/controllers/carousel_controller.dart';
+import 'package:sampang/utils/colors.dart';
+import 'package:sampang/controllers/carousel_controller.dart';
 
 class CarouselContainer extends StatelessWidget {
-  CarouselContainer({super.key});
-  final CarouselBannerController carouselController =
-      Get.put(CarouselBannerController());
+  CarouselContainer({
+    super.key,
+    required this.carouselController,
+  });
+
+  final CarouselBannerController carouselController;
 
   @override
   Widget build(BuildContext context) {

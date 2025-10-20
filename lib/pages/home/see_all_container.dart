@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:jombang/utils/colors.dart';
-import 'package:jombang/utils/sizes.dart';
+import 'package:sampang/utils/colors.dart';
+import 'package:sampang/utils/sizes.dart';
 
 class SeeAllContainer extends StatelessWidget {
   const SeeAllContainer(

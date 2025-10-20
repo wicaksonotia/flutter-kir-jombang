@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:jombang/models/uji_hari_ini_model.dart';
-import 'package:jombang/networks/api_request.dart';
+import 'package:sampang/models/uji_hari_ini_model.dart';
+import 'package:sampang/networks/api_request.dart';
 
 class UjiHariIniController extends GetxController {
   var resultData = DataUjiHariIni().obs;

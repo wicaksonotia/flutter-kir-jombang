@@ -1,9 +1,9 @@
 // import 'package:flutter/material.dart';
 // import 'package:get/get.dart';
 // import 'package:go_router/go_router.dart';
-// import 'package:jombang/controllers/search_bar_controller.dart';
-// import 'package:jombang/utils/colors.dart';
-// import 'package:jombang/utils/widgets/text_field_widget.dart';
+// import 'package:sampang/controllers/search_bar_controller.dart';
+// import 'package:sampang/utils/colors.dart';
+// import 'package:sampang/utils/widgets/text_field_widget.dart';
 
 // class CekDataPage extends StatefulWidget {
 //   const CekDataPage({super.key});

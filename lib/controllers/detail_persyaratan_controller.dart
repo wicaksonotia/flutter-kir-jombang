@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
-import 'package:jombang/models/persyaratan_model.dart';
-import 'package:jombang/networks/api_request.dart';
+import 'package:sampang/models/persyaratan_model.dart';
+import 'package:sampang/networks/api_request.dart';
 
 class DetailPersyaratanController extends GetxController {
   var persyaratanItem = <PersyaratanModel>[].obs;

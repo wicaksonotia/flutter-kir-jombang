@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:jombang/networks/api_request.dart';
-import 'package:jombang/models/menu_model.dart';
+import 'package:sampang/networks/api_request.dart';
+import 'package:sampang/models/menu_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeMenuController extends GetxController {

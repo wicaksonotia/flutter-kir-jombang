@@ -2,12 +2,12 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
-import 'package:jombang/controllers/detail_kendaraan_controller.dart';
-import 'package:jombang/pages/cek_data_kendaraan/text_header.dart';
-import 'package:jombang/pages/cek_data_kendaraan/text_left.dart';
-import 'package:jombang/pages/cek_data_kendaraan/text_right.dart';
-import 'package:jombang/utils/containers/box_container.dart';
-import 'package:jombang/utils/sizes.dart';
+import 'package:sampang/controllers/detail_kendaraan_controller.dart';
+import 'package:sampang/pages/cek_data_kendaraan/text_header.dart';
+import 'package:sampang/pages/cek_data_kendaraan/text_left.dart';
+import 'package:sampang/pages/cek_data_kendaraan/text_right.dart';
+import 'package:sampang/utils/containers/box_container.dart';
+import 'package:sampang/utils/sizes.dart';
 
 class ResultCekData extends StatelessWidget {
   const ResultCekData({super.key});

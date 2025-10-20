@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:grouped_list/grouped_list.dart';
-import 'package:jombang/controllers/riwayat_pendaftaran_controller.dart';
-import 'package:jombang/utils/colors.dart';
-import 'package:jombang/utils/containers/box_container.dart';
-import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
+import 'package:sampang/controllers/riwayat_pendaftaran_controller.dart';
+import 'package:sampang/utils/colors.dart';
+import 'package:sampang/utils/containers/box_container.dart';
 
 class ResultRiwayatPendaftaran extends StatelessWidget {
   ResultRiwayatPendaftaran({super.key});

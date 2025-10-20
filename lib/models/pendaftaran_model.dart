@@ -11,7 +11,7 @@ class PendaftaranModel {
     if (json['data'] != null) {
       data = <DataRetribusi>[];
       json['data'].forEach((v) {
-        data!.add(new DataRetribusi.fromJson(v));
+        data!.add(DataRetribusi.fromJson(v));
       });
     }
   }

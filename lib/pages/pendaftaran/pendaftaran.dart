@@ -5,15 +5,15 @@ import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
-import 'package:jombang/controllers/pendaftaran_controller.dart';
-import 'package:jombang/pages/cek_data_kendaraan/text_header.dart';
-import 'package:jombang/pages/cek_data_kendaraan/text_left.dart';
-import 'package:jombang/pages/cek_data_kendaraan/text_right.dart';
-import 'package:jombang/pages/pendaftaran/loading_button.dart';
-import 'package:jombang/pages/persyaratan/background_header.dart';
-import 'package:jombang/utils/colors.dart';
-import 'package:jombang/utils/containers/app_bar_header.dart';
-import 'package:jombang/utils/containers/box_container.dart';
+import 'package:sampang/controllers/pendaftaran_controller.dart';
+import 'package:sampang/pages/cek_data_kendaraan/text_header.dart';
+import 'package:sampang/pages/cek_data_kendaraan/text_left.dart';
+import 'package:sampang/pages/cek_data_kendaraan/text_right.dart';
+import 'package:sampang/pages/pendaftaran/loading_button.dart';
+import 'package:sampang/pages/persyaratan/background_header.dart';
+import 'package:sampang/utils/colors.dart';
+import 'package:sampang/utils/containers/app_bar_header.dart';
+import 'package:sampang/utils/containers/box_container.dart';
 
 class PendaftaranPage extends StatefulWidget {
   const PendaftaranPage({super.key});

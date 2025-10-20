@@ -4,8 +4,7 @@ class UjiHariIniModel {
   UjiHariIniModel({this.data});
 
   UjiHariIniModel.fromJson(Map<String, dynamic> json) {
-    data =
-        json['data'] != null ? new DataUjiHariIni.fromJson(json['data']) : null;
+    data = json['data'] != null ? DataUjiHariIni.fromJson(json['data']) : null;
   }
 
   Map<String, dynamic> toJson() {

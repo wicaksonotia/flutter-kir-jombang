@@ -1,18 +1,18 @@
 import 'dart:async';
 import 'package:dio/dio.dart';
-import 'package:jombang/models/berita_model.dart';
-import 'package:jombang/models/carousel_model.dart';
-import 'package:jombang/models/hasil_uji_model.dart';
-import 'package:jombang/models/jenis_uji_model.dart';
-import 'package:jombang/models/kendaraan_model.dart';
-import 'package:jombang/models/menu_model.dart';
-import 'package:jombang/models/pendaftaran_model.dart';
-import 'package:jombang/models/persyaratan_model.dart';
-import 'package:jombang/models/riwayat_detail_model.dart';
-import 'package:jombang/models/riwayat_model.dart';
-import 'package:jombang/models/tidak_lulus_model.dart';
-import 'package:jombang/models/uji_hari_ini_model.dart';
-import 'package:jombang/networks/api_endpoints.dart';
+import 'package:sampang/models/berita_model.dart';
+import 'package:sampang/models/carousel_model.dart';
+import 'package:sampang/models/hasil_uji_model.dart';
+import 'package:sampang/models/jenis_uji_model.dart';
+import 'package:sampang/models/kendaraan_model.dart';
+import 'package:sampang/models/menu_model.dart';
+import 'package:sampang/models/pendaftaran_model.dart';
+import 'package:sampang/models/persyaratan_model.dart';
+import 'package:sampang/models/riwayat_detail_model.dart';
+import 'package:sampang/models/riwayat_model.dart';
+import 'package:sampang/models/tidak_lulus_model.dart';
+import 'package:sampang/models/uji_hari_ini_model.dart';
+import 'package:sampang/networks/api_endpoints.dart';
 
 class RemoteDataSource {
   static Future<bool> login(FormData data) async {
@@ -134,6 +134,7 @@ class RemoteDataSource {
         // Map<String, dynamic> jsonData = response.data;
         final DetailKendaraanModel res =
             DetailKendaraanModel.fromJson(response.data);
+        print(res.data!.imgKiri);
         return res;
       }
       return null;

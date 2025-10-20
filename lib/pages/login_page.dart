@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
-import 'package:jombang/controllers/login_controller.dart';
+import 'package:sampang/controllers/login_controller.dart';
 
 class LoginPage extends StatelessWidget {
   LoginPage({super.key});

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:jombang/utils/colors.dart';
+import 'package:sampang/utils/colors.dart';
 
 class BackgroundHeader extends StatelessWidget {
   const BackgroundHeader({super.key});
