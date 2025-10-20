@@ -1,5 +1,3 @@
-// import 'dart:convert';
-// import 'dart:typed_data';
 import 'package:http/http.dart' as http;
 import 'package:html/parser.dart' as parser;
 import 'package:flutter/material.dart';
@@ -30,14 +28,36 @@ class _BeritaState extends State<Berita> {
   Future<void> _launchURL(String url) async {
     try {
       final Uri uri = Uri.parse(url);
+      String? videoId;
+
+      // Ambil video ID dari URL
+      if (uri.host.contains('youtu.be')) {
+        videoId = uri.pathSegments.first;
+      } else if (uri.host.contains('youtube.com')) {
+        videoId = uri.queryParameters['v'];
+      }
+
+      // 🔹 Kalau ada videoId, coba buka dengan intent ke YouTube app
+      if (videoId != null) {
+        final youtubeAppUri = Uri.parse('vnd.youtube:$videoId');
+        if (await canLaunchUrl(youtubeAppUri)) {
+          await launchUrl(youtubeAppUri, mode: LaunchMode.externalApplication);
+          return;
+        }
+      }
+
+      // 🔹 Fallback ke browser kalau YouTube app tidak tersedia
       if (await canLaunchUrl(uri)) {
-        await launchUrl(uri);
-        // await launchUrl(uri, mode: LaunchMode.externalApplication);
+        await launchUrl(uri, mode: LaunchMode.externalApplication);
       } else {
-        print('Could not launch $url');
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Tidak bisa membuka link YouTube')),
+        );
       }
     } catch (e) {
-      print('Could not launch $url: $e');
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Gagal membuka YouTube: $e')),
+      );
     }
   }
 
