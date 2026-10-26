@@ -1,55 +1,130 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 import 'package:jombang/controllers/search_bar_controller.dart';
 import 'package:jombang/models/kendaraan_model.dart';
 import 'package:jombang/networks/api_request.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class DetailKendaraanController extends GetxController {
-  final searchTextFieldController =
-      Get.find<SearchBarController>().searchTextFieldController;
-  var isLoadingDetailKendaraan = false.obs;
-  var resultData = DataDetailKendaraan().obs;
-  String? valueSearch = '';
-  bool? isLogin = false;
+  late final TextEditingController searchTextFieldController;
+
+  // Input 5 digit terakhir nomor mesin.
+  final TextEditingController noMesinController = TextEditingController();
+
+  final isLoadingDetailKendaraan = false.obs;
+  final resultData = DataDetailKendaraan().obs;
+  final hasResult = false.obs;
+
+  String? valueSearch;
+  bool isLogin = false;
+  final isEmptyNoMesin = true.obs;
 
   @override
   void onInit() {
     super.onInit();
+
+    searchTextFieldController =
+        Get.find<SearchBarController>().searchTextFieldController;
+
     cekIsLogin();
   }
 
-  void getDetailDataKendaraan() async {
-    valueSearch = searchTextFieldController.text.toString();
-    getData(valueSearch);
+  /// Mencari kendaraan dengan Nomor Uji dan
+  /// 5 digit terakhir Nomor Mesin.
+  Future<void> getDetailDataKendaraan() async {
+    final noUji = searchTextFieldController.text.trim().toUpperCase();
+    final noMesin = noMesinController.text.trim();
+
+    // Kedua input wajib diisi.
+    if (noUji.isEmpty || noMesin.isEmpty) {
+      _showNotification(
+        'Nomor Uji dan 5 digit terakhir Nomor Mesin wajib diisi.',
+      );
+      return;
+    }
+
+    // Nomor mesin harus tepat 5 digit angka.
+    if (!RegExp(r'^\d{5}$').hasMatch(noMesin)) {
+      _showNotification(
+        'Nomor Mesin harus terdiri dari tepat 5 digit angka.',
+      );
+      return;
+    }
+
+    await getData(
+      noUji: noUji,
+      noMesin: noMesin,
+    );
   }
 
-  void getData(valueSearch) async {
+  /// Mengambil detail kendaraan dari API.
+  Future<void> getData({
+    required String noUji,
+    required String noMesin,
+  }) async {
+    if (isLoadingDetailKendaraan.value) return;
+
     try {
-      isLoadingDetailKendaraan(true);
-      var result = await RemoteDataSource.getDetailKendaraan(valueSearch!);
-      // print(result.toJson());
-      if (result!.status == 'ok') {
+      isLoadingDetailKendaraan.value = true;
+      hasResult.value = false;
+
+      final result = await RemoteDataSource.getDetailKendaraan(
+        noUji: noUji.trim().toUpperCase(),
+        noMesin: noMesin.trim().toUpperCase(),
+      );
+
+      if (result != null && result.isSuccess && result.data != null) {
         resultData.value = result.data!;
-      } else if (result.status == 'error') {
-        Get.snackbar('Notification', 'Data kendaraan belum terdaftar.',
-            icon: const Icon(Icons.error), snackPosition: SnackPosition.BOTTOM);
+        hasResult.value = true;
+        valueSearch = noUji;
+      } else {
+        _showNotification(
+          result?.message ?? 'Data kendaraan tidak ditemukan.',
+        );
       }
-    } catch (error) {
-      Get.snackbar('Error', "Silakan cek koneksi internet anda.",
-          icon: const Icon(Icons.error), snackPosition: SnackPosition.BOTTOM);
-      isLoadingDetailKendaraan(false);
+    } catch (e) {
+      _showNotification(
+        'Gagal mengambil data kendaraan. Periksa koneksi internet.',
+      );
     } finally {
-      isLoadingDetailKendaraan(false);
+      isLoadingDetailKendaraan.value = false;
     }
   }
 
-  void cekIsLogin() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    isLogin = prefs.getBool('statusLogin');
-    if (isLogin == true) {
-      valueSearch = prefs.getString('username');
-      getData(valueSearch);
+  /// Memeriksa status login.
+  Future<void> cekIsLogin() async {
+    final prefs = await SharedPreferences.getInstance();
+
+    isLogin = prefs.getBool('statusLogin') ?? false;
+
+    if (!isLogin) return;
+
+    final username = prefs.getString('username');
+
+    if (username == null || username.trim().isEmpty) {
+      return;
     }
+
+    // Isi otomatis Nomor Uji dari akun yang login.
+    // Nomor Mesin tetap harus dimasukkan pengguna.
+    valueSearch = username;
+    searchTextFieldController.text = username;
+  }
+
+  void _showNotification(String message) {
+    Get.snackbar(
+      'Informasi',
+      message,
+      icon: const Icon(Icons.info_outline),
+      snackPosition: SnackPosition.BOTTOM,
+      duration: const Duration(seconds: 3),
+    );
+  }
+
+  @override
+  void onClose() {
+    noMesinController.dispose();
+    super.onClose();
   }
 }

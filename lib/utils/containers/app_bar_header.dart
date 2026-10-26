@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:jombang/utils/colors.dart';
 
 class AppbarHeader extends StatelessWidget {
   const AppbarHeader({super.key, required this.header});
@@ -8,21 +8,12 @@ class AppbarHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: Text(
-        header,
-        style: const TextStyle(color: Colors.white),
-      ),
-      backgroundColor: Colors.transparent,
-      elevation: 0.0,
-      leading: IconButton(
-        icon: const Icon(
-          Icons.arrow_back,
-          color: Colors.white,
-        ),
-        onPressed: () {
-          Get.back();
-        },
-      ),
+      backgroundColor: MyColors.primary,
+      foregroundColor: Colors.white,
+      elevation: 0,
+      scrolledUnderElevation: 0,
+      surfaceTintColor: Colors.transparent,
+      title: const Text('Cek Data Kendaraan'),
     );
   }
 }

@@ -224,22 +224,28 @@ class RemoteDataSource {
   }
 
   // DETAIL KEDARAAN
-  static Future<DetailKendaraanModel?> getDetailKendaraan(String params) async {
-    try {
-      var url =
-          ApiEndPoints.baseUrl + ApiEndPoints.authEndpoints.detailkendaraan;
-      final response = await Dio().get("$url?nouji=$params");
-      if (response.statusCode == 200) {
-        // Map<String, dynamic> jsonData = response.data;
-        final DetailKendaraanModel res =
-            DetailKendaraanModel.fromJson(response.data);
-        print(res.data!.imgKiri);
-        return res;
-      }
-      return null;
-    } catch (e) {
-      throw Exception(e.toString());
+  static Future<DetailKendaraanModel?> getDetailKendaraan({
+    required String noUji,
+    required String noMesin,
+  }) async {
+    final url =
+        ApiEndPoints.baseUrl + ApiEndPoints.authEndpoints.detailkendaraan;
+
+    final response = await Dio().get(
+      url,
+      queryParameters: {
+        'nouji': noUji,
+        'nomesin': noMesin,
+      },
+    );
+
+    if (response.statusCode == 200) {
+      return DetailKendaraanModel.fromJson(
+        Map<String, dynamic>.from(response.data),
+      );
     }
+
+    return null;
   }
 
   // HASIL UJI

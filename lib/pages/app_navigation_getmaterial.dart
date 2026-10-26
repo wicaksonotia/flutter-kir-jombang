@@ -52,6 +52,6 @@ class RouterClass {
     // ),
     GetPage(page: () => const InformasiPage(), name: informasi),
     GetPage(page: () => const Profile(), name: '/profile'),
-    GetPage(page: () => const QRScannerPage(), name: qrscanner),
+    // GetPage(page: () => const QRScannerPage(), name: qrscanner),
   ];
 }

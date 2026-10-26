@@ -59,7 +59,7 @@ class _QRScannerPageState extends State<QRScannerPage> {
         );
 
         // 🔥 Panggil fungsi controller untuk ambil data
-        detailKendaraanController.getData(code);
+        // detailKendaraanController.getData(code);
 
         // ✅ Tutup dialog loading
         if (context.mounted) Navigator.pop(context);

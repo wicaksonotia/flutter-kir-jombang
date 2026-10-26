@@ -131,22 +131,22 @@ class PendaftaranController extends GetxController {
   }
 
   void getDetailDataKendaraan(valueSearch) async {
-    try {
-      isLoadingDetailKendaraan(true);
-      var result = await RemoteDataSource.getDetailKendaraan(valueSearch!);
-      if (result!.status == 'ok') {
-        resultDataDetailKendaraan.value = result.data!;
-      } else if (result.status == 'error') {
-        Get.snackbar('Notification', 'Data kendaraan belum terdaftar.',
-            icon: const Icon(Icons.error), snackPosition: SnackPosition.BOTTOM);
-      }
-    } catch (error) {
-      Get.snackbar('Notification', 'Data kendaraan belum terdaftar.',
-          icon: const Icon(Icons.error), snackPosition: SnackPosition.BOTTOM);
-      isLoadingDetailKendaraan(false);
-    } finally {
-      isLoadingDetailKendaraan(false);
-    }
+    // try {
+    //   isLoadingDetailKendaraan(true);
+    //   var result = await RemoteDataSource.getDetailKendaraan(valueSearch!);
+    //   if (result!.status == 'ok') {
+    //     resultDataDetailKendaraan.value = result.data!;
+    //   } else if (result.status == 'error') {
+    //     Get.snackbar('Notification', 'Data kendaraan belum terdaftar.',
+    //         icon: const Icon(Icons.error), snackPosition: SnackPosition.BOTTOM);
+    //   }
+    // } catch (error) {
+    //   Get.snackbar('Notification', 'Data kendaraan belum terdaftar.',
+    //       icon: const Icon(Icons.error), snackPosition: SnackPosition.BOTTOM);
+    //   isLoadingDetailKendaraan(false);
+    // } finally {
+    //   isLoadingDetailKendaraan(false);
+    // }
   }
 
   // PILIH TANGGAL UJI

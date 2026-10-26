@@ -1,26 +1,41 @@
 class DetailKendaraanModel {
-  String? status;
+  dynamic status;
   String? message;
   DataDetailKendaraan? data;
 
-  DetailKendaraanModel({this.status, this.message, this.data});
+  DetailKendaraanModel({
+    this.status,
+    this.message,
+    this.data,
+  });
 
   DetailKendaraanModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     message = json['message'];
+
     data = json['data'] != null
-        ? DataDetailKendaraan.fromJson(json['data'])
+        ? DataDetailKendaraan.fromJson(
+            Map<String, dynamic>.from(json['data']),
+          )
         : null;
   }
 
+  /// Memeriksa apakah respons API berhasil.
+  bool get isSuccess {
+    return status == true || status == 'ok' || status == 'success';
+  }
+
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['status'] = status;
-    data['message'] = message;
-    if (this.data != null) {
-      data['data'] = this.data!.toJson();
+    final Map<String, dynamic> json = <String, dynamic>{};
+
+    json['status'] = status;
+    json['message'] = message;
+
+    if (data != null) {
+      json['data'] = data!.toJson();
     }
-    return data;
+
+    return json;
   }
 }
 
@@ -60,115 +75,116 @@ class DataDetailKendaraan {
   String? imgKanan;
   String? imgKiri;
 
-  DataDetailKendaraan(
-      {this.noUji,
-      this.noKendaraan,
-      this.merk,
-      this.tipe,
-      this.noChasis,
-      this.noMesin,
-      this.pemilik,
-      this.jnsKend,
-      this.matiUji,
-      this.namaKomersil,
-      this.jenisKaroseri,
-      this.bahanUtama,
-      this.panjang,
-      this.lebar,
-      this.tinggi,
-      this.dimpanjang,
-      this.dimlebar,
-      this.dimtinggi,
-      this.jbb,
-      this.orang,
-      this.barang,
-      this.sb1,
-      this.sb2,
-      this.sb3,
-      this.sb4,
-      this.sb5,
-      this.totalSb,
-      this.jbi,
-      this.mst,
-      this.kondisi,
-      this.imgDepan,
-      this.imgBelakang,
-      this.imgKanan,
-      this.imgKiri});
+  DataDetailKendaraan({
+    this.noUji,
+    this.noKendaraan,
+    this.merk,
+    this.tipe,
+    this.noChasis,
+    this.noMesin,
+    this.pemilik,
+    this.jnsKend,
+    this.matiUji,
+    this.namaKomersil,
+    this.jenisKaroseri,
+    this.bahanUtama,
+    this.panjang,
+    this.lebar,
+    this.tinggi,
+    this.dimpanjang,
+    this.dimlebar,
+    this.dimtinggi,
+    this.jbb,
+    this.orang,
+    this.barang,
+    this.sb1,
+    this.sb2,
+    this.sb3,
+    this.sb4,
+    this.sb5,
+    this.totalSb,
+    this.jbi,
+    this.mst,
+    this.kondisi,
+    this.imgDepan,
+    this.imgBelakang,
+    this.imgKanan,
+    this.imgKiri,
+  });
 
   DataDetailKendaraan.fromJson(Map<String, dynamic> json) {
-    noUji = json['no_uji'];
-    noKendaraan = json['no_kendaraan'];
-    merk = json['merk'];
-    tipe = json['tipe'];
-    noChasis = json['no_chasis'];
-    noMesin = json['no_mesin'];
-    pemilik = json['pemilik'];
-    jnsKend = json['jns_kend'];
-    matiUji = json['mati_uji'];
-    namaKomersil = json['nama_komersil'];
-    jenisKaroseri = json['jenis_karoseri'];
-    bahanUtama = json['bahan_utama'];
-    panjang = json['panjang'];
-    lebar = json['lebar'];
-    tinggi = json['tinggi'];
-    dimpanjang = json['dimpanjang'];
-    dimlebar = json['dimlebar'];
-    dimtinggi = json['dimtinggi'];
-    jbb = json['jbb'];
-    orang = json['orang'];
-    barang = json['barang'];
-    sb1 = json['sb1'];
-    sb2 = json['sb2'];
-    sb3 = json['sb3'];
-    sb4 = json['sb4'];
-    sb5 = json['sb5'];
-    totalSb = json['total_sb'];
-    jbi = json['jbi'];
-    mst = json['mst'];
-    kondisi = json['kondisi'];
-    imgDepan = json['img_depan'];
-    imgBelakang = json['img_belakang'];
-    imgKanan = json['img_kanan'];
-    imgKiri = json['img_kiri'];
+    noUji = json['no_uji']?.toString();
+    noKendaraan = json['no_kendaraan']?.toString();
+    merk = json['merk']?.toString();
+    tipe = json['tipe']?.toString();
+    noChasis = json['no_chasis']?.toString();
+    noMesin = json['no_mesin']?.toString();
+    pemilik = json['pemilik']?.toString();
+    jnsKend = json['jns_kend']?.toString();
+    matiUji = json['mati_uji']?.toString();
+    namaKomersil = json['nama_komersil']?.toString();
+    jenisKaroseri = json['jenis_karoseri']?.toString();
+    bahanUtama = json['bahan_utama']?.toString();
+    panjang = json['panjang']?.toString();
+    lebar = json['lebar']?.toString();
+    tinggi = json['tinggi']?.toString();
+    dimpanjang = json['dimpanjang']?.toString();
+    dimlebar = json['dimlebar']?.toString();
+    dimtinggi = json['dimtinggi']?.toString();
+    jbb = json['jbb']?.toString();
+    orang = json['orang']?.toString();
+    barang = json['barang']?.toString();
+    sb1 = json['sb1']?.toString();
+    sb2 = json['sb2']?.toString();
+    sb3 = json['sb3']?.toString();
+    sb4 = json['sb4']?.toString();
+    sb5 = json['sb5']?.toString();
+    totalSb = json['total_sb']?.toString();
+    jbi = json['jbi']?.toString();
+    mst = json['mst']?.toString();
+    kondisi = json['kondisi']?.toString();
+    imgDepan = json['img_depan']?.toString();
+    imgBelakang = json['img_belakang']?.toString();
+    imgKanan = json['img_kanan']?.toString();
+    imgKiri = json['img_kiri']?.toString();
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['no_uji'] = noUji;
-    data['no_kendaraan'] = noKendaraan;
-    data['merk'] = merk;
-    data['tipe'] = tipe;
-    data['no_chasis'] = noChasis;
-    data['no_mesin'] = noMesin;
-    data['pemilik'] = pemilik;
-    data['jns_kend'] = jnsKend;
-    data['mati_uji'] = matiUji;
-    data['nama_komersil'] = namaKomersil;
-    data['jenis_karoseri'] = jenisKaroseri;
-    data['bahan_utama'] = bahanUtama;
-    data['panjang'] = panjang;
-    data['lebar'] = lebar;
-    data['tinggi'] = tinggi;
-    data['dimpanjang'] = dimpanjang;
-    data['dimlebar'] = dimlebar;
-    data['dimtinggi'] = dimtinggi;
-    data['jbb'] = jbb;
-    data['orang'] = orang;
-    data['barang'] = barang;
-    data['sb1'] = sb1;
-    data['sb2'] = sb2;
-    data['sb3'] = sb3;
-    data['sb4'] = sb4;
-    data['sb5'] = sb5;
-    data['total_sb'] = totalSb;
-    data['jbi'] = jbi;
-    data['mst'] = mst;
-    data['kondisi'] = kondisi;
-    data['img_depan'] = imgDepan;
-    data['img_belakang'] = imgBelakang;
-    data['img_kanan'] = imgKanan;
-    data['img_kiri'] = imgKiri;
-    return data;
+    return {
+      'no_uji': noUji,
+      'no_kendaraan': noKendaraan,
+      'merk': merk,
+      'tipe': tipe,
+      'no_chasis': noChasis,
+      'no_mesin': noMesin,
+      'pemilik': pemilik,
+      'jns_kend': jnsKend,
+      'mati_uji': matiUji,
+      'nama_komersil': namaKomersil,
+      'jenis_karoseri': jenisKaroseri,
+      'bahan_utama': bahanUtama,
+      'panjang': panjang,
+      'lebar': lebar,
+      'tinggi': tinggi,
+      'dimpanjang': dimpanjang,
+      'dimlebar': dimlebar,
+      'dimtinggi': dimtinggi,
+      'jbb': jbb,
+      'orang': orang,
+      'barang': barang,
+      'sb1': sb1,
+      'sb2': sb2,
+      'sb3': sb3,
+      'sb4': sb4,
+      'sb5': sb5,
+      'total_sb': totalSb,
+      'jbi': jbi,
+      'mst': mst,
+      'kondisi': kondisi,
+      'img_depan': imgDepan,
+      'img_belakang': imgBelakang,
+      'img_kanan': imgKanan,
+      'img_kiri': imgKiri,
+    };
   }
 }

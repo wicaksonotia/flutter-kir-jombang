@@ -1,13 +1,10 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
 import 'package:get/get.dart';
+
 import 'package:jombang/controllers/detail_kendaraan_controller.dart';
-import 'package:jombang/pages/cek_data_kendaraan/text_header.dart';
-import 'package:jombang/pages/cek_data_kendaraan/text_left.dart';
-import 'package:jombang/pages/cek_data_kendaraan/text_right.dart';
-import 'package:jombang/utils/containers/box_container.dart';
-import 'package:jombang/utils/sizes.dart';
+import 'package:jombang/pages/cek_data_kendaraan/cek_data/widgets/dimensi_kendaraan_section.dart';
+import 'package:jombang/pages/cek_data_kendaraan/cek_data/widgets/identitas_kendaraan_section.dart';
+import 'package:jombang/utils/colors.dart';
 
 class ResultCekData extends StatelessWidget {
   const ResultCekData({super.key});
@@ -19,341 +16,147 @@ class ResultCekData extends StatelessWidget {
 
     return Obx(() {
       if (controller.isLoadingDetailKendaraan.value) {
-        return Container(
-          margin: const EdgeInsets.only(top: 10),
-          child: const Center(
-            child: CircularProgressIndicator(),
-          ),
-        );
-      } else {
-        return SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 10),
-          child: Column(
-            children: [
-              // ==========================
-              // IDENTITAS KENDARAAN
-              // ==========================
-              BoxContainer(
-                padding: const EdgeInsets.all(10),
-                radius: 5,
-                showBorder: true,
-                borderColor: Colors.grey.shade200,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const TextHeader(
-                      nama: 'Identitas Kendaraan',
-                    ),
-                    const Gap(10),
-                    Row(
-                      children: [
-                        const TextLeft(nama: 'No Uji'),
-                        const Spacer(),
-                        TextRight(
-                          nama: controller.resultData.value.noUji ?? '-',
-                        )
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        const TextLeft(nama: 'No Kendaraan'),
-                        const Spacer(),
-                        TextRight(
-                          nama: controller.resultData.value.noKendaraan ?? '-',
-                        )
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        const TextLeft(nama: 'Nama Pemilik'),
-                        const Spacer(),
-                        TextRight(
-                          nama: controller.resultData.value.pemilik ?? '-',
-                        )
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        const TextLeft(nama: 'Jenis Kendaraan'),
-                        const Spacer(),
-                        TextRight(
-                          nama: controller.resultData.value.jnsKend ?? '-',
-                        )
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        const TextLeft(nama: 'Nama Komersil'),
-                        const Spacer(),
-                        TextRight(
-                          nama: controller.resultData.value.namaKomersil ?? '-',
-                        )
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        const TextLeft(nama: 'Merk'),
-                        const Spacer(),
-                        TextRight(
-                          nama: controller.resultData.value.merk ?? '-',
-                        )
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        const TextLeft(nama: 'Tipe'),
-                        const Spacer(),
-                        TextRight(
-                          nama: controller.resultData.value.tipe ?? '-',
-                        )
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        const TextLeft(nama: 'No. Chasis'),
-                        const Spacer(),
-                        TextRight(
-                          nama: controller.resultData.value.noChasis ?? '-',
-                        )
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        const TextLeft(nama: 'No. Mesin'),
-                        const Spacer(),
-                        TextRight(
-                          nama: controller.resultData.value.noMesin ?? '-',
-                        )
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-
-              // ==========================
-              // DIMENSI KENDARAAN
-              // ==========================
-              const Gap(10),
-              BoxContainer(
-                padding: const EdgeInsets.all(10),
-                radius: 5,
-                showBorder: true,
-                borderColor: Colors.grey.shade200,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const TextHeader(
-                      nama: 'Dimensi Utama',
-                    ),
-                    const Gap(10),
-                    Row(
-                      children: [
-                        const TextLeft(nama: 'Panjang'),
-                        const Spacer(),
-                        TextRight(
-                          nama: controller.resultData.value.panjang ?? '-',
-                        )
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        const TextLeft(nama: 'Lebar'),
-                        const Spacer(),
-                        TextRight(
-                          nama: controller.resultData.value.lebar ?? '-',
-                        )
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        const TextLeft(nama: 'Tinggi'),
-                        const Spacer(),
-                        TextRight(
-                          nama: controller.resultData.value.tinggi ?? '-',
-                        )
-                      ],
-                    ),
-                    const Gap(10),
-                    const TextHeader(
-                      nama: 'Dimensi Bak Muatan',
-                    ),
-                    const Gap(10),
-                    Row(
-                      children: [
-                        const TextLeft(nama: 'Panjang'),
-                        const Spacer(),
-                        TextRight(
-                          nama: controller.resultData.value.dimpanjang ?? '-',
-                        )
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        const TextLeft(nama: 'Lebar'),
-                        const Spacer(),
-                        TextRight(
-                          nama: controller.resultData.value.dimlebar ?? '-',
-                        )
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        const TextLeft(nama: 'Tinggi'),
-                        const Spacer(),
-                        TextRight(
-                          nama: controller.resultData.value.dimtinggi ?? '-',
-                        )
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-
-              // ==========================
-              // FOTO KENDARAAN
-              // ==========================
-              const Gap(10),
-              BoxContainer(
-                padding: const EdgeInsets.all(10),
-                radius: 5,
-                showBorder: true,
-                borderColor: Colors.grey.shade200,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    RichText(
-                      text: const TextSpan(
-                        text: 'Dokumentasi Foto Terakhir Kendaraan ',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: MySizes.fontSizeMd,
-                            color: Colors.black),
-                        children: [
-                          TextSpan(
-                            text: '*',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, color: Colors.red),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const Gap(10),
-                    Row(
-                      children: [
-                        Container(
-                          width: MediaQuery.of(context).size.width * .43,
-                          height: 100,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            image: DecorationImage(
-                              image: controller.resultData.value.imgDepan ==
-                                          null ||
-                                      controller.resultData.value.imgDepan == ""
-                                  ? const AssetImage(
-                                      'assets/images/no_image.png')
-                                  : MemoryImage(
-                                      const Base64Decoder().convert(controller
-                                          .resultData.value.imgDepan!),
-                                    ),
-                              fit: controller.resultData.value.imgDepan ==
-                                          null ||
-                                      controller.resultData.value.imgDepan == ""
-                                  ? BoxFit.fitHeight
-                                  : BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        Container(
-                          width: MediaQuery.of(context).size.width * .43,
-                          height: 100,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            image: DecorationImage(
-                              image: controller.resultData.value.imgBelakang ==
-                                          null ||
-                                      controller.resultData.value.imgBelakang ==
-                                          ""
-                                  ? const AssetImage(
-                                      'assets/images/no_image.png')
-                                  : MemoryImage(
-                                      const Base64Decoder().convert(controller
-                                          .resultData.value.imgBelakang!),
-                                    ),
-                              fit: controller.resultData.value.imgBelakang ==
-                                          null ||
-                                      controller.resultData.value.imgBelakang ==
-                                          ""
-                                  ? BoxFit.fitHeight
-                                  : BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    const Gap(20),
-                    Row(
-                      children: [
-                        Container(
-                          width: MediaQuery.of(context).size.width * .43,
-                          height: 100,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            image: DecorationImage(
-                              image: controller.resultData.value.imgKanan ==
-                                          null ||
-                                      controller.resultData.value.imgKanan == ""
-                                  ? const AssetImage(
-                                      'assets/images/no_image.png')
-                                  : MemoryImage(
-                                      const Base64Decoder().convert(controller
-                                          .resultData.value.imgKanan!),
-                                    ),
-                              fit: controller.resultData.value.imgKanan ==
-                                          null ||
-                                      controller.resultData.value.imgKanan == ""
-                                  ? BoxFit.fitHeight
-                                  : BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        Container(
-                          width: MediaQuery.of(context).size.width * .43,
-                          height: 100,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            image: DecorationImage(
-                              image: controller.resultData.value.imgKiri ==
-                                          null ||
-                                      controller.resultData.value.imgKiri == ""
-                                  ? const AssetImage(
-                                      'assets/images/no_image.png')
-                                  : MemoryImage(
-                                      const Base64Decoder().convert(
-                                          controller.resultData.value.imgKiri!),
-                                    ),
-                              fit: controller.resultData.value.imgKiri ==
-                                          null ||
-                                      controller.resultData.value.imgKiri == ""
-                                  ? BoxFit.fitHeight
-                                  : BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        );
+        return const _LoadingState();
       }
+
+      if (!controller.hasResult.value) {
+        return const _EmptyState();
+      }
+
+      final data = controller.resultData.value;
+
+      return SingleChildScrollView(
+        padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
+        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Padding(
+              padding: EdgeInsets.only(bottom: 14),
+              child: Row(
+                children: [
+                  Icon(
+                    Icons.fact_check_outlined,
+                    size: 21,
+                    color: MyColors.primary,
+                  ),
+                  SizedBox(width: 8),
+                  Text(
+                    'Hasil Pencarian',
+                    style: TextStyle(
+                      fontSize: 17,
+                      fontWeight: FontWeight.w700,
+                      color: Color(0xFF1E293B),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            IdentitasKendaraanSection(
+              noUji: data.noUji ?? '-',
+              noKendaraan: data.noKendaraan ?? '-',
+              pemilik: data.pemilik ?? '-',
+              jenisKendaraan: data.jnsKend ?? '-',
+              namaKomersil: data.namaKomersil ?? '-',
+              merk: data.merk ?? '-',
+              tipe: data.tipe ?? '-',
+              noChasis: data.noChasis ?? '-',
+              noMesin: data.noMesin ?? '-',
+            ),
+            const SizedBox(height: 14),
+            DimensiKendaraanSection(
+              panjang: data.panjang ?? '-',
+              lebar: data.lebar ?? '-',
+              tinggi: data.tinggi ?? '-',
+              dimPanjang: data.dimpanjang ?? '-',
+              dimLebar: data.dimlebar ?? '-',
+              dimTinggi: data.dimtinggi ?? '-',
+            ),
+          ],
+        ),
+      );
     });
+  }
+}
+
+class _LoadingState extends StatelessWidget {
+  const _LoadingState();
+
+  @override
+  Widget build(BuildContext context) {
+    return const Center(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          CircularProgressIndicator(
+            color: MyColors.primary,
+            strokeWidth: 3,
+          ),
+          SizedBox(height: 16),
+          Text(
+            'Sedang mencari data kendaraan...',
+            style: TextStyle(
+              fontSize: 13,
+              color: Color(0xFF64748B),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _EmptyState extends StatelessWidget {
+  const _EmptyState();
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: SingleChildScrollView(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 28,
+          vertical: 24,
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              width: 88,
+              height: 88,
+              decoration: BoxDecoration(
+                color: MyColors.primary.withValues(alpha: 0.08),
+                shape: BoxShape.circle,
+              ),
+              child: const Icon(
+                Icons.directions_car_outlined,
+                size: 42,
+                color: MyColors.primary,
+              ),
+            ),
+            const SizedBox(height: 20),
+            const Text(
+              'Informasi Kendaraan',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w700,
+                color: Color(0xFF1E293B),
+              ),
+            ),
+            const SizedBox(height: 8),
+            const Text(
+              'Masukkan Nomor Uji dan 5 digit terakhir Nomor Mesin, '
+              'lalu tekan tombol cari untuk melihat detail kendaraan.',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 13,
+                height: 1.6,
+                color: Color(0xFF64748B),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

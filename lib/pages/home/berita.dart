@@ -120,7 +120,6 @@ class _BeritaCard extends StatelessWidget {
     final videoId = berita.youtubeId;
     final imageBytes = berita.imageBytes;
     final hasYoutube = videoId != null;
-    final hasImage = imageBytes != null && imageBytes.isNotEmpty;
 
     return Card(
       margin: EdgeInsets.zero,
