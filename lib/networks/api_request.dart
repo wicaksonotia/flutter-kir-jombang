@@ -1,18 +1,19 @@
 import 'dart:async';
 import 'package:dio/dio.dart';
-import 'package:sampang/models/berita_model.dart';
-import 'package:sampang/models/carousel_model.dart';
-import 'package:sampang/models/hasil_uji_model.dart';
-import 'package:sampang/models/jenis_uji_model.dart';
-import 'package:sampang/models/kendaraan_model.dart';
-import 'package:sampang/models/menu_model.dart';
-import 'package:sampang/models/pendaftaran_model.dart';
-import 'package:sampang/models/persyaratan_model.dart';
-import 'package:sampang/models/riwayat_detail_model.dart';
-import 'package:sampang/models/riwayat_model.dart';
-import 'package:sampang/models/tidak_lulus_model.dart';
-import 'package:sampang/models/uji_hari_ini_model.dart';
-import 'package:sampang/networks/api_endpoints.dart';
+import 'package:flutter/foundation.dart';
+import 'package:jombang/models/berita_model.dart';
+import 'package:jombang/models/carousel_model.dart';
+import 'package:jombang/models/hasil_uji_model.dart';
+import 'package:jombang/models/jenis_uji_model.dart';
+import 'package:jombang/models/kendaraan_model.dart';
+import 'package:jombang/models/menu_model.dart';
+import 'package:jombang/models/pendaftaran_model.dart';
+import 'package:jombang/models/persyaratan_model.dart';
+import 'package:jombang/models/riwayat_detail_model.dart';
+import 'package:jombang/models/riwayat_model.dart';
+import 'package:jombang/models/tidak_lulus_model.dart';
+import 'package:jombang/models/uji_hari_ini_model.dart';
+import 'package:jombang/networks/api_endpoints.dart';
 
 class RemoteDataSource {
   static Future<bool> login(FormData data) async {
@@ -63,17 +64,47 @@ class RemoteDataSource {
   }
 
   // MENU
+
   static Future<List<MenuModel>?> getMenu() async {
     try {
-      var url = ApiEndPoints.baseUrl + ApiEndPoints.authEndpoints.menu;
+      final url = ApiEndPoints.baseUrl + ApiEndPoints.authEndpoints.menu;
+
       final response = await Dio().get(url);
-      if (response.statusCode == 200) {
-        List<dynamic> jsonData = response.data;
-        return jsonData.map((e) => MenuModel.fromJson(e)).toList();
+
+      if (response.statusCode != 200) {
+        return null;
       }
-      return null;
+
+      final responseData = response.data;
+
+      if (responseData is! Map<String, dynamic>) {
+        throw const FormatException(
+          'Format respons menu tidak valid.',
+        );
+      }
+
+      if (responseData['status'] != 'ok') {
+        return null;
+      }
+
+      final jsonData = responseData['data'];
+
+      if (jsonData is! List) {
+        throw const FormatException(
+          'Data menu bukan berupa list.',
+        );
+      }
+
+      return jsonData
+          .whereType<Map<String, dynamic>>()
+          .map(MenuModel.fromJson)
+          .toList();
+    } on DioException catch (e) {
+      debugPrint('Gagal mengambil menu: ${e.message}');
+      rethrow;
     } catch (e) {
-      throw Exception(e.toString());
+      debugPrint('Error parsing menu: $e');
+      rethrow;
     }
   }
 

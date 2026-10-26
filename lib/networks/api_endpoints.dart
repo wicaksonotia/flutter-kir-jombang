@@ -1,22 +1,22 @@
 class ApiEndPoints {
-  static const String baseUrl = 'http://103.146.132.198/apiandroid/';
+  static const String baseUrl = 'http://192.168.1.9:8000/api/v1/';
   static _AuthEndPoints authEndpoints = _AuthEndPoints();
 }
 
 class _AuthEndPoints {
   // final String registerEmail = 'authaccount/registration';
   final String login = 'login';
-  final String menu = 'kirmenu';
-  final String slider = 'kirslider';
-  final String berita = 'kirberita';
-  final String jenisuji = 'kirjenisuji';
-  final String detailpersyaratan = 'kirdetailpersyaratan';
-  final String detailkendaraan = 'kirdetailkendaraan';
-  final String hasilujikendaraan = 'kirhasiluji';
-  final String keterangantl = 'kirketerangantidaklulus';
-  final String riwayatkendaraan = 'kirriwayatkendaraan';
-  final String detailriwayatkendaraan = 'kirdetailriwayat';
+  final String menu = 'menu';
+  final String slider = 'slider';
+  final String berita = 'berita';
+  final String jenisuji = 'jenisujipersyaratan';
+  final String detailpersyaratan = 'detailpersyaratan';
+  final String detailkendaraan = 'kendaraan/detail';
+  final String hasilujikendaraan = 'kendaraan/hasil-uji';
+  final String keterangantl = 'kendaraan/keterangan-tidak-lulus';
+  final String riwayatkendaraan = 'kendaraan/riwayat';
+  final String detailriwayatkendaraan = 'kendaraan/riwayat/detail';
   final String daftarretribusi = 'kircreateretribusi';
   final String listretribusi = 'kirlistretribusi';
-  final String ujihariini = 'kirujihariini';
+  final String ujihariini = 'uji/total-hari-ini';
 }

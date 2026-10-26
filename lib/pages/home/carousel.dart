@@ -5,11 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
-import 'package:sampang/utils/colors.dart';
-import 'package:sampang/controllers/carousel_controller.dart';
+import 'package:jombang/utils/colors.dart';
+import 'package:jombang/controllers/carousel_controller.dart';
 
 class CarouselContainer extends StatelessWidget {
-  CarouselContainer({
+  const CarouselContainer({
     super.key,
     required this.carouselController,
   });

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
-import 'package:sampang/controllers/jenis_uji_controller.dart';
-import 'package:sampang/utils/containers/app_bar_header.dart';
-import 'package:sampang/pages/persyaratan/background_header.dart';
-import 'package:sampang/pages/persyaratan/card_categories.dart';
+import 'package:jombang/controllers/jenis_uji_controller.dart';
+import 'package:jombang/utils/containers/app_bar_header.dart';
+import 'package:jombang/pages/persyaratan/background_header.dart';
+import 'package:jombang/pages/persyaratan/card_categories.dart';
 
 class PersyaratanPage extends StatefulWidget {
   const PersyaratanPage({super.key});
@@ -19,8 +19,8 @@ class _PersyaratanPageState extends State<PersyaratanPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(50),
+      appBar: const PreferredSize(
+        preferredSize: Size.fromHeight(50),
         child: AppbarHeader(
           header: 'Persyaratan Uji Kendaraan',
         ),

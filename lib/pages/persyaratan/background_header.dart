@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sampang/utils/colors.dart';
+import 'package:jombang/utils/colors.dart';
 
 class BackgroundHeader extends StatelessWidget {
   const BackgroundHeader({super.key});
@@ -29,7 +29,7 @@ class BackgroundHeader extends StatelessWidget {
             width: 200,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(100),
-              color: Colors.white.withOpacity(0.2),
+              color: Colors.white.withValues(alpha: 0.2),
             ),
           ),
         ),
@@ -42,7 +42,7 @@ class BackgroundHeader extends StatelessWidget {
             width: 120,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(100),
-              color: Colors.white.withOpacity(0.2),
+              color: Colors.white.withValues(alpha: 0.2),
             ),
           ),
         ),

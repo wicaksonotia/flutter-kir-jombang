@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
-import 'package:sampang/controllers/detail_persyaratan_controller.dart';
-import 'package:sampang/controllers/jenis_uji_controller.dart';
-import 'package:sampang/utils/containers/box_container.dart';
-import 'package:sampang/utils/sizes.dart';
+import 'package:jombang/controllers/detail_persyaratan_controller.dart';
+import 'package:jombang/controllers/jenis_uji_controller.dart';
+import 'package:jombang/utils/containers/box_container.dart';
+import 'package:jombang/utils/sizes.dart';
 
 class CardCategories extends StatelessWidget {
   CardCategories({
@@ -49,7 +49,7 @@ class CardCategories extends StatelessWidget {
                   width: 170,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(100),
-                    color: Colors.white.withOpacity(0.2),
+                    color: Colors.white.withValues(alpha: 0.2),
                   ),
                 ),
               ),

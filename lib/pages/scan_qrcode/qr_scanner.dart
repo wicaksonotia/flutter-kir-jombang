@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:qr_scanner_overlay/qr_scanner_overlay.dart';
-import 'package:sampang/controllers/detail_kendaraan_controller.dart';
+import 'package:jombang/controllers/detail_kendaraan_controller.dart';
 
 class QRScannerPage extends StatefulWidget {
   const QRScannerPage({super.key});
@@ -99,7 +99,7 @@ class _QRScannerPageState extends State<QRScannerPage> {
 
           /// Overlay area scanner
           QRScannerOverlay(
-            overlayColor: Colors.black.withOpacity(0.6),
+            overlayColor: Colors.black.withValues(alpha: 0.6),
             borderColor: Colors.greenAccent,
             borderRadius: 12,
             borderStrokeWidth: 8,

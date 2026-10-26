@@ -1,18 +1,31 @@
 class MenuModel {
-  String? nama;
-  String? directlink;
+  final String nama;
+  final String directlink;
+  final bool status;
+  final int sorting;
 
-  MenuModel({this.nama, this.directlink});
+  const MenuModel({
+    required this.nama,
+    required this.directlink,
+    required this.status,
+    required this.sorting,
+  });
 
-  MenuModel.fromJson(Map<String, dynamic> json) {
-    nama = json['nama'];
-    directlink = json['directlink'];
+  factory MenuModel.fromJson(Map<String, dynamic> json) {
+    return MenuModel(
+      nama: json['nama']?.toString() ?? '',
+      directlink: json['directlink']?.toString() ?? '',
+      status: json['status'] == true,
+      sorting: int.tryParse(json['sorting']?.toString() ?? '') ?? 0,
+    );
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['nama'] = nama;
-    data['directlink'] = directlink;
-    return data;
+    return {
+      'nama': nama,
+      'directlink': directlink,
+      'status': status,
+      'sorting': sorting,
+    };
   }
 }

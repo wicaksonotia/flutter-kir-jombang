@@ -6,12 +6,12 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:sampang/controllers/berita_controller.dart';
-import 'package:sampang/utils/containers/app_bar_header.dart';
-import 'package:sampang/pages/persyaratan/background_header.dart';
-import 'package:sampang/utils/colors.dart';
-import 'package:sampang/utils/containers/box_container.dart';
-import 'package:sampang/utils/sizes.dart';
+import 'package:jombang/controllers/berita_controller.dart';
+import 'package:jombang/utils/containers/app_bar_header.dart';
+import 'package:jombang/pages/persyaratan/background_header.dart';
+import 'package:jombang/utils/colors.dart';
+import 'package:jombang/utils/containers/box_container.dart';
+import 'package:jombang/utils/sizes.dart';
 
 class InformasiPage extends StatefulWidget {
   const InformasiPage({super.key});
@@ -26,8 +26,8 @@ class _InformasiPageState extends State<InformasiPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(50),
+      appBar: const PreferredSize(
+        preferredSize: Size.fromHeight(50),
         child: AppbarHeader(
           header: 'Informasi',
         ),

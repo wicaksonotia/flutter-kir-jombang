@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sampang/networks/api_request.dart';
-import 'package:sampang/models/carousel_model.dart';
+import 'package:jombang/networks/api_request.dart';
+import 'package:jombang/models/carousel_model.dart';
 
 class CarouselBannerController extends GetxController {
   var carouselItems = <CarouselModel>[].obs;

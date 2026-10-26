@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sampang/utils/sizes.dart';
+import 'package:jombang/utils/sizes.dart';
 
 class BoxContainer extends StatelessWidget {
   const BoxContainer(
@@ -37,7 +37,7 @@ class BoxContainer extends StatelessWidget {
         boxShadow: [
           shadow
               ? BoxShadow(
-                  color: Colors.grey.withOpacity(0.3),
+                  color: Colors.grey.withValues(alpha: 0.3),
                   spreadRadius: 2,
                   blurRadius: 7,
                   // offset: Offset(0, 3), // changes position of shadow

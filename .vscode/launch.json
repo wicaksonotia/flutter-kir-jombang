@@ -5,18 +5,18 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "sampang",
+      "name": "jombang",
       "request": "launch",
       "type": "dart"
     },
     {
-      "name": "sampang (profile mode)",
+      "name": "jombang (profile mode)",
       "request": "launch",
       "type": "dart",
       "flutterMode": "profile"
     },
     {
-      "name": "sampang (release mode)",
+      "name": "jombang (release mode)",
       "request": "launch",
       "type": "dart",
       "flutterMode": "release"

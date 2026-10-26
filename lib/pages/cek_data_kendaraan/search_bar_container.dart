@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sampang/controllers/detail_kendaraan_controller.dart';
-import 'package:sampang/controllers/hasil_uji_controller.dart';
-import 'package:sampang/controllers/riwayat_kendaraan_controller.dart';
-import 'package:sampang/controllers/riwayat_pendaftaran_controller.dart';
-import 'package:sampang/utils/colors.dart';
-import 'package:sampang/utils/widgets/text_field_widget.dart';
-import 'package:sampang/controllers/search_bar_controller.dart';
+import 'package:jombang/controllers/detail_kendaraan_controller.dart';
+import 'package:jombang/controllers/hasil_uji_controller.dart';
+import 'package:jombang/controllers/riwayat_kendaraan_controller.dart';
+import 'package:jombang/controllers/riwayat_pendaftaran_controller.dart';
+import 'package:jombang/utils/colors.dart';
+import 'package:jombang/utils/widgets/text_field_widget.dart';
+import 'package:jombang/controllers/search_bar_controller.dart';
 
 class SearchBarContainer extends StatelessWidget {
   final String menu;
@@ -32,7 +32,7 @@ class SearchBarContainer extends StatelessWidget {
               decoration: BoxDecoration(
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.grey.withOpacity(0.3),
+                    color: Colors.grey.withValues(alpha: 0.3),
                     spreadRadius: 2,
                     blurRadius: 7,
                   ),

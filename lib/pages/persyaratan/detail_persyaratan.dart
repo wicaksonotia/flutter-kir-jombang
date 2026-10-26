@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
-import 'package:sampang/controllers/detail_persyaratan_controller.dart';
-import 'package:sampang/pages/persyaratan/background_header.dart';
+import 'package:jombang/controllers/detail_persyaratan_controller.dart';
+import 'package:jombang/pages/cek_data_kendaraan/background_header.dart';
 
 class DetailPersyaratanPage extends StatefulWidget {
   const DetailPersyaratanPage({super.key});
@@ -61,7 +61,9 @@ class _DetailPersyaratanPageState extends State<DetailPersyaratanPage> {
         removeTop: true,
         child: Column(
           children: [
-            const BackgroundHeader(),
+            const BackgroundHeader(
+              menu: '',
+            ),
             SizedBox(
               height: MediaQuery.of(context).size.height * .79,
               child: Obx(

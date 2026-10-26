@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:sampang/utils/containers/app_bar_header.dart';
-import 'package:sampang/pages/cek_data_kendaraan/background_header.dart';
-import 'package:sampang/pages/cek_data_kendaraan/cek_data/result_cek_data.dart';
+import 'package:jombang/utils/containers/app_bar_header.dart';
+import 'package:jombang/pages/cek_data_kendaraan/background_header.dart';
+import 'package:jombang/pages/cek_data_kendaraan/cek_data/result_cek_data.dart';
 
 class HomeCekData extends StatefulWidget {
   const HomeCekData({super.key});
@@ -16,8 +16,8 @@ class _HomeCekDataState extends State<HomeCekData> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       extendBodyBehindAppBar: true,
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(50),
+      appBar: const PreferredSize(
+        preferredSize: Size.fromHeight(50),
         child: AppbarHeader(
           header: 'Cek Data Kendaraan',
         ),

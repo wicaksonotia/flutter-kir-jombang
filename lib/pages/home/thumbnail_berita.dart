@@ -87,7 +87,7 @@ class _ThumbnailBeritaState extends State<ThumbnailBerita> {
       _title = null;
     });
 
-    final url =
+    const url =
         'https://www.youtube.com/watch?v=gBg0qyuK1EQ&list=RDgBg0qyuK1EQ&start_radio=1';
 
     try {

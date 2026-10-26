@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
-import 'package:sampang/controllers/uji_hari_ini_controller.dart';
-import 'package:sampang/utils/containers/box_container.dart';
-import 'package:sampang/utils/sizes.dart';
+import 'package:jombang/controllers/uji_hari_ini_controller.dart';
+import 'package:jombang/utils/containers/box_container.dart';
+import 'package:jombang/utils/sizes.dart';
 
 class Info extends StatelessWidget {
-  Info({
+  const Info({
     super.key,
     required this.ujiHariIniController,
   });
@@ -44,7 +44,7 @@ class Info extends StatelessWidget {
                           width: 120,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(100),
-                            color: Colors.amber.withOpacity(0.2),
+                            color: Colors.amber.withValues(alpha: 0.2),
                           ),
                         ),
                       ),
@@ -124,7 +124,7 @@ class Info extends StatelessWidget {
                           width: 120,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(100),
-                            color: Colors.blue.withOpacity(0.2),
+                            color: Colors.blue.withValues(alpha: 0.2),
                           ),
                         ),
                       ),
@@ -204,7 +204,7 @@ class Info extends StatelessWidget {
                           width: 120,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(100),
-                            color: Colors.green.withOpacity(0.2),
+                            color: Colors.green.withValues(alpha: 0.2),
                           ),
                         ),
                       ),
@@ -284,7 +284,7 @@ class Info extends StatelessWidget {
                           width: 120,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(100),
-                            color: Colors.red.withOpacity(0.2),
+                            color: Colors.red.withValues(alpha: 0.2),
                           ),
                         ),
                       ),

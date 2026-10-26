@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
-import 'package:sampang/controllers/berita_controller.dart';
-import 'package:sampang/controllers/carousel_controller.dart';
-import 'package:sampang/controllers/login_controller.dart';
-import 'package:sampang/controllers/uji_hari_ini_controller.dart';
-import 'package:sampang/pages/home/berita.dart';
-import 'package:sampang/pages/home/info.dart';
-import 'package:sampang/pages/home/see_all_container.dart';
-// import 'package:sampang/pages/home/thumbnail_berita.dart';
-import 'package:sampang/utils/colors.dart';
-import 'package:sampang/pages/home/menu.dart';
-import 'package:sampang/utils/containers/box_container.dart';
-import 'package:sampang/pages/home/carousel.dart';
-import 'package:sampang/utils/sizes.dart';
+import 'package:jombang/controllers/berita_controller.dart';
+import 'package:jombang/controllers/carousel_controller.dart';
+import 'package:jombang/controllers/login_controller.dart';
+import 'package:jombang/controllers/uji_hari_ini_controller.dart';
+import 'package:jombang/pages/home/berita.dart';
+import 'package:jombang/pages/home/info.dart';
+import 'package:jombang/pages/home/see_all_container.dart';
+// import 'package:jombang/pages/home/thumbnail_berita.dart';
+import 'package:jombang/utils/colors.dart';
+import 'package:jombang/pages/home/menu.dart';
+import 'package:jombang/utils/containers/box_container.dart';
+import 'package:jombang/pages/home/carousel.dart';
+import 'package:jombang/utils/sizes.dart';
 
 // ignore: must_be_immutable
 class HomePage extends StatelessWidget {
@@ -65,7 +65,7 @@ class HomePage extends StatelessWidget {
                         width: 200,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(100),
-                          color: Colors.white.withOpacity(0.2),
+                          color: Colors.white.withValues(alpha: 0.2),
                         ),
                       ),
                     ),
@@ -78,7 +78,7 @@ class HomePage extends StatelessWidget {
                         width: 120,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(100),
-                          color: Colors.white.withOpacity(0.2),
+                          color: Colors.white.withValues(alpha: 0.2),
                         ),
                       ),
                     ),
