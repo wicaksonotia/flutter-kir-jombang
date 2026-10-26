@@ -45,7 +45,7 @@ class Menu extends StatelessWidget {
                     //     Get.toNamed('/login');
                     //   }
                     // } else {
-                    Get.toNamed(menuController.menuItem[index].directlink!);
+                    Get.toNamed(menuController.menuItem[index].directlink);
                     // }
                   },
                   child: Column(
@@ -66,7 +66,7 @@ class Menu extends StatelessWidget {
                       ),
                       const Gap(3),
                       Text(
-                        menuController.menuItem[index].nama!,
+                        menuController.menuItem[index].nama,
                         style: const TextStyle(fontSize: MySizes.fontSizeXsm),
                         textAlign: TextAlign.center,
                       ),

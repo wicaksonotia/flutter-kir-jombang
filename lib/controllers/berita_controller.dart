@@ -1,30 +1,40 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:jombang/models/berita_model.dart';
 import 'package:jombang/networks/api_request.dart';
 
 class BeritaController extends GetxController {
-  var resultData = <BeritaModel>[].obs;
-  var isLoading = true.obs;
+  final resultData = <BeritaModel>[].obs;
+  final isLoading = false.obs;
+  final hasError = false.obs;
 
   @override
   void onInit() {
-    fetchData();
     super.onInit();
+    fetchData();
   }
 
-  void fetchData() async {
+  Future<void> fetchData() async {
     try {
-      isLoading(true);
-      var result = await RemoteDataSource.getBerita();
-      if (result != null) {
-        resultData.assignAll(result);
+      isLoading.value = true;
+      hasError.value = false;
+
+      final result = await RemoteDataSource.getBerita();
+
+      if (result == null) {
+        resultData.clear();
+        hasError.value = true;
+        return;
       }
-    } catch (error) {
-      Get.snackbar('Error', "Silakan cek koneksi internet anda.",
-          icon: const Icon(Icons.error), snackPosition: SnackPosition.BOTTOM);
+
+      resultData.assignAll(result);
+    } catch (error, stackTrace) {
+      hasError.value = true;
+
+      debugPrint('Gagal memuat berita: $error');
+      debugPrintStack(stackTrace: stackTrace);
     } finally {
-      isLoading(false);
+      isLoading.value = false;
     }
   }
 }

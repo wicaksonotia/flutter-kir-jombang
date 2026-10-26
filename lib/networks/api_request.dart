@@ -50,16 +50,49 @@ class RemoteDataSource {
   // SLIDER
   static Future<List<CarouselModel>?> getSlider() async {
     try {
-      var url = ApiEndPoints.baseUrl + ApiEndPoints.authEndpoints.slider;
+      final url = ApiEndPoints.baseUrl + ApiEndPoints.authEndpoints.slider;
+
       final response = await Dio().get(url);
-      if (response.statusCode == 200) {
-        List<dynamic> jsonData = response.data;
-        // print(jsonData);
-        return jsonData.map((e) => CarouselModel.fromJson(e)).toList();
+
+      if (response.statusCode != 200) {
+        return null;
       }
-      return null;
+
+      if (response.data is! Map) {
+        throw const FormatException(
+          'Format respons slider tidak valid.',
+        );
+      }
+
+      final responseData = Map<String, dynamic>.from(response.data);
+
+      if (responseData['status'] != 'ok') {
+        return null;
+      }
+
+      final jsonData = responseData['data'];
+
+      if (jsonData is! List) {
+        throw const FormatException(
+          'Data slider bukan berupa list.',
+        );
+      }
+
+      return jsonData
+          .whereType<Map>()
+          .map(
+            (item) => CarouselModel.fromJson(
+              Map<String, dynamic>.from(item),
+            ),
+          )
+          .where((item) => item.status && item.gambar != null)
+          .toList();
+    } on DioException catch (e) {
+      debugPrint('Gagal mengambil slider: ${e.message}');
+      rethrow;
     } catch (e) {
-      throw Exception(e.toString());
+      debugPrint('Error parsing slider: $e');
+      rethrow;
     }
   }
 
@@ -109,17 +142,52 @@ class RemoteDataSource {
   }
 
   // BERITA
+
   static Future<List<BeritaModel>?> getBerita() async {
     try {
-      var url = ApiEndPoints.baseUrl + ApiEndPoints.authEndpoints.berita;
+      final url = ApiEndPoints.baseUrl + ApiEndPoints.authEndpoints.berita;
+
       final response = await Dio().get(url);
-      if (response.statusCode == 200) {
-        List<dynamic> jsonData = response.data;
-        return jsonData.map((e) => BeritaModel.fromJson(e)).toList();
+
+      if (response.statusCode != 200) {
+        return null;
       }
-      return null;
+
+      if (response.data is! Map) {
+        throw const FormatException(
+          'Format respons berita tidak valid.',
+        );
+      }
+
+      final responseData = Map<String, dynamic>.from(response.data);
+
+      if (responseData['status'] != 'ok') {
+        return null;
+      }
+
+      final jsonData = responseData['data'];
+
+      if (jsonData is! List) {
+        throw const FormatException(
+          'Data berita bukan berupa list.',
+        );
+      }
+
+      return jsonData
+          .whereType<Map>()
+          .map(
+            (item) => BeritaModel.fromJson(
+              Map<String, dynamic>.from(item),
+            ),
+          )
+          .where((item) => item.status)
+          .toList();
+    } on DioException catch (e) {
+      debugPrint('Gagal mengambil berita: ${e.message}');
+      rethrow;
     } catch (e) {
-      throw Exception(e.toString());
+      debugPrint('Error parsing berita: $e');
+      rethrow;
     }
   }
 

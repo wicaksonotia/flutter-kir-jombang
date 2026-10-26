@@ -1,31 +1,48 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:jombang/networks/api_request.dart';
 import 'package:jombang/models/carousel_model.dart';
+import 'package:jombang/networks/api_request.dart';
 
 class CarouselBannerController extends GetxController {
-  var carouselItems = <CarouselModel>[].obs;
-  var isLoading = true.obs;
-  RxInt indexSlider = 0.obs;
+  final carouselItems = <CarouselModel>[].obs;
+  final isLoading = false.obs;
+  final hasError = false.obs;
+  final indexSlider = 0.obs;
 
   @override
   void onInit() {
-    fetchData();
     super.onInit();
+    fetchData();
   }
 
-  void fetchData() async {
+  Future<void> fetchData() async {
     try {
-      isLoading(true);
-      var result = await RemoteDataSource.getSlider();
-      if (result != null) {
-        carouselItems.assignAll(result);
+      isLoading.value = true;
+      hasError.value = false;
+
+      final result = await RemoteDataSource.getSlider();
+
+      if (result == null) {
+        carouselItems.clear();
+        hasError.value = true;
+        return;
       }
-    } catch (error) {
-      Get.snackbar('Error', "Silakan cek koneksi internet anda.",
-          icon: const Icon(Icons.error), snackPosition: SnackPosition.BOTTOM);
+
+      carouselItems.assignAll(result);
+      indexSlider.value = 0;
+    } catch (error, stackTrace) {
+      carouselItems.clear();
+      indexSlider.value = 0;
+      hasError.value = true;
+
+      debugPrint('Gagal memuat slider: $error');
+      debugPrintStack(stackTrace: stackTrace);
     } finally {
-      isLoading(false);
+      isLoading.value = false;
     }
+  }
+
+  void changePage(int index) {
+    indexSlider.value = index;
   }
 }
