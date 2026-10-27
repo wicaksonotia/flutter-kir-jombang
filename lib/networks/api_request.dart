@@ -233,18 +233,50 @@ class RemoteDataSource {
 
   // DETAIL PERSYARATAN
   static Future<List<PersyaratanDetailModel>?> getDetailPersyaratan(
-      String jenisUji) async {
+    int idJenisUji,
+  ) async {
     try {
-      var url =
-          ApiEndPoints.baseUrl + ApiEndPoints.authEndpoints.detailpersyaratan;
-      final response = await Dio().get("$url?nama=$jenisUji");
-      if (response.statusCode == 200) {
-        List<dynamic> jsonData = response.data;
-        return jsonData.map((e) => PersyaratanDetailModel.fromJson(e)).toList();
+      final url =
+          '${ApiEndPoints.baseUrl}${ApiEndPoints.authEndpoints.detailpersyaratan}';
+
+      final response = await Dio().get(
+        url,
+        queryParameters: {
+          'id_jenis_uji': idJenisUji,
+        },
+      );
+
+      if (response.statusCode != 200) {
+        return null;
       }
-      return null;
-    } catch (e) {
-      throw Exception(e.toString());
+
+      final responseData = response.data;
+
+      if (responseData is! Map<String, dynamic>) {
+        throw Exception('Format respons persyaratan tidak valid.');
+      }
+
+      if (responseData['status']?.toString().toLowerCase() != 'ok') {
+        throw Exception(
+          responseData['status_message']?.toString() ??
+              'Gagal mengambil persyaratan.',
+        );
+      }
+
+      final data = responseData['data'];
+
+      if (data is! List) {
+        throw Exception('Data persyaratan tidak berbentuk daftar.');
+      }
+
+      return data
+          .whereType<Map<String, dynamic>>()
+          .map(PersyaratanDetailModel.fromJson)
+          .where((item) => item.status)
+          .toList();
+    } catch (error) {
+      debugPrint('[getDetailPersyaratan] Error: $error');
+      rethrow;
     }
   }
 

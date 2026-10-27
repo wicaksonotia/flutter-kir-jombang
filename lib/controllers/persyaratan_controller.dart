@@ -14,8 +14,6 @@ class PersyaratanController extends GetxController {
   final errorMessage = ''.obs;
   final errorPersyaratan = ''.obs;
 
-  final jenisUji = 'UJI PERTAMA'.obs;
-
   @override
   void onInit() {
     super.onInit();
@@ -53,17 +51,14 @@ class PersyaratanController extends GetxController {
     }
   }
 
-  Future<void> fetchDataDetailPersyaratan([
-    String? namaJenisUji,
-  ]) async {
+  Future<void> fetchDataDetailPersyaratan(int idJenisUji) async {
     if (isLoadingPersyaratan.value) return;
 
     try {
       isLoadingPersyaratan.value = true;
       errorPersyaratan.value = '';
 
-      final nama = namaJenisUji ?? jenisUji.value;
-      final result = await RemoteDataSource.getDetailPersyaratan(nama);
+      final result = await RemoteDataSource.getDetailPersyaratan(idJenisUji);
 
       if (result == null) {
         errorPersyaratan.value = 'Tidak ada respons saat memuat persyaratan.';
@@ -72,7 +67,9 @@ class PersyaratanController extends GetxController {
 
       persyaratan.assignAll(result);
     } catch (error, stackTrace) {
-      debugPrint('[JenisUjiController] Error persyaratan: $error');
+      debugPrint(
+        '[PersyaratanController] Error persyaratan: $error',
+      );
       debugPrintStack(stackTrace: stackTrace);
 
       errorPersyaratan.value =

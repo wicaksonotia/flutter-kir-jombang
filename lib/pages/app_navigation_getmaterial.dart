@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:jombang/bindings/detail_persyaratan_binding.dart';
 import 'package:jombang/bindings/detail_riwayat_binding.dart';
 import 'package:jombang/bindings/pendaftaran_binding.dart';
 import 'package:jombang/bindings/riwayat_binding.dart';
@@ -10,7 +11,7 @@ import 'package:jombang/pages/home/home.dart';
 import 'package:jombang/pages/informasi/informasi.dart';
 import 'package:jombang/pages/login_page.dart';
 import 'package:jombang/pages/pendaftaran/pendaftaran.dart';
-import 'package:jombang/pages/persyaratan/detail_persyaratan.dart';
+import 'package:jombang/pages/persyaratan/detail_persyaratan_page.dart';
 import 'package:jombang/pages/persyaratan/persyaratan_page.dart';
 import 'package:jombang/pages/profile/profile.dart';
 import 'package:jombang/pages/scan_qrcode/qr_scanner.dart';
@@ -43,12 +44,21 @@ class RouterClass {
         name: riwayatkendaraan,
         binding: RiwayatBinding()),
     GetPage(
-      page: () => DetailRiwayat(),
+      page: () => const DetailRiwayat(),
       name: detailriwayat,
       binding: DetailRiwayatBinding(),
     ),
-    GetPage(page: () => const PersyaratanPage(), name: persyaratan),
-    GetPage(page: () => const DetailPersyaratanPage(), name: detailpersyaratan),
+    GetPage(
+      page: () => const PersyaratanPage(),
+      name: persyaratan,
+    ),
+    GetPage(
+      page: () => const DetailPersyaratanPage(),
+      name: detailpersyaratan,
+      binding: DetailPersyaratanBinding(),
+      transition: Transition.rightToLeft,
+      transitionDuration: const Duration(milliseconds: 300),
+    ),
     // GetPage(
     //   page: () => const DetailPersyaratanPage(),
     //   name: '/detailpersyaratan',

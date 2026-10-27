@@ -6,7 +6,7 @@ import 'package:jombang/pages/cek_data_kendaraan/hasil_uji/home_hasil_uji.dart';
 import 'package:jombang/pages/cek_data_kendaraan/riwayat/home_riwayat.dart';
 import 'package:jombang/pages/home/home.dart';
 import 'package:jombang/pages/pendaftaran/pendaftaran.dart';
-import 'package:jombang/pages/persyaratan/detail_persyaratan.dart';
+import 'package:jombang/pages/persyaratan/detail_persyaratan_page.dart';
 import 'package:jombang/pages/persyaratan/persyaratan_page.dart';
 
 class AppNavigation {

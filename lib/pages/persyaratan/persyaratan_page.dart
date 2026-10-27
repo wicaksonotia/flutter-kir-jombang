@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 
-import 'package:jombang/controllers/detail_persyaratan_controller.dart';
 import 'package:jombang/controllers/persyaratan_controller.dart';
+import 'package:jombang/pages/app_navigation_getmaterial.dart';
 import 'package:jombang/pages/persyaratan/widgets/jenis_uji_card.dart';
 import 'package:jombang/pages/persyaratan/widgets/persyaratan_app_bar.dart';
 import 'package:jombang/pages/persyaratan/widgets/persyaratan_empty_state.dart';
 import 'package:jombang/pages/persyaratan/widgets/persyaratan_section_heading.dart';
+import 'package:jombang/pages/persyaratan/widgets/persyaratan_shimmer.dart';
 import 'package:jombang/utils/colors.dart';
 
 class PersyaratanPage extends StatefulWidget {
@@ -37,20 +38,15 @@ class _PersyaratanPageState extends State<PersyaratanPage> {
     final item = controller.jenisUjiItem[index];
     final nama = item.nama?.trim() ?? '';
 
-    if (nama.isEmpty) return;
+    if (item.id < 1 || nama.isEmpty) return;
 
-    final detailController = Get.isRegistered<DetailPersyaratanController>()
-        ? Get.find<DetailPersyaratanController>()
-        : Get.put(DetailPersyaratanController());
-
-    detailController.persyaratanHeader.value = nama;
-
-    Get.toNamed('/detailpersyaratan')?.then((_) {
-      // Tidak perlu mengubah daftar kategori saat kembali.
-    });
-
-    // Muat persyaratan sesuai kategori yang dipilih.
-    detailController.fetchData(nama);
+    Get.toNamed(
+      RouterClass.detailpersyaratan,
+      arguments: {
+        'id_jenis_uji': item.id,
+        'nama': nama,
+      },
+    );
   }
 
   @override
@@ -66,9 +62,7 @@ class _PersyaratanPageState extends State<PersyaratanPage> {
           onRefresh: _refresh,
           child: Obx(() {
             if (controller.isLoading.value && controller.jenisUjiItem.isEmpty) {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
+              return const PersyaratanShimmer();
             }
 
             if (controller.jenisUjiItem.isEmpty) {
