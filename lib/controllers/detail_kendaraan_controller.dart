@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:jombang/controllers/search_bar_controller.dart';
 import 'package:jombang/models/kendaraan_model.dart';
@@ -17,7 +16,6 @@ class DetailKendaraanController extends GetxController {
   final hasResult = false.obs;
 
   String? valueSearch;
-  bool isLogin = false;
   final isEmptyNoMesin = true.obs;
 
   @override
@@ -26,8 +24,6 @@ class DetailKendaraanController extends GetxController {
 
     searchTextFieldController =
         Get.find<SearchBarController>().searchTextFieldController;
-
-    cekIsLogin();
   }
 
   /// Mencari kendaraan dengan Nomor Uji dan
@@ -92,26 +88,6 @@ class DetailKendaraanController extends GetxController {
     }
   }
 
-  /// Memeriksa status login.
-  Future<void> cekIsLogin() async {
-    final prefs = await SharedPreferences.getInstance();
-
-    isLogin = prefs.getBool('statusLogin') ?? false;
-
-    if (!isLogin) return;
-
-    final username = prefs.getString('username');
-
-    if (username == null || username.trim().isEmpty) {
-      return;
-    }
-
-    // Isi otomatis Nomor Uji dari akun yang login.
-    // Nomor Mesin tetap harus dimasukkan pengguna.
-    valueSearch = username;
-    searchTextFieldController.text = username;
-  }
-
   void _showNotification(String message) {
     Get.snackbar(
       'Informasi',
@@ -120,11 +96,5 @@ class DetailKendaraanController extends GetxController {
       snackPosition: SnackPosition.BOTTOM,
       duration: const Duration(seconds: 3),
     );
-  }
-
-  @override
-  void onClose() {
-    noMesinController.dispose();
-    super.onClose();
   }
 }

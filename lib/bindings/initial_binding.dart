@@ -1,12 +1,21 @@
 import 'package:get/get.dart';
 import 'package:jombang/controllers/login_controller.dart';
 import 'package:jombang/controllers/search_bar_controller.dart';
+import 'package:jombang/controllers/detail_kendaraan_controller.dart';
 
-class InitialBinding implements Bindings {
+class InitialBinding extends Bindings {
   @override
-  void dependencies() async {
+  void dependencies() {
     Get.lazyPut<LoginController>(() => LoginController());
-    // Get.lazyPut<SearchBarController>(() => SearchBarController());
-    Get.put<SearchBarController>(SearchBarController());
+
+    Get.put<SearchBarController>(
+      SearchBarController(),
+      permanent: true,
+    );
+
+    Get.put<DetailKendaraanController>(
+      DetailKendaraanController(),
+      permanent: true,
+    );
   }
 }

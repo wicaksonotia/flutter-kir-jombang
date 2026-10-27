@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:jombang/controllers/detail_kendaraan_controller.dart';
 import 'package:jombang/controllers/search_bar_controller.dart';
@@ -25,13 +24,6 @@ class RiwayatKendaraanController extends GetxController {
   final responseMessage = 'error'.obs;
 
   String? valueSearch;
-  bool? isLogin = false;
-
-  @override
-  void onInit() {
-    super.onInit();
-    cekIsLogin();
-  }
 
   Future<void> getDataRiwayat() async {
     final noUji = noUjiController.text.trim().toUpperCase();
@@ -94,23 +86,6 @@ class RiwayatKendaraanController extends GetxController {
       );
     } finally {
       isLoadingRiwayat.value = false;
-    }
-  }
-
-  Future<void> cekIsLogin() async {
-    final prefs = await SharedPreferences.getInstance();
-
-    isLogin = prefs.getBool('statusLogin') ?? false;
-
-    if (isLogin != true) return;
-
-    final username = prefs.getString('username');
-
-    if (username != null && username.trim().isNotEmpty) {
-      noUjiController.text = username.trim().toUpperCase();
-
-      // Tidak melakukan pencarian otomatis karena Nomor Mesin
-      // juga wajib diisi.
     }
   }
 

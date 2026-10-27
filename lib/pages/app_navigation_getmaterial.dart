@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:jombang/bindings/detail_riwayat_binding.dart';
 import 'package:jombang/bindings/pendaftaran_binding.dart';
 import 'package:jombang/bindings/riwayat_binding.dart';
 import 'package:jombang/pages/cek_data_kendaraan/cek_data/home_cek_data.dart';
@@ -41,7 +42,11 @@ class RouterClass {
         page: () => const HomeRiwayat(),
         name: riwayatkendaraan,
         binding: RiwayatBinding()),
-    GetPage(page: () => DetailRiwayat(), name: detailriwayat),
+    GetPage(
+      page: () => DetailRiwayat(),
+      name: detailriwayat,
+      binding: DetailRiwayatBinding(),
+    ),
     GetPage(page: () => const PersyaratanPage(), name: persyaratan),
     GetPage(page: () => const DetailPersyaratanPage(), name: detailpersyaratan),
     // GetPage(

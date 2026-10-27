@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'package:jombang/controllers/detail_riwayat_controller.dart';
 import 'package:jombang/controllers/riwayat_kendaraan_controller.dart';
 import 'package:jombang/utils/colors.dart';
 
 class CardRiwayat extends StatelessWidget {
-  CardRiwayat({
+  const CardRiwayat({
     super.key,
     required this.controller,
     required this.index,
@@ -14,11 +13,6 @@ class CardRiwayat extends StatelessWidget {
 
   final RiwayatKendaraanController controller;
   final int index;
-
-  final DetailRiwayatController detailRiwayatController =
-      Get.isRegistered<DetailRiwayatController>()
-          ? Get.find<DetailRiwayatController>()
-          : Get.put(DetailRiwayatController());
 
   @override
   Widget build(BuildContext context) {
@@ -39,14 +33,29 @@ class CardRiwayat extends StatelessWidget {
         child: InkWell(
           borderRadius: BorderRadius.circular(20),
           onTap: () {
-            detailRiwayatController.getDetailDataKendaraan(
-              item.idHasilUji!,
+            final idHasilUji = item.idHasilUji;
+            final noUji = item.noUji?.trim();
+
+            if (idHasilUji == null || noUji == null || noUji.isEmpty) {
+              Get.snackbar(
+                'Informasi',
+                'ID hasil pengujian atau nomor uji tidak tersedia.',
+                snackPosition: SnackPosition.BOTTOM,
+              );
+              return;
+            }
+
+            Get.toNamed(
+              '/detailriwayat',
+              arguments: {
+                'idhasiluji': idHasilUji,
+                'no_uji': noUji,
+              },
             );
-            Get.toNamed('/detailriwayat');
           },
           child: Ink(
             decoration: BoxDecoration(
-              color: theme.colorScheme.surface,
+              color: Colors.white,
               borderRadius: BorderRadius.circular(20),
               border: Border.all(
                 color: theme.colorScheme.outlineVariant.withValues(alpha: 0.55),
@@ -64,7 +73,6 @@ class CardRiwayat extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Header: ikon dan status
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -143,18 +151,13 @@ class CardRiwayat extends StatelessWidget {
                       ),
                     ],
                   ),
-
                   const SizedBox(height: 18),
-
                   Divider(
                     height: 1,
                     color: theme.colorScheme.outlineVariant
                         .withValues(alpha: 0.65),
                   ),
-
                   const SizedBox(height: 15),
-
-                  // Informasi penguji dan tanggal
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -175,10 +178,7 @@ class CardRiwayat extends StatelessWidget {
                       ),
                     ],
                   ),
-
                   const SizedBox(height: 16),
-
-                  // Footer
                   Row(
                     children: [
                       Text(

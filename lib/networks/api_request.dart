@@ -312,18 +312,44 @@ class RemoteDataSource {
   }
 
   // DETAIL RIWAYAT KENDARAAN
-  static Future<DetailRiwayatModel?> getDetailRiwayatKendaraan(
-      int params) async {
+  static Future<DetailRiwayatModel?> getDetailRiwayatKendaraan({
+    required int idHasilUji,
+    required String noUji,
+  }) async {
     try {
-      var url = ApiEndPoints.baseUrl +
+      final url = ApiEndPoints.baseUrl +
           ApiEndPoints.authEndpoints.detailriwayatkendaraan;
-      final response = await Dio().get("$url?idhasiluji=$params");
+
+      final response = await Dio().get(
+        url,
+        queryParameters: {
+          'idhasiluji': idHasilUji,
+          'nouji': noUji.trim(),
+        },
+      );
+
       if (response.statusCode == 200) {
-        final DetailRiwayatModel res =
-            DetailRiwayatModel.fromJson(response.data);
-        return res;
+        final responseData = response.data;
+
+        if (responseData is Map) {
+          return DetailRiwayatModel.fromJson(
+            Map<String, dynamic>.from(responseData),
+          );
+        }
+
+        throw Exception('Format respons detail kendaraan tidak valid.');
       }
+
       return null;
+    } on DioException catch (e) {
+      final responseData = e.response?.data;
+
+      final message =
+          responseData is Map ? responseData['message']?.toString() : null;
+
+      throw Exception(
+        message ?? e.message ?? 'Gagal mengambil detail riwayat kendaraan.',
+      );
     } catch (e) {
       throw Exception(e.toString());
     }

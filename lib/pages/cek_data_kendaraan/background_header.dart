@@ -7,12 +7,14 @@ class BackgroundHeader extends StatelessWidget {
   final String menu;
   final String title;
   final VoidCallback? onBack;
+  final bool showSearchCard;
 
   const BackgroundHeader({
     super.key,
     required this.menu,
     this.title = 'Cek Data Kendaraan',
     this.onBack,
+    this.showSearchCard = true,
   });
 
   void _handleBack(BuildContext context) {
@@ -33,9 +35,8 @@ class BackgroundHeader extends StatelessWidget {
     return Stack(
       clipBehavior: Clip.none,
       children: [
-        // Latar belakang biru.
         Container(
-          height: topPadding + 190,
+          height: topPadding + (showSearchCard ? 190 : 76),
           decoration: BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.topLeft,
@@ -58,7 +59,7 @@ class BackgroundHeader extends StatelessWidget {
           child: const _HeaderCircle(size: 150),
         ),
         Positioned(
-          top: topPadding + 40,
+          top: topPadding + 20,
           right: -35,
           child: const _HeaderCircle(size: 115),
         ),
@@ -108,65 +109,66 @@ class BackgroundHeader extends StatelessWidget {
           ),
         ),
 
-        // Kartu pencarian.
-        Container(
-          width: double.infinity,
-          margin: EdgeInsets.fromLTRB(
-            16,
-            topPadding + 64,
-            16,
-            16,
-          ),
-          padding: const EdgeInsets.all(16),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(20),
-            border: Border.all(
-              color: const Color(0xFFE9EDF4),
+        // Kartu pencarian hanya muncul jika diaktifkan.
+        if (showSearchCard)
+          Container(
+            width: double.infinity,
+            margin: EdgeInsets.fromLTRB(
+              16,
+              topPadding + 64,
+              16,
+              16,
             ),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withValues(alpha: 0.07),
-                blurRadius: 20,
-                offset: const Offset(0, 6),
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(20),
+              border: Border.all(
+                color: const Color(0xFFE9EDF4),
               ),
-            ],
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Row(
-                children: [
-                  Icon(
-                    Icons.manage_search_rounded,
-                    size: 22,
-                    color: MyColors.primary,
-                  ),
-                  SizedBox(width: 8),
-                  Text(
-                    'Cari Kendaraan',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w700,
-                      color: Color(0xFF1E293B),
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 5),
-              const Text(
-                'Masukkan data kendaraan untuk melihat informasi pengujian.',
-                style: TextStyle(
-                  fontSize: 12,
-                  height: 1.5,
-                  color: Color(0xFF64748B),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withValues(alpha: 0.07),
+                  blurRadius: 20,
+                  offset: const Offset(0, 6),
                 ),
-              ),
-              const SizedBox(height: 16),
-              SearchBarContainer(menu: menu),
-            ],
+              ],
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Row(
+                  children: [
+                    Icon(
+                      Icons.manage_search_rounded,
+                      size: 22,
+                      color: MyColors.primary,
+                    ),
+                    SizedBox(width: 8),
+                    Text(
+                      'Cari Kendaraan',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w700,
+                        color: Color(0xFF1E293B),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 5),
+                const Text(
+                  'Masukkan data kendaraan untuk melihat informasi pengujian.',
+                  style: TextStyle(
+                    fontSize: 12,
+                    height: 1.5,
+                    color: Color(0xFF64748B),
+                  ),
+                ),
+                const SizedBox(height: 16),
+                SearchBarContainer(menu: menu),
+              ],
+            ),
           ),
-        ),
       ],
     );
   }
