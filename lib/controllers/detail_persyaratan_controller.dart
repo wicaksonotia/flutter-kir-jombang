@@ -1,9 +1,9 @@
 import 'package:get/get.dart';
-import 'package:jombang/models/persyaratan_model.dart';
+import 'package:jombang/models/persyaratan_detail_model.dart';
 import 'package:jombang/networks/api_request.dart';
 
 class DetailPersyaratanController extends GetxController {
-  var persyaratanItem = <PersyaratanModel>[].obs;
+  var persyaratanItem = <PersyaratanDetailModel>[].obs;
   var isLoading = true.obs;
   RxString persyaratanHeader = 'UJI PERTAMA'.obs;
 

@@ -4,11 +4,11 @@ import 'package:flutter/foundation.dart';
 import 'package:jombang/models/berita_model.dart';
 import 'package:jombang/models/carousel_model.dart';
 import 'package:jombang/models/hasil_uji_model.dart';
-import 'package:jombang/models/jenis_uji_model.dart';
+import 'package:jombang/models/persyaratan_model.dart';
 import 'package:jombang/models/kendaraan_model.dart';
 import 'package:jombang/models/menu_model.dart';
 import 'package:jombang/models/pendaftaran_model.dart';
-import 'package:jombang/models/persyaratan_model.dart';
+import 'package:jombang/models/persyaratan_detail_model.dart';
 import 'package:jombang/models/riwayat_detail_model.dart';
 import 'package:jombang/models/riwayat_model.dart';
 import 'package:jombang/models/tidak_lulus_model.dart';
@@ -191,23 +191,48 @@ class RemoteDataSource {
     }
   }
 
-  // JENIS UJI
-  static Future<List<JenisUjiModel>?> getJenisUji() async {
+  // PERSYARATAN
+  static Future<List<PersyaratanModel>?> getPersyaratan() async {
     try {
-      var url = ApiEndPoints.baseUrl + ApiEndPoints.authEndpoints.jenisuji;
+      final url = ApiEndPoints.baseUrl + ApiEndPoints.authEndpoints.jenisuji;
+
       final response = await Dio().get(url);
-      if (response.statusCode == 200) {
-        List<dynamic> jsonData = response.data;
-        return jsonData.map((e) => JenisUjiModel.fromJson(e)).toList();
+
+      if (response.statusCode != 200) {
+        return null;
       }
-      return null;
+
+      final responseData = response.data;
+
+      if (responseData is! Map<String, dynamic>) {
+        throw Exception('Format respons persyaratan tidak valid.');
+      }
+
+      if (responseData['status']?.toString().toLowerCase() != 'ok') {
+        throw Exception(
+          responseData['status_message']?.toString() ??
+              'Gagal mengambil data persyaratan.',
+        );
+      }
+
+      final data = responseData['data'];
+
+      if (data is! List) {
+        throw Exception('Data persyaratan tidak berbentuk daftar.');
+      }
+
+      return data
+          .whereType<Map<String, dynamic>>()
+          .map((item) => PersyaratanModel.fromJson(item))
+          .toList();
     } catch (e) {
-      throw Exception(e.toString());
+      debugPrint('[getJenisUji] Error: $e');
+      rethrow;
     }
   }
 
   // DETAIL PERSYARATAN
-  static Future<List<PersyaratanModel>?> getDetailPersyaratan(
+  static Future<List<PersyaratanDetailModel>?> getDetailPersyaratan(
       String jenisUji) async {
     try {
       var url =
@@ -215,7 +240,7 @@ class RemoteDataSource {
       final response = await Dio().get("$url?nama=$jenisUji");
       if (response.statusCode == 200) {
         List<dynamic> jsonData = response.data;
-        return jsonData.map((e) => PersyaratanModel.fromJson(e)).toList();
+        return jsonData.map((e) => PersyaratanDetailModel.fromJson(e)).toList();
       }
       return null;
     } catch (e) {

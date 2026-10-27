@@ -14,7 +14,6 @@ class DetailRiwayat extends GetView<DetailRiwayatController> {
   const DetailRiwayat({super.key});
 
   static const Color _backgroundColor = Color(0xFFF4F7FB);
-  static const Color _textColor = Color(0xFF172B4D);
   static const Color _mutedColor = Color(0xFF718096);
 
   String _value(dynamic value) {

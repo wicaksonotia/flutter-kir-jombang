@@ -11,7 +11,7 @@ import 'package:jombang/pages/informasi/informasi.dart';
 import 'package:jombang/pages/login_page.dart';
 import 'package:jombang/pages/pendaftaran/pendaftaran.dart';
 import 'package:jombang/pages/persyaratan/detail_persyaratan.dart';
-import 'package:jombang/pages/persyaratan/persyaratan.dart';
+import 'package:jombang/pages/persyaratan/persyaratan_page.dart';
 import 'package:jombang/pages/profile/profile.dart';
 import 'package:jombang/pages/scan_qrcode/qr_scanner.dart';
 

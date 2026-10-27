@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:jombang/controllers/detail_persyaratan_controller.dart';
-import 'package:jombang/controllers/jenis_uji_controller.dart';
+import 'package:jombang/controllers/persyaratan_controller.dart';
 import 'package:jombang/utils/containers/box_container.dart';
 import 'package:jombang/utils/sizes.dart';
 
@@ -10,12 +10,12 @@ class CardCategories extends StatelessWidget {
   CardCategories({
     super.key,
     required this.hexString,
-    required this.jenisUjiController,
+    required this.persyaratanController,
     required this.index,
   });
 
   final String hexString;
-  final JenisUjiController jenisUjiController;
+  final PersyaratanController persyaratanController;
   final int index;
   final DetailPersyaratanController detailPersyaratanController =
       Get.put(DetailPersyaratanController());
@@ -26,12 +26,12 @@ class CardCategories extends StatelessWidget {
       () => InkWell(
         onTap: () {
           // context.goNamed('detailpersyaratan', queryParameters: {
-          //   'nama': jenisUjiController.jenisUjiItem[index].nama
+          //   'nama': persyaratanController.jenisUjiItem[index].nama
           // });
           detailPersyaratanController.persyaratanHeader.value =
-              jenisUjiController.jenisUjiItem[index].nama!;
+              persyaratanController.jenisUjiItem[index].nama!;
           detailPersyaratanController
-              .fetchData(jenisUjiController.jenisUjiItem[index].nama!);
+              .fetchData(persyaratanController.jenisUjiItem[index].nama!);
           Get.toNamed('/detailpersyaratan');
         },
         child: BoxContainer(
@@ -82,14 +82,15 @@ class CardCategories extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            jenisUjiController.jenisUjiItem[index].nama!,
+                            persyaratanController.jenisUjiItem[index].nama!,
                             style: const TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,
                                 fontSize: MySizes.fontSizeLg),
                           ),
                           Text(
-                            jenisUjiController.jenisUjiItem[index].keterangan!,
+                            persyaratanController
+                                .jenisUjiItem[index].keterangan!,
                             style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: MySizes.fontSizeMd),

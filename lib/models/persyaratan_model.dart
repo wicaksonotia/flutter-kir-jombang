@@ -1,15 +1,39 @@
 class PersyaratanModel {
-  String? persyaratan;
+  String? nama;
+  String? keterangan;
+  String? warna;
+  bool? status;
+  int id;
+  int? sorting;
 
-  PersyaratanModel({this.persyaratan});
+  PersyaratanModel({
+    this.nama,
+    this.keterangan,
+    this.warna,
+    this.status,
+    this.id = 1,
+    this.sorting,
+  });
 
-  PersyaratanModel.fromJson(Map<String, dynamic> json) {
-    persyaratan = json['persyaratan'];
+  factory PersyaratanModel.fromJson(Map<String, dynamic> json) {
+    return PersyaratanModel(
+      nama: json['nama']?.toString(),
+      keterangan: json['keterangan']?.toString(),
+      warna: json['warna']?.toString(),
+      status: json['status'] is bool ? json['status'] as bool : null,
+      id: int.tryParse(json['id']?.toString() ?? '') ?? 1,
+      sorting: int.tryParse(json['sorting']?.toString() ?? ''),
+    );
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['persyaratan'] = persyaratan;
-    return data;
+    return {
+      'nama': nama,
+      'keterangan': keterangan,
+      'warna': warna,
+      'status': status,
+      'id': id,
+      'sorting': sorting,
+    };
   }
 }
