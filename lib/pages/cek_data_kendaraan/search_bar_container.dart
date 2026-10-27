@@ -38,7 +38,6 @@ class SearchBarContainer extends StatelessWidget {
       hasilUjiController.getHasilUjiKendaraan();
     } else if (menu == 'riwayat') {
       riwayatKendaraanController.getDataRiwayat();
-      riwayatPendaftaranController.getDataRiwayatRetribusi();
     }
   }
 
@@ -193,7 +192,7 @@ class SearchBarContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Obx(
       () {
-        if (menu == 'cekdata') {
+        if (menu == 'cekdata' || menu == 'riwayat') {
           return _buildCekDataForm();
         }
 

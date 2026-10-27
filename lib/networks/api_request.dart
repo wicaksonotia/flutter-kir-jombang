@@ -283,17 +283,28 @@ class RemoteDataSource {
   }
 
   // LIST RIWAYAT KENDARAAN
-  static Future<RiwayatKendaraanModel?> getRiwayatKendaraan(
-      String params) async {
+  static Future<RiwayatKendaraanModel?> getRiwayatKendaraan({
+    required String noUji,
+    required String noMesin,
+  }) async {
     try {
-      var url =
+      final url =
           ApiEndPoints.baseUrl + ApiEndPoints.authEndpoints.riwayatkendaraan;
-      final response = await Dio().get("$url?nouji=$params");
+
+      final response = await Dio().get(
+        url,
+        queryParameters: {
+          'nouji': noUji.trim().toUpperCase(),
+          'nomesin': noMesin.trim(),
+        },
+      );
+
       if (response.statusCode == 200) {
-        final RiwayatKendaraanModel res =
-            RiwayatKendaraanModel.fromJson(response.data);
-        return res;
+        return RiwayatKendaraanModel.fromJson(
+          Map<String, dynamic>.from(response.data),
+        );
       }
+
       return null;
     } catch (e) {
       throw Exception(e.toString());
