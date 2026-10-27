@@ -9,6 +9,7 @@ import 'package:jombang/pages/cek_data_kendaraan/riwayat/widgets/riwayat_hasil_u
 import 'package:jombang/pages/cek_data_kendaraan/riwayat/widgets/riwayat_header.dart';
 import 'package:jombang/pages/cek_data_kendaraan/riwayat/widgets/riwayat_identitas.dart';
 import 'package:jombang/utils/colors.dart';
+import 'package:jombang/utils/containers/app_bar_header.dart';
 
 class DetailRiwayat extends GetView<DetailRiwayatController> {
   const DetailRiwayat({super.key});
@@ -49,66 +50,9 @@ class DetailRiwayat extends GetView<DetailRiwayatController> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: _backgroundColor,
-      appBar: AppBar(
-        toolbarHeight: 70,
-        elevation: 0,
-        scrolledUnderElevation: 0,
-        foregroundColor: Colors.white,
-        backgroundColor: MyColors.primary,
-        leadingWidth: 64,
-        leading: Padding(
-          padding: const EdgeInsets.only(left: 12),
-          child: IconButton(
-            tooltip: 'Kembali',
-            onPressed: () {
-              if (Navigator.of(context).canPop()) {
-                Navigator.of(context).pop();
-              } else {
-                Get.back();
-              }
-            },
-            icon: Container(
-              width: 40,
-              height: 40,
-              decoration: BoxDecoration(
-                color: Colors.white.withValues(alpha: 0.14),
-                borderRadius: BorderRadius.circular(14),
-                border: Border.all(
-                  color: Colors.white.withValues(alpha: 0.15),
-                ),
-              ),
-              child: const Icon(
-                Icons.arrow_back_rounded,
-                size: 21,
-                color: Colors.white,
-              ),
-            ),
-          ),
-        ),
-        titleSpacing: 4,
-        title: const Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Detail Riwayat Uji',
-              style: TextStyle(
-                fontSize: 19,
-                fontWeight: FontWeight.w700,
-                letterSpacing: -0.3,
-                color: Colors.white,
-              ),
-            ),
-            Gap(3),
-            Text(
-              'Informasi kendaraan dan hasil pengujian',
-              style: TextStyle(
-                fontSize: 11,
-                fontWeight: FontWeight.w400,
-                color: Color(0xFFDCE8FF),
-              ),
-            ),
-          ],
-        ),
+      appBar: const AppbarHeader(
+        header: 'Detail Riwayat Uji',
+        subtitle: 'Informasi kendaraan dan hasil pengujian',
       ),
       body: Obx(() {
         if (controller.isLoading.value) {

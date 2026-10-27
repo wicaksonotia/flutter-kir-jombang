@@ -3,11 +3,11 @@ import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 
 import 'package:jombang/controllers/detail_persyaratan_controller.dart';
-import 'package:jombang/pages/persyaratan/widgets/detail_persyaratan_app_bar.dart';
 import 'package:jombang/pages/persyaratan/widgets/detail_persyaratan_item_card.dart';
 import 'package:jombang/pages/persyaratan/widgets/detail_persyaratan_shimmer.dart';
 import 'package:jombang/pages/persyaratan/widgets/detail_persyaratan_summary_card.dart';
 import 'package:jombang/utils/colors.dart';
+import 'package:jombang/utils/containers/app_bar_header.dart';
 
 class DetailPersyaratanPage extends StatefulWidget {
   const DetailPersyaratanPage({super.key});
@@ -29,8 +29,10 @@ class _DetailPersyaratanPageState extends State<DetailPersyaratanPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFF4F7FB),
-      appBar: DetailPersyaratanAppBar(
-        title: controller.persyaratanHeader,
+      appBar: AppbarHeader(
+        header: 'Detail Persyaratan',
+        subtitle: 'Dokumen yang perlu dibawa saat pengujian',
+        dynamicHeader: controller.persyaratanHeader,
       ),
       body: Obx(() {
         if (controller.isLoading.value) {

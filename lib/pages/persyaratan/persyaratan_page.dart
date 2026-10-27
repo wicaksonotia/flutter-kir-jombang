@@ -5,11 +5,11 @@ import 'package:get/get.dart';
 import 'package:jombang/controllers/persyaratan_controller.dart';
 import 'package:jombang/pages/app_navigation_getmaterial.dart';
 import 'package:jombang/pages/persyaratan/widgets/jenis_uji_card.dart';
-import 'package:jombang/pages/persyaratan/widgets/persyaratan_app_bar.dart';
 import 'package:jombang/pages/persyaratan/widgets/persyaratan_empty_state.dart';
 import 'package:jombang/pages/persyaratan/widgets/persyaratan_section_heading.dart';
 import 'package:jombang/pages/persyaratan/widgets/persyaratan_shimmer.dart';
 import 'package:jombang/utils/colors.dart';
+import 'package:jombang/utils/containers/app_bar_header.dart';
 
 class PersyaratanPage extends StatefulWidget {
   const PersyaratanPage({super.key});
@@ -53,7 +53,10 @@ class _PersyaratanPageState extends State<PersyaratanPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFF4F7FB),
-      appBar: const PersyaratanAppBar(),
+      appBar: const AppbarHeader(
+        header: 'Persyaratan',
+        subtitle: 'Dokumen pengujian kendaraan',
+      ),
       body: SafeArea(
         top: false,
         child: RefreshIndicator(
