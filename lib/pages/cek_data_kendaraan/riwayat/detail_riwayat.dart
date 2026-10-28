@@ -8,6 +8,7 @@ import 'package:jombang/pages/cek_data_kendaraan/riwayat/widgets/riwayat_foto_ke
 import 'package:jombang/pages/cek_data_kendaraan/riwayat/widgets/riwayat_hasil_uji.dart';
 import 'package:jombang/pages/cek_data_kendaraan/riwayat/widgets/riwayat_header.dart';
 import 'package:jombang/pages/cek_data_kendaraan/riwayat/widgets/riwayat_identitas.dart';
+import 'package:jombang/pages/cek_data_kendaraan/riwayat/widgets/detail_riwayat_shimmer.dart';
 import 'package:jombang/utils/colors.dart';
 import 'package:jombang/utils/containers/app_bar_header.dart';
 
@@ -56,9 +57,7 @@ class DetailRiwayat extends GetView<DetailRiwayatController> {
       ),
       body: Obx(() {
         if (controller.isLoading.value) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
+          return const DetailRiwayatShimmer();
         }
 
         final DataDetailRiwayat data = controller.resultData.value;
@@ -73,63 +72,45 @@ class DetailRiwayat extends GetView<DetailRiwayatController> {
             ),
             padding: const EdgeInsets.fromLTRB(16, 18, 16, 30),
             children: [
-              // Ringkasan kendaraan
               RiwayatHeader(
                 noUji: _value(data.noUji),
                 noKendaraan: _value(data.noKendaraan),
                 merk: _value(data.merk),
                 tipe: _value(data.tipe),
               ),
-
               const Gap(26),
-
-              // Identitas kendaraan, pemilik, dan registrasi
               const _SectionHeading(
                 title: 'Informasi Kendaraan',
                 subtitle: 'Identitas dan data registrasi kendaraan',
                 icon: Icons.directions_car_rounded,
               ),
-
               const Gap(12),
-
               RiwayatIdentitas(data: data),
-
               const Gap(24),
-
-              // Hasil pengujian
               const _SectionHeading(
                 title: 'Hasil Pengujian',
                 subtitle: 'Rincian pemeriksaan kendaraan',
                 icon: Icons.fact_check_rounded,
               ),
-
               const Gap(12),
-
               RiwayatHasilUji(
                 data: data,
                 controller: controller,
               ),
-
               const Gap(24),
-
-              // Foto kendaraan
               const _SectionHeading(
                 title: 'Dokumentasi Kendaraan',
                 subtitle: 'Foto kendaraan dari beberapa sisi',
                 icon: Icons.photo_library_outlined,
               ),
-
               const Gap(12),
-
               RiwayatFotoKendaraan(
                 depan: _value(data.imgDepan),
                 belakang: _value(data.imgBelakang),
                 kanan: _value(data.imgKanan),
                 kiri: _value(data.imgKiri),
               ),
-
               const Gap(24),
-
               Center(
                 child: Column(
                   children: [

@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 import 'package:jombang/controllers/detail_kendaraan_controller.dart';
 import 'package:jombang/pages/cek_data_kendaraan/cek_data/widgets/dimensi_kendaraan_section.dart';
 import 'package:jombang/pages/cek_data_kendaraan/cek_data/widgets/identitas_kendaraan_section.dart';
+import 'package:jombang/pages/cek_data_kendaraan/cek_data/widgets/result_cek_data_empty.dart';
+import 'package:jombang/pages/cek_data_kendaraan/cek_data/widgets/result_cek_data_shimmer.dart';
 import 'package:jombang/utils/colors.dart';
 
 class ResultCekData extends StatelessWidget {
@@ -12,15 +14,17 @@ class ResultCekData extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final DetailKendaraanController controller =
-        Get.put(DetailKendaraanController());
+        Get.isRegistered<DetailKendaraanController>()
+            ? Get.find<DetailKendaraanController>()
+            : Get.put(DetailKendaraanController());
 
     return Obx(() {
       if (controller.isLoadingDetailKendaraan.value) {
-        return const _LoadingState();
+        return const ResultCekDataShimmer();
       }
 
       if (!controller.hasResult.value) {
-        return const _EmptyState();
+        return const ResultCekDataEmpty();
       }
 
       final data = controller.resultData.value;
@@ -76,87 +80,5 @@ class ResultCekData extends StatelessWidget {
         ),
       );
     });
-  }
-}
-
-class _LoadingState extends StatelessWidget {
-  const _LoadingState();
-
-  @override
-  Widget build(BuildContext context) {
-    return const Center(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          CircularProgressIndicator(
-            color: MyColors.primary,
-            strokeWidth: 3,
-          ),
-          SizedBox(height: 16),
-          Text(
-            'Sedang mencari data kendaraan...',
-            style: TextStyle(
-              fontSize: 13,
-              color: Color(0xFF64748B),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _EmptyState extends StatelessWidget {
-  const _EmptyState();
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 28,
-          vertical: 24,
-        ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Container(
-              width: 88,
-              height: 88,
-              decoration: BoxDecoration(
-                color: MyColors.primary.withValues(alpha: 0.08),
-                shape: BoxShape.circle,
-              ),
-              child: const Icon(
-                Icons.directions_car_outlined,
-                size: 42,
-                color: MyColors.primary,
-              ),
-            ),
-            const SizedBox(height: 20),
-            const Text(
-              'Informasi Kendaraan',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.w700,
-                color: Color(0xFF1E293B),
-              ),
-            ),
-            const SizedBox(height: 8),
-            const Text(
-              'Masukkan Nomor Uji dan 5 digit terakhir Nomor Mesin, '
-              'lalu tekan tombol cari untuk melihat detail kendaraan.',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 13,
-                height: 1.6,
-                color: Color(0xFF64748B),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
   }
 }

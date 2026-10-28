@@ -7,7 +7,7 @@ import 'package:jombang/pages/cek_data_kendaraan/cek_data/home_cek_data.dart';
 import 'package:jombang/pages/cek_data_kendaraan/hasil_uji/home_hasil_uji.dart';
 import 'package:jombang/pages/cek_data_kendaraan/riwayat/detail_riwayat.dart';
 import 'package:jombang/pages/cek_data_kendaraan/riwayat/home_riwayat.dart';
-import 'package:jombang/pages/home/home.dart';
+import 'package:jombang/pages/home/home_page.dart';
 import 'package:jombang/pages/informasi/informasi_page.dart';
 import 'package:jombang/pages/login_page.dart';
 import 'package:jombang/pages/pendaftaran/pendaftaran.dart';

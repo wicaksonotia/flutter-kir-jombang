@@ -65,10 +65,11 @@ class BackgroundHeader extends StatelessWidget {
         ),
 
         // Tombol kembali dan judul.
+        // Tombol kembali dan judul.
         Padding(
           padding: EdgeInsets.fromLTRB(
             12,
-            topPadding + 4,
+            topPadding + 14, // Sebelumnya topPadding + 4
             16,
             0,
           ),
@@ -115,7 +116,7 @@ class BackgroundHeader extends StatelessWidget {
             width: double.infinity,
             margin: EdgeInsets.fromLTRB(
               16,
-              topPadding + 64,
+              topPadding + 74,
               16,
               16,
             ),
