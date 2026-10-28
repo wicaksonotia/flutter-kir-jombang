@@ -14,8 +14,6 @@ class Menu extends StatelessWidget {
           : Get.put(HomeMenuController());
 
   static const Color _mutedColor = Color(0xFF718096);
-  static const Color _shimmerBase = Color(0xFFE8EDF4);
-  static const Color _shimmerHighlight = Color(0xFFF7F9FC);
 
   @override
   Widget build(BuildContext context) {
