@@ -283,7 +283,7 @@ class RemoteDataSource {
   // DETAIL KEDARAAN
   static Future<DetailKendaraanModel?> getDetailKendaraan({
     required String noUji,
-    required String noMesin,
+    required String noRangka,
   }) async {
     final url =
         ApiEndPoints.baseUrl + ApiEndPoints.authEndpoints.detailkendaraan;
@@ -292,7 +292,7 @@ class RemoteDataSource {
       url,
       queryParameters: {
         'nouji': noUji,
-        'nomesin': noMesin,
+        'norangka': noRangka,
       },
     );
 
@@ -342,7 +342,7 @@ class RemoteDataSource {
   // LIST RIWAYAT KENDARAAN
   static Future<RiwayatKendaraanModel?> getRiwayatKendaraan({
     required String noUji,
-    required String noMesin,
+    required String noRangka,
   }) async {
     try {
       final url =
@@ -352,7 +352,7 @@ class RemoteDataSource {
         url,
         queryParameters: {
           'nouji': noUji.trim().toUpperCase(),
-          'nomesin': noMesin.trim(),
+          'norangka': noRangka.trim(),
         },
       );
 

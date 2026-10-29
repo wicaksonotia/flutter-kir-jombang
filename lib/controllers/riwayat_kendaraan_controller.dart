@@ -16,8 +16,8 @@ class RiwayatKendaraanController extends GetxController {
   TextEditingController get noUjiController =>
       searchBarController.searchTextFieldController;
 
-  TextEditingController get noMesinController =>
-      detailKendaraanController.noMesinController;
+  TextEditingController get noRangkaController =>
+      detailKendaraanController.noRangkaController;
 
   final isLoadingRiwayat = false.obs;
   final resultData = <DataRiwayat>[].obs;
@@ -27,31 +27,31 @@ class RiwayatKendaraanController extends GetxController {
 
   Future<void> getDataRiwayat() async {
     final noUji = noUjiController.text.trim().toUpperCase();
-    final noMesin = noMesinController.text.trim();
+    final noRangka = noRangkaController.text.trim();
 
-    if (noUji.isEmpty || noMesin.isEmpty) {
+    if (noUji.isEmpty || noRangka.isEmpty) {
       _showNotification(
-        'Nomor Uji dan 5 digit terakhir Nomor Mesin wajib diisi.',
+        'Nomor Uji dan 5 digit terakhir Nomor Rangka wajib diisi.',
       );
       return;
     }
 
-    if (!RegExp(r'^\d{5}$').hasMatch(noMesin)) {
+    if (!RegExp(r'^\d{5}$').hasMatch(noRangka)) {
       _showNotification(
-        'Nomor Mesin harus terdiri dari tepat 5 digit angka.',
+        'Nomor Rangka harus terdiri dari tepat 5 digit angka.',
       );
       return;
     }
 
     await getData(
       noUji: noUji,
-      noMesin: noMesin,
+      noRangka: noRangka,
     );
   }
 
   Future<void> getData({
     required String noUji,
-    required String noMesin,
+    required String noRangka,
   }) async {
     if (isLoadingRiwayat.value) return;
 
@@ -60,7 +60,7 @@ class RiwayatKendaraanController extends GetxController {
 
       final result = await RemoteDataSource.getRiwayatKendaraan(
         noUji: noUji.trim().toUpperCase(),
-        noMesin: noMesin.trim(),
+        noRangka: noRangka.trim(),
       );
 
       if (result == null) {

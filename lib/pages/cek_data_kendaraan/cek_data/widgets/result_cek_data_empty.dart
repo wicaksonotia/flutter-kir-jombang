@@ -41,7 +41,7 @@ class ResultCekDataEmpty extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             const Text(
-              'Masukkan Nomor Uji dan 5 digit terakhir Nomor Mesin, '
+              'Masukkan Nomor Uji dan 5 digit terakhir Nomor Rangka, '
               'lalu tekan tombol cari untuk melihat detail kendaraan.',
               textAlign: TextAlign.center,
               style: TextStyle(

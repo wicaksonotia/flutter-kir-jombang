@@ -1,5 +1,6 @@
 class ApiEndPoints {
-  static const String baseUrl = 'http://192.168.1.9:8000/api/v1/';
+  // static const String baseUrl = 'https://ujikir.jombangkab.go.id/api/v1/';
+  static const String baseUrl = 'http://192.168.1.19:8000/api/v1/';
   static _AuthEndPoints authEndpoints = _AuthEndPoints();
 }
 

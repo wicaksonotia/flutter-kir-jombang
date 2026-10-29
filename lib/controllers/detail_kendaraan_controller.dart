@@ -8,15 +8,15 @@ import 'package:jombang/networks/api_request.dart';
 class DetailKendaraanController extends GetxController {
   late final TextEditingController searchTextFieldController;
 
-  // Input 5 digit terakhir nomor mesin.
-  final TextEditingController noMesinController = TextEditingController();
+  // Input 5 digit terakhir nomor rangka.
+  final TextEditingController noRangkaController = TextEditingController();
 
   final isLoadingDetailKendaraan = false.obs;
   final resultData = DataDetailKendaraan().obs;
   final hasResult = false.obs;
 
   String? valueSearch;
-  final isEmptyNoMesin = true.obs;
+  final isEmptyNoRangka = true.obs;
 
   @override
   void onInit() {
@@ -27,37 +27,37 @@ class DetailKendaraanController extends GetxController {
   }
 
   /// Mencari kendaraan dengan Nomor Uji dan
-  /// 5 digit terakhir Nomor Mesin.
+  /// 5 digit terakhir Nomor Rangka.
   Future<void> getDetailDataKendaraan() async {
     final noUji = searchTextFieldController.text.trim().toUpperCase();
-    final noMesin = noMesinController.text.trim();
+    final noRangka = noRangkaController.text.trim();
 
     // Kedua input wajib diisi.
-    if (noUji.isEmpty || noMesin.isEmpty) {
+    if (noUji.isEmpty || noRangka.isEmpty) {
       _showNotification(
-        'Nomor Uji dan 5 digit terakhir Nomor Mesin wajib diisi.',
+        'Nomor Uji dan 5 digit terakhir Nomor Rangka wajib diisi.',
       );
       return;
     }
 
-    // Nomor mesin harus tepat 5 digit angka.
-    if (!RegExp(r'^\d{5}$').hasMatch(noMesin)) {
+    // Nomor rangka harus tepat 5 digit angka.
+    if (!RegExp(r'^\d{5}$').hasMatch(noRangka)) {
       _showNotification(
-        'Nomor Mesin harus terdiri dari tepat 5 digit angka.',
+        'Nomor Rangka harus terdiri dari tepat 5 digit angka.',
       );
       return;
     }
 
     await getData(
       noUji: noUji,
-      noMesin: noMesin,
+      noRangka: noRangka,
     );
   }
 
   /// Mengambil detail kendaraan dari API.
   Future<void> getData({
     required String noUji,
-    required String noMesin,
+    required String noRangka,
   }) async {
     if (isLoadingDetailKendaraan.value) return;
 
@@ -67,7 +67,7 @@ class DetailKendaraanController extends GetxController {
 
       final result = await RemoteDataSource.getDetailKendaraan(
         noUji: noUji.trim().toUpperCase(),
-        noMesin: noMesin.trim().toUpperCase(),
+        noRangka: noRangka.trim().toUpperCase(),
       );
 
       if (result != null && result.isSuccess && result.data != null) {

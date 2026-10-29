@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:jombang/models/berita_model.dart';
 import 'package:jombang/utils/colors.dart';
@@ -10,6 +11,43 @@ class BeritaCard extends StatelessWidget {
   });
 
   final BeritaModel berita;
+
+  static final Dio _dio = Dio(
+    BaseOptions(
+      connectTimeout: const Duration(seconds: 10),
+      receiveTimeout: const Duration(seconds: 10),
+    ),
+  );
+
+  static final Map<String, Future<String?>> _youtubeTitleCache = {};
+
+  Future<String?> _fetchYoutubeTitle(String videoId) {
+    return _youtubeTitleCache.putIfAbsent(videoId, () async {
+      try {
+        final response = await _dio.get(
+          'https://www.youtube.com/oembed',
+          queryParameters: {
+            'url': 'https://www.youtube.com/watch?v=$videoId',
+            'format': 'json',
+          },
+        );
+
+        final data = response.data;
+
+        if (data is Map && data['title'] is String) {
+          final title = (data['title'] as String).trim();
+
+          if (title.isNotEmpty) {
+            return title;
+          }
+        }
+      } catch (_) {
+        // Judul YouTube gagal dimuat.
+      }
+
+      return null;
+    });
+  }
 
   Future<void> _openYoutube(BuildContext context) async {
     final videoId = berita.youtubeId;
@@ -25,12 +63,25 @@ class BeritaCard extends StatelessWidget {
         mode: LaunchMode.externalApplication,
       );
 
-      if (!opened && context.mounted) {
-        _showMessage(context, 'Tidak bisa membuka video YouTube.');
+      if (!opened) {
+        await launchUrl(
+          uri,
+          mode: LaunchMode.platformDefault,
+        );
       }
     } catch (_) {
-      if (context.mounted) {
-        _showMessage(context, 'Gagal membuka video YouTube.');
+      try {
+        await launchUrl(
+          uri,
+          mode: LaunchMode.platformDefault,
+        );
+      } catch (_) {
+        if (context.mounted) {
+          _showMessage(
+            context,
+            'Tidak bisa membuka video YouTube.',
+          );
+        }
       }
     }
   }
@@ -67,15 +118,57 @@ class BeritaCard extends StatelessWidget {
         '${bulan[date.month - 1]} ${date.year}';
   }
 
+  Widget _buildTitle(bool hasYoutube, String? videoId) {
+    if (hasYoutube && videoId != null) {
+      return FutureBuilder<String?>(
+        future: _fetchYoutubeTitle(videoId.trim()),
+        builder: (context, snapshot) {
+          final youtubeTitle = snapshot.data;
+
+          final title = snapshot.connectionState == ConnectionState.waiting
+              ? 'Memuat judul YouTube...'
+              : youtubeTitle != null && youtubeTitle.isNotEmpty
+                  ? youtubeTitle
+                  : 'Judul YouTube tidak tersedia';
+
+          return Text(
+            title,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+            style: const TextStyle(
+              fontSize: 13,
+              height: 1.3,
+              fontWeight: FontWeight.w700,
+              color: Color(0xFF1B2F4A),
+            ),
+          );
+        },
+      );
+    }
+
+    final title = berita.judul.trim().isNotEmpty
+        ? berita.judul.trim()
+        : 'Informasi Dishub';
+
+    return Text(
+      title,
+      maxLines: 2,
+      overflow: TextOverflow.ellipsis,
+      style: const TextStyle(
+        fontSize: 13,
+        height: 1.3,
+        fontWeight: FontWeight.w700,
+        color: Color(0xFF1B2F4A),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final videoId = berita.youtubeId;
     final hasYoutube = videoId != null && videoId.trim().isNotEmpty;
-    final title = berita.judul.trim().isNotEmpty
-        ? berita.judul.trim()
-        : (hasYoutube ? 'Video kegiatan Dishub' : 'Informasi Dishub');
-
     final summary = berita.berita.trim();
+    final tanggal = _formatTanggal(berita.tanggal);
 
     return Material(
       color: Colors.white,
@@ -104,11 +197,16 @@ class BeritaCard extends StatelessWidget {
               Expanded(
                 flex: 6,
                 child: Padding(
-                  padding: const EdgeInsets.fromLTRB(12, 11, 12, 10),
+                  padding: const EdgeInsets.fromLTRB(
+                    12,
+                    11,
+                    12,
+                    10,
+                  ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      if (_formatTanggal(berita.tanggal).isNotEmpty)
+                      if (tanggal.isNotEmpty)
                         Row(
                           children: [
                             Icon(
@@ -119,7 +217,7 @@ class BeritaCard extends StatelessWidget {
                             const SizedBox(width: 5),
                             Expanded(
                               child: Text(
-                                _formatTanggal(berita.tanggal),
+                                tanggal,
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                                 style: const TextStyle(
@@ -132,17 +230,7 @@ class BeritaCard extends StatelessWidget {
                           ],
                         ),
                       const SizedBox(height: 7),
-                      Text(
-                        title,
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
-                          fontSize: 13,
-                          height: 1.3,
-                          fontWeight: FontWeight.w700,
-                          color: Color(0xFF1B2F4A),
-                        ),
-                      ),
+                      _buildTitle(hasYoutube, videoId),
                       if (!hasYoutube && summary.isNotEmpty) ...[
                         const SizedBox(height: 5),
                         Expanded(
@@ -159,25 +247,6 @@ class BeritaCard extends StatelessWidget {
                         ),
                       ] else
                         const Spacer(),
-                      if (hasYoutube)
-                        Row(
-                          children: [
-                            Icon(
-                              Icons.play_circle_outline_rounded,
-                              size: 16,
-                              color: MyColors.primary,
-                            ),
-                            const SizedBox(width: 5),
-                            Text(
-                              'Tonton video',
-                              style: TextStyle(
-                                color: MyColors.primary,
-                                fontSize: 11,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                          ],
-                        ),
                     ],
                   ),
                 ),
@@ -194,38 +263,11 @@ class BeritaCard extends StatelessWidget {
       final thumbnailUrl =
           'https://img.youtube.com/vi/${videoId.trim()}/hqdefault.jpg';
 
-      return Stack(
-        fit: StackFit.expand,
-        alignment: Alignment.center,
-        children: [
-          Image.network(
-            thumbnailUrl,
-            fit: BoxFit.cover,
-            errorBuilder: (_, __, ___) => _thumbnailPlaceholder(),
-          ),
-          Container(
-            color: Colors.black.withValues(alpha: 0.12),
-          ),
-          Container(
-            width: 42,
-            height: 42,
-            decoration: BoxDecoration(
-              color: Colors.white.withValues(alpha: 0.94),
-              shape: BoxShape.circle,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withValues(alpha: 0.15),
-                  blurRadius: 12,
-                ),
-              ],
-            ),
-            child: Icon(
-              Icons.play_arrow_rounded,
-              color: MyColors.primary,
-              size: 30,
-            ),
-          ),
-        ],
+      return Image.network(
+        thumbnailUrl,
+        fit: BoxFit.cover,
+        width: double.infinity,
+        errorBuilder: (_, __, ___) => _thumbnailPlaceholder(),
       );
     }
 

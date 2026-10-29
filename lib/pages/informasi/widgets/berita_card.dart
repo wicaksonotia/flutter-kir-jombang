@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
@@ -47,18 +48,41 @@ class BeritaCard extends StatelessWidget {
     return null;
   }
 
-  String? get youtubeUrl {
-    final text = '$berita $gambar';
+  static final Dio _dio = Dio(
+    BaseOptions(
+      connectTimeout: const Duration(seconds: 10),
+      receiveTimeout: const Duration(seconds: 10),
+    ),
+  );
 
-    final pattern = RegExp(
-      r"""https?://(?:www\.)?(?:youtube\.com|youtu\.be)/[^\s<>"']+""",
-      caseSensitive: false,
-    );
+  static final Map<String, Future<String?>> _youtubeTitleCache = {};
 
-    final match = pattern.firstMatch(text);
-    if (match == null) return null;
+  Future<String?> _fetchYoutubeTitle(String videoId) {
+    return _youtubeTitleCache.putIfAbsent(videoId, () async {
+      try {
+        final response = await _dio.get(
+          'https://www.youtube.com/oembed',
+          queryParameters: {
+            'url': 'https://www.youtube.com/watch?v=$videoId',
+            'format': 'json',
+          },
+        );
 
-    return match.group(0)!.replaceAll(RegExp(r'[),.;]+$'), '');
+        final data = response.data;
+
+        if (data is Map && data['title'] is String) {
+          final title = (data['title'] as String).trim();
+
+          if (title.isNotEmpty) {
+            return title;
+          }
+        }
+      } catch (_) {
+        // Judul gagal dimuat akan ditampilkan sebagai pesan error.
+      }
+
+      return null;
+    });
   }
 
   Uint8List? _decodeImage(String value) {
@@ -105,30 +129,35 @@ class BeritaCard extends StatelessWidget {
 
   Future<void> _openContent() async {
     final videoId = youtubeId;
-    final url = youtubeUrl;
 
-    if (videoId != null && url != null) {
-      final uri = Uri.tryParse(url);
-      if (uri != null) {
-        try {
-          final opened = await launchUrl(
-            uri,
-            mode: LaunchMode.externalApplication,
-          );
+    if (videoId != null) {
+      final uri = Uri.parse(
+        'https://www.youtube.com/watch?v=$videoId',
+      );
 
-          if (!opened) {
-            await launchUrl(
-              Uri.parse('https://www.youtube.com/watch?v=$videoId'),
-              mode: LaunchMode.platformDefault,
-            );
-          }
-        } catch (_) {
+      try {
+        final opened = await launchUrl(
+          uri,
+          mode: LaunchMode.externalApplication,
+        );
+
+        if (!opened) {
           await launchUrl(
-            Uri.parse('https://www.youtube.com/watch?v=$videoId'),
+            uri,
             mode: LaunchMode.platformDefault,
           );
         }
+      } catch (_) {
+        try {
+          await launchUrl(
+            uri,
+            mode: LaunchMode.platformDefault,
+          );
+        } catch (_) {
+          // Gagal membuka YouTube.
+        }
       }
+
       return;
     }
 
@@ -156,7 +185,9 @@ class BeritaCard extends StatelessWidget {
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(22),
-            border: Border.all(color: const Color(0xFFE9EEF5)),
+            border: Border.all(
+              color: const Color(0xFFE9EEF5),
+            ),
             boxShadow: [
               BoxShadow(
                 color: const Color(0xFF172B4D).withValues(alpha: 0.035),
@@ -168,105 +199,89 @@ class BeritaCard extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Stack(
-                children: [
-                  SizedBox(
-                    width: double.infinity,
-                    height: 160,
-                    child: videoId != null
-                        ? Image.network(
-                            'https://img.youtube.com/vi/$videoId/hqdefault.jpg',
+              SizedBox(
+                width: double.infinity,
+                height: 160,
+                child: videoId != null
+                    ? Image.network(
+                        'https://img.youtube.com/vi/$videoId/hqdefault.jpg',
+                        fit: BoxFit.cover,
+                        errorBuilder: (_, __, ___) =>
+                            const _BeritaImagePlaceholder(),
+                      )
+                    : imageBytes != null
+                        ? Image.memory(
+                            imageBytes,
                             fit: BoxFit.cover,
                             errorBuilder: (_, __, ___) =>
                                 const _BeritaImagePlaceholder(),
                           )
-                        : imageBytes != null
-                            ? Image.memory(
-                                imageBytes,
-                                fit: BoxFit.cover,
-                                errorBuilder: (_, __, ___) =>
-                                    const _BeritaImagePlaceholder(),
-                              )
-                            : const _BeritaImagePlaceholder(),
-                  ),
-                  if (videoId != null)
-                    const Center(
-                      child: Padding(
-                        padding: EdgeInsets.only(top: 52),
-                        child: Icon(
-                          Icons.play_circle_fill_rounded,
-                          size: 54,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                  Positioned(
-                    left: 12,
-                    bottom: 12,
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 10,
-                        vertical: 7,
-                      ),
-                      decoration: BoxDecoration(
-                        color: Colors.white.withValues(alpha: 0.96),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Icon(
-                            videoId != null
-                                ? Icons.play_arrow_rounded
-                                : Icons.calendar_month_rounded,
-                            size: 14,
-                            color: MyColors.primary,
-                          ),
-                          const Gap(6),
-                          Text(
-                            videoId != null
-                                ? 'Video YouTube'
-                                : _formatTanggal(),
-                            style: const TextStyle(
-                              fontSize: 11,
-                              fontWeight: FontWeight.w600,
-                              color: Color(0xFF344563),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
+                        : const _BeritaImagePlaceholder(),
               ),
               Expanded(
                 child: Padding(
-                  padding: const EdgeInsets.fromLTRB(16, 15, 16, 14),
+                  padding: const EdgeInsets.fromLTRB(
+                    16,
+                    15,
+                    16,
+                    14,
+                  ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        judul.trim().isEmpty
-                            ? 'Informasi tanpa judul'
-                            : judul.trim(),
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
-                          fontSize: 15,
-                          height: 1.35,
-                          fontWeight: FontWeight.w700,
-                          letterSpacing: -0.2,
-                          color: Color(0xFF172B4D),
+                      if (videoId != null)
+                        FutureBuilder<String?>(
+                          future: _fetchYoutubeTitle(videoId),
+                          builder: (context, snapshot) {
+                            String title;
+
+                            if (snapshot.connectionState ==
+                                ConnectionState.waiting) {
+                              title = 'Memuat judul YouTube...';
+                            } else if (snapshot.data == null ||
+                                snapshot.data!.isEmpty) {
+                              title = 'Judul YouTube tidak tersedia';
+                            } else {
+                              title = snapshot.data!;
+                            }
+
+                            return Text(
+                              title,
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                              style: const TextStyle(
+                                fontSize: 15,
+                                height: 1.35,
+                                fontWeight: FontWeight.w700,
+                                letterSpacing: -0.2,
+                                color: Color(0xFF172B4D),
+                              ),
+                            );
+                          },
+                        )
+                      else
+                        Text(
+                          judul.trim().isEmpty
+                              ? 'Informasi tanpa judul'
+                              : judul.trim(),
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: const TextStyle(
+                            fontSize: 15,
+                            height: 1.35,
+                            fontWeight: FontWeight.w700,
+                            letterSpacing: -0.2,
+                            color: Color(0xFF172B4D),
+                          ),
                         ),
-                      ),
                       const Gap(8),
                       Expanded(
                         child: Text(
-                          berita.trim().isEmpty || videoId != null
-                              ? videoId != null
-                                  ? 'Tonton video selengkapnya di YouTube.'
-                                  : 'Belum ada ringkasan informasi.'
-                              : berita.trim(),
+                          videoId != null
+                              ? 'Tonton video selengkapnya di YouTube.'
+                              : berita.trim().isEmpty
+                                  ? 'Belum ada ringkasan informasi.'
+                                  : berita.trim(),
                           maxLines: 3,
                           overflow: TextOverflow.ellipsis,
                           style: const TextStyle(
@@ -300,6 +315,17 @@ class BeritaCard extends StatelessWidget {
                           ),
                         ],
                       ),
+                      if (videoId == null) ...[
+                        const Gap(8),
+                        Text(
+                          _formatTanggal(),
+                          style: const TextStyle(
+                            fontSize: 11,
+                            fontWeight: FontWeight.w500,
+                            color: Color(0xFF718096),
+                          ),
+                        ),
+                      ],
                     ],
                   ),
                 ),

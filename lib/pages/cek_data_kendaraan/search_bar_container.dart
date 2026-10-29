@@ -133,23 +133,23 @@ class SearchBarContainer extends StatelessWidget {
         ),
         const SizedBox(height: 12),
         _buildField(
-          hint: '5 digit terakhir Nomor Mesin',
-          controller: detailKendaraanController.noMesinController,
+          hint: '5 digit terakhir Nomor Rangka',
+          controller: detailKendaraanController.noRangkaController,
           prefixIcon: Icons.pin_outlined,
-          suffixIcon: detailKendaraanController.isEmptyNoMesin.value
+          suffixIcon: detailKendaraanController.isEmptyNoRangka.value
               ? null
               : Icons.clear,
           onTapSuffixIcon: () {
-            detailKendaraanController.noMesinController.clear();
-            detailKendaraanController.isEmptyNoMesin.value = true;
+            detailKendaraanController.noRangkaController.clear();
+            detailKendaraanController.isEmptyNoRangka.value = true;
           },
           onChanged: (value) {
             _formatUppercase(
-              detailKendaraanController.noMesinController,
+              detailKendaraanController.noRangkaController,
               value,
             );
 
-            detailKendaraanController.isEmptyNoMesin.value = value.isEmpty;
+            detailKendaraanController.isEmptyNoRangka.value = value.isEmpty;
           },
         ),
         const SizedBox(height: 16),

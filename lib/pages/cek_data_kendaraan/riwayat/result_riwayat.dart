@@ -90,7 +90,7 @@ class _EmptyRiwayat extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             Text(
-              'Masukkan Nomor Uji dan 5 digit terakhir Nomor Mesin '
+              'Masukkan Nomor Uji dan 5 digit terakhir Nomor Rangka '
               'untuk melihat riwayat pengujian kendaraan.',
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
