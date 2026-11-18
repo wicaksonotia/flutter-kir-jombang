@@ -69,6 +69,8 @@ class DataDetailKendaraan {
   String? totalSb;
   String? jbi;
   String? mst;
+  String? kelasJalan;
+  String? konfsumbu;
   String? kondisi;
   String? imgDepan;
   String? imgBelakang;
@@ -105,6 +107,8 @@ class DataDetailKendaraan {
     this.totalSb,
     this.jbi,
     this.mst,
+    this.kelasJalan,
+    this.konfsumbu,
     this.kondisi,
     this.imgDepan,
     this.imgBelakang,
@@ -142,6 +146,8 @@ class DataDetailKendaraan {
     totalSb = json['total_sb']?.toString();
     jbi = json['jbi']?.toString();
     mst = json['mst']?.toString();
+    kelasJalan = json['kelasjalan']?.toString();
+    konfsumbu = json['konfsumbu']?.toString();
     kondisi = json['kondisi']?.toString();
     imgDepan = json['img_depan']?.toString();
     imgBelakang = json['img_belakang']?.toString();
@@ -180,6 +186,8 @@ class DataDetailKendaraan {
       'total_sb': totalSb,
       'jbi': jbi,
       'mst': mst,
+      'kelasjalan': kelasJalan,
+      'konfsumbu': konfsumbu,
       'kondisi': kondisi,
       'img_depan': imgDepan,
       'img_belakang': imgBelakang,

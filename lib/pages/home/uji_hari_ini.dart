@@ -138,7 +138,7 @@ class UjiHariIni extends StatelessWidget {
                       color: MyColors.primary.withValues(alpha: 0.08),
                       borderRadius: BorderRadius.circular(17),
                     ),
-                    child: Icon(
+                    child: const Icon(
                       Icons.fact_check_rounded,
                       size: 28,
                       color: MyColors.primary,
@@ -197,7 +197,7 @@ class UjiHariIni extends StatelessWidget {
               ),
               child: Row(
                 children: [
-                  Icon(
+                  const Icon(
                     Icons.info_outline_rounded,
                     size: 15,
                     color: MyColors.primary,

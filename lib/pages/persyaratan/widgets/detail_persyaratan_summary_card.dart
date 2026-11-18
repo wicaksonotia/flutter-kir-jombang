@@ -30,7 +30,7 @@ class DetailPersyaratanSummaryCard extends StatelessWidget {
               color: MyColors.primary.withValues(alpha: 0.09),
               borderRadius: BorderRadius.circular(17),
             ),
-            child: Icon(
+            child: const Icon(
               Icons.fact_check_outlined,
               color: MyColors.primary,
               size: 28,

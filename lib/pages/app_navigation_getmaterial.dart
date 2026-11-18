@@ -14,7 +14,6 @@ import 'package:jombang/pages/pendaftaran/pendaftaran.dart';
 import 'package:jombang/pages/persyaratan/detail_persyaratan_page.dart';
 import 'package:jombang/pages/persyaratan/persyaratan_page.dart';
 import 'package:jombang/pages/profile/profile.dart';
-import 'package:jombang/pages/scan_qrcode/qr_scanner.dart';
 
 class RouterClass {
   static String login = "/login";
@@ -32,7 +31,7 @@ class RouterClass {
 
   static List<GetPage> routes = [
     GetPage(page: () => LoginPage(), name: login),
-    GetPage(page: () => HomePage(), name: home),
+    GetPage(page: () => const HomePage(), name: home),
     GetPage(
         page: () => const PendaftaranPage(),
         name: pendaftaran,

@@ -209,7 +209,7 @@ class BeritaCard extends StatelessWidget {
                       if (tanggal.isNotEmpty)
                         Row(
                           children: [
-                            Icon(
+                            const Icon(
                               Icons.calendar_today_rounded,
                               size: 12,
                               color: MyColors.primary,

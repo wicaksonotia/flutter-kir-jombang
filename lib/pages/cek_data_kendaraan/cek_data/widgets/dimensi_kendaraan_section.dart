@@ -11,6 +11,10 @@ class DimensiKendaraanSection extends StatelessWidget {
   final String dimPanjang;
   final String dimLebar;
   final String dimTinggi;
+  final String jbb;
+  final String jbi;
+  final String konfSumbu;
+  final String kelasJalan;
 
   const DimensiKendaraanSection({
     super.key,
@@ -20,6 +24,10 @@ class DimensiKendaraanSection extends StatelessWidget {
     required this.dimPanjang,
     required this.dimLebar,
     required this.dimTinggi,
+    required this.jbb,
+    required this.jbi,
+    required this.konfSumbu,
+    required this.kelasJalan,
   });
 
   @override
@@ -31,11 +39,12 @@ class DimensiKendaraanSection extends StatelessWidget {
         DetailInfoRow(label: 'Lebar', value: lebar),
         DetailInfoRow(label: 'Tinggi', value: tinggi),
         const Gap(12),
-        const TextHeader(nama: 'Dimensi Bak Muatan'),
+        const TextHeader(nama: 'Batas Dimensi Kendaraan'),
         const Gap(10),
-        DetailInfoRow(label: 'Panjang', value: dimPanjang),
-        DetailInfoRow(label: 'Lebar', value: dimLebar),
-        DetailInfoRow(label: 'Tinggi', value: dimTinggi),
+        DetailInfoRow(label: 'JBB', value: jbb),
+        DetailInfoRow(label: 'JBI', value: jbi),
+        DetailInfoRow(label: 'Konf. Sumbu', value: konfSumbu),
+        DetailInfoRow(label: 'Kelas Jalan', value: kelasJalan),
       ],
     );
   }

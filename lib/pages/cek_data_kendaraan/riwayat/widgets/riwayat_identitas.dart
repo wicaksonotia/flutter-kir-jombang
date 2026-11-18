@@ -39,23 +39,23 @@ class RiwayatIdentitas extends StatelessWidget {
             ],
           ),
         ),
-        const SizedBox(height: 14),
-        RiwayatSectionCard(
-          title: 'Identitas Pemilik',
-          icon: Icons.person_outline_rounded,
-          child: Column(
-            children: [
-              RiwayatInfoRow(
-                label: 'Nama pemilik',
-                value: data.pemilik,
-              ),
-              RiwayatInfoRow(
-                label: 'Alamat',
-                value: data.alamat,
-              ),
-            ],
-          ),
-        ),
+        // const SizedBox(height: 14),
+        // RiwayatSectionCard(
+        //   title: 'Identitas Pemilik',
+        //   icon: Icons.person_outline_rounded,
+        //   child: Column(
+        //     children: [
+        //       RiwayatInfoRow(
+        //         label: 'Nama pemilik',
+        //         value: data.pemilik,
+        //       ),
+        //       RiwayatInfoRow(
+        //         label: 'Alamat',
+        //         value: data.alamat,
+        //       ),
+        //     ],
+        //   ),
+        // ),
         const SizedBox(height: 14),
         RiwayatSectionCard(
           title: 'Data Pengujian',
@@ -78,10 +78,10 @@ class RiwayatIdentitas extends StatelessWidget {
                 label: 'Jenis pengujian',
                 value: data.nmUji,
               ),
-              RiwayatInfoRow(
-                label: 'Nama penguji',
-                value: data.nmPenguji,
-              ),
+              // RiwayatInfoRow(
+              //   label: 'Nama penguji',
+              //   value: data.nmPenguji,
+              // ),
             ],
           ),
         ),

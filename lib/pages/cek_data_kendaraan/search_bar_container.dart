@@ -114,7 +114,7 @@ class SearchBarContainer extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         _buildField(
-          hint: 'Masukkan Nomor Uji',
+          hint: 'Masukkan No. Uji atau No. Kendaraan',
           controller: searchBarController.searchTextFieldController,
           prefixIcon: Icons.directions_car_outlined,
           suffixIcon:

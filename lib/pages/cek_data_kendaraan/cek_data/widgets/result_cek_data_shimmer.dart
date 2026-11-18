@@ -30,14 +30,14 @@ class ResultCekDataShimmer extends StatelessWidget {
             const SizedBox(height: 14),
 
             // Kartu identitas kendaraan.
-            _ShimmerCard(
+            const _ShimmerCard(
               titleWidth: 170,
               rowCount: 9,
             ),
             const SizedBox(height: 14),
 
             // Kartu dimensi kendaraan.
-            _ShimmerCard(
+            const _ShimmerCard(
               titleWidth: 145,
               rowCount: 6,
             ),
